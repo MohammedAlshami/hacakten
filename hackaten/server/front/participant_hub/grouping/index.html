@@ -192,7 +192,7 @@
                     <h3>
                         Enter Group Name
                     </h3>
-                    <input type="text" placeholder="Type The Group Name" class="group-input" id="join-group-input">
+                    <input type="text" placeholder="Type The Group Name" class="group-input" id="create-group-input">
 
                     <div class="group-btn" id="create-group-btn">
                         <h3>Create Group</h3>
@@ -200,23 +200,23 @@
                     <p id="create-group-error">
                         Note: Once you have created the group you cannot change the group name
                     </p>
-         
+
                 </div>
 
                 <div class="create-group" id="join-group-form">
                     <h3>
                         Join Group
                     </h3>
-                    <input type="text" placeholder="Type The Group ID" class="group-input">
+                    <input type="text" placeholder="Type The Group ID" class="group-input" id="join-group-input">
 
-                    <div class="group-btn">
+                    <div class="group-btn" id="join-group-btn">
                         <h3>Join Group</h3>
                     </div>
-                    <p>
+                    <p id="join-group-error">
                         Note: Once you have joined a group you cannot change the group.
-                        
+
                     </p>
-          
+
 
                 </div>
             </div>
@@ -257,8 +257,12 @@
 <script>
 
     const create_group_btn = document.getElementById("create-group-btn");
-    const create_group_input = document.getElementById("join-group-input");
+    const create_group_input = document.getElementById("create-group-input");
     const create_group_error = document.getElementById("create-group-error");
+
+    const join_group_btn = document.getElementById("join-group-btn");
+    const join_group_input = document.getElementById("join-group-input");
+    const join_group_error = document.getElementById("join-group-error");
     // create_group_input = create_group_input.value;
 
     function setCookie(name, value, daysToExpire) {
@@ -315,11 +319,56 @@
                         setCookie("session_auth", session_auth, 7);
                         window.location.href = '/hub'; // Redirect to the desired page
                     } else {
-                        
+
                         create_group_input.style.border = "2px solid red";
                         const msg = data.msg;
                         create_group_error.style.color = "red";
                         create_group_error.innerHTML = msg;
+                        console.log("error")
+                    }
+                });
+            } else {
+                console.log("error")
+            }
+        })
+            .catch(error => {
+                console.log("error")
+            });
+    });
+
+    join_group_btn.addEventListener('click', function () {
+
+
+
+        var csrftoken = getCookie('csrftoken');
+        console.log(csrftoken);
+        var headers = new Headers();
+        headers.append('X-CSRFToken', csrftoken);
+
+
+        const formData = new FormData();
+        formData.append("type", "join");
+        formData.append("data", join_group_input.value.trim());
+        fetch('/groups/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie("csrftoken")
+            },
+            credentials: 'include'
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.status === 'success') {
+                        const session_auth = data.session_auth;
+                        setCookie("session_auth", session_auth, 7);
+                        window.location.href = '/hub'; // Redirect to the desired page
+                    } else {
+
+                        join_group_input.style.border = "2px solid red";
+                        const msg = data.msg;
+                        join_group_error.style.color = "red";
+                        join_group_error.innerHTML = msg;
                         console.log("error")
                     }
                 });

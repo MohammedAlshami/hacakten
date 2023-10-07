@@ -147,6 +147,38 @@ def grouping(request):
                     }
                     
                     return JsonResponse(response_data)
+                
+            if request_type == "join":
+                user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+                userid = user_payload["user_id"]    
+                is_create = firebase.join_group(userid, request_data)
+
+                if is_create == 1:
+                    response_data = {
+                            "status": "success",
+                            "session_auth": str(
+                                generate_jwt_token(
+                                    "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
+                                )
+                            ),
+                            
+                        }
+                    return JsonResponse(response_data)
+                elif is_create == 0:
+                    response_data = {
+                        "status": "fail",
+                        "msg": "Sorry but the group is already full"
+                    }
+                    
+                    return JsonResponse(response_data)
+                elif is_create == -1:
+                    response_data = {
+                        "status": "fail",
+                        "msg": "Group Doesn't Exist"
+                    }
+                    return JsonResponse(response_data)
+
+
 
     return render(request, "participant_hub\grouping\index.html")
 
