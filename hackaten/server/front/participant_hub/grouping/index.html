@@ -1,5 +1,5 @@
 {% load static %}
-
+{% csrf_token %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +21,7 @@
         flex-direction: column;
         /* justify-content: center; */
         align-items: center;
-        height: 100vh;
+        max-height: 100%;
         overflow-y: scroll;
         z-index: 1;
         padding-left: 17vw;
@@ -109,8 +109,9 @@
         font-size: 17px;
         font-family: Helvetica;
         color: white;
+        cursor: pointer;
 
-
+        user-select: none;
     }
 
     @media (max-width: 1050px) {
@@ -191,15 +192,15 @@
                     <h3>
                         Enter Group Name
                     </h3>
-                    <input type="text" placeholder="Type The Group Name" class="group-input">
+                    <input type="text" placeholder="Type The Group Name" class="group-input" id="join-group-input">
 
-                    <div class="group-btn">
+                    <div class="group-btn" id="create-group-btn">
                         <h3>Create Group</h3>
                     </div>
-                    <p>
+                    <p id="create-group-error">
                         Note: Once you have created the group you cannot change the group name
                     </p>
-
+         
                 </div>
 
                 <div class="create-group" id="join-group-form">
@@ -213,7 +214,9 @@
                     </div>
                     <p>
                         Note: Once you have joined a group you cannot change the group.
+                        
                     </p>
+          
 
                 </div>
             </div>
@@ -248,6 +251,87 @@
 
         // Apply
     });
+</script>
+
+
+<script>
+
+    const create_group_btn = document.getElementById("create-group-btn");
+    const create_group_input = document.getElementById("join-group-input");
+    const create_group_error = document.getElementById("create-group-error");
+    // create_group_input = create_group_input.value;
+
+    function setCookie(name, value, daysToExpire) {
+        // Calculate the expiration date
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
+        // Format the cookie string
+        const cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
+
+        // Set the cookie
+        document.cookie = cookieString;
+    }
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    create_group_btn.addEventListener('click', function () {
+
+
+
+        var csrftoken = getCookie('csrftoken');
+        console.log(csrftoken);
+        var headers = new Headers();
+        headers.append('X-CSRFToken', csrftoken);
+
+
+        const formData = new FormData();
+        formData.append("type", "create");
+        formData.append("data", create_group_input.value.trim());
+        fetch('/groups/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie("csrftoken")
+            },
+            credentials: 'include'
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.status === 'success') {
+                        const session_auth = data.session_auth;
+                        setCookie("session_auth", session_auth, 7);
+                        window.location.href = '/hub'; // Redirect to the desired page
+                    } else {
+                        
+                        create_group_input.style.border = "2px solid red";
+                        const msg = data.msg;
+                        create_group_error.style.color = "red";
+                        create_group_error.innerHTML = msg;
+                        console.log("error")
+                    }
+                });
+            } else {
+                console.log("error")
+            }
+        })
+            .catch(error => {
+                console.log("error")
+            });
+    });
+
 </script>
 
 

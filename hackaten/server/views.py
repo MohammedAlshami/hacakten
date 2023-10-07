@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # importing firebase for authentication
-from .modules import Firebase
+from .modules import Firebase, generate_jwt_token, decode_jwt_token, SECRET_KEY
 
 firebase = Firebase()
 
@@ -74,7 +74,7 @@ def signup(request):
                 confirm_password,
                 join_reason,
             )
-            
+
             if isAuthValid:
                 # Return a JSON response with status and user name
                 response_data = {
@@ -84,7 +84,7 @@ def signup(request):
                 return JsonResponse(response_data)
             else:
                 response_data = {"status": "fail"}
-                return JsonResponse(response_data) 
+                return JsonResponse(response_data)
             # resume_file = request.FILES.get("resume", None)
 
             # # Handle the file, e.g., save it to the server
@@ -116,6 +116,38 @@ def case_studies(request):
 
 
 def grouping(request):
+    session_auth = request.COOKIES.get("session_auth")
+    if session_auth:
+        if request.method == "POST":
+            request_type = str(request.POST.get("type", ""))
+            request_data = str(request.POST.get("data", ""))
+
+            if request_type == "create":
+                user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+                userid = user_payload["user_id"]    
+                is_create = firebase.create_group(userid, request_data)
+
+                if is_create:
+                    # print(request_type, request_data)
+
+                    response_data = {
+                        "status": "success",
+                        "session_auth": str(
+                            generate_jwt_token(
+                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
+                            )
+                        ),
+                        
+                    }
+                    return JsonResponse(response_data)
+                else:
+                    response_data = {
+                        "status": "fail",
+                        "msg": "Group Name Already Exists, Please Choose A different Name."
+                    }
+                    
+                    return JsonResponse(response_data)
+
     return render(request, "participant_hub\grouping\index.html")
 
 
