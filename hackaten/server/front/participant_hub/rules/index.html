@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/student_hub/hub_navbar.css' %}" />
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        background-color: black;
+        /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+        /* Center vertically */
+    }
+
+    #rules {
+        line-height: 2;
+        font-size: 18px;
+        /* background-size: contain; */
+    }
+
+    #rules li {
+        padding-bottom: 15px;
+        width: 50vw;
+    }
+
+    @media (max-width: 1300px) {
+
+        #rules li {
+            width: 65vw;
+        }
+    }
+
+    @media (max-width: 700px) {
+
+        #rules li {
+            width: 80vw;
+        }
+    }
+    #rules-container {
+        background-color: rgba(17, 20, 27, .6 );
+        backdrop-filter: blur(100px);
+
+
+        border: 2px solid #333;
+        padding: 100px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        
+    }
+</style>
+
+<body>
+    <!-- {% include 'participant_hub/hub_main.html' %} -->
+    {% include 'participant_hub/hub_navbar.html' %}
+
+    <section id="rules" style="padding-top: 50px;">
+
+        <div id="rules-container">
+
+
+            <h1 style="text-align: center; margin-bottom: 70px;">Coding Hackathon Rules and Regulations</h1>
+            <ol>
+                <li><strong>Eligibility:</strong> Participants must meet the eligibility criteria specified for the
+                    hackathon, including age, skill level, and any other relevant requirements.</li>
+                <li><strong>Team Size:</strong> Teams should consist of the maximum number of members allowed, as
+                    specified
+                    in the hackathon guidelines. No exceptions will be made.</li>
+                <li><strong>Registration:</strong> All participants must register in advance through the official
+                    registration process. Late registrations may not be accepted.</li>
+                <li><strong>Code of Conduct:</strong> Respectful and inclusive behavior is expected from all
+                    participants.
+                    Harassment, discrimination, or any form of misconduct will not be tolerated.</li>
+                <li><strong>Original Work:</strong> Participants must submit original work developed during the
+                    hackathon.
+                    Plagiarism or using pre-existing code without disclosure is prohibited.</li>
+                <li><strong>Submission Deadline:</strong> Project submissions must be made within the specified
+                    deadline.
+                    Late submissions will not be considered for judging.</li>
+                <li><strong>Project Scope:</strong> Projects must align with the specified theme or problem statement of
+                    the
+                    hackathon. Deviating from the theme may result in disqualification.</li>
+                <li><strong>Demo Requirement:</strong> All teams must present a live demo or a video demonstration of
+                    their
+                    project during the judging phase. Failure to do so may impact judging.</li>
+                <li><strong>Judging Criteria:</strong> Projects will be evaluated based on predefined judging criteria,
+                    including innovation, functionality, and presentation. Judges' decisions are final.</li>
+                <li><strong>Ownership and Licensing:</strong> Participants retain ownership of their projects unless
+                    otherwise specified. Clarify the licensing and usage rights of submitted projects.</li>
+                <li><strong>Tools and Technologies:</strong> Participants must adhere to the list of allowed tools,
+                    programming languages, and technologies as specified in the hackathon guidelines.</li>
+                <li><strong>Intellectual Property:</strong> Specify the handling of intellectual property. Decide
+                    whether
+                    projects will remain open-source or if there are any restrictions.</li>
+                <li><strong>Communication:</strong> Participants can use designated communication channels for questions
+                    and
+                    clarifications. Organizers will provide timely responses.</li>
+                <li><strong>Prizes and Awards:</strong> Prizes and awards will be granted to winners and possibly to
+                    projects in special categories (e.g., best design, best innovation). Details will be provided.</li>
+                <li><strong>Disqualification:</strong> Teams or participants may be disqualified for violating rules,
+                    cheating, or engaging in inappropriate behavior. The decision of the organizers is final.</li>
+            </ol>
+        </div>
+
+
+    </section>
+</body>
+
+</html>

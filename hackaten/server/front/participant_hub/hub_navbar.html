@@ -1,0 +1,340 @@
+{% load static %}
+
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+    }
+
+    #side-nav {
+        position: fixed;
+        /* Fixed position to keep it above everything */
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 12vw;
+        background-color: black;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 100000;
+        /* Set a high z-index to ensure it's above other elements */
+    }
+
+
+    /* #nav-logo {
+
+
+        } */
+    #nav-content {
+        /* padding-left: 15px; */
+    }
+
+    #nav-content h5 {
+        color: white;
+        font-family: Helvetica, sans-serif;
+
+    }
+
+    #nav-logo-content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        color: white;
+        font-family: Helvetica, sans-serif;
+        font-size: 1.5vw;
+    }
+
+    #nav-logo-content img {
+        /* width: 30px; */
+        height: 25px;
+    }
+
+    #nav-logo-img {
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    #nav-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 10px;
+        border-radius: 10px;
+    }
+
+    #nav-item img {
+        height: 20px;
+    }
+
+    #nav-item h4 {
+        font-family: Helvetica, sans-serif;
+        font-size: 15px;
+        color: white;
+    }
+
+    #nav-item:hover {
+        background-color: white;
+        cursor: pointer;
+    }
+
+    #nav-item:hover h4 {
+        background-color: white;
+        color: black;
+    }
+
+    #nav-item:hover img {
+        filter: invert(99%) sepia(0%) saturate(628%) hue-rotate(236deg) brightness(109%) contrast(98%);
+    }
+
+    .nav-items {
+        width: 100%;
+    }
+
+    #nav-profile {
+        /* display: flex; */
+        justify-content: flex-end;
+        /* margin-top: 30px; */
+        /* padding-bottom: 15px; */
+        color: white;
+        margin-bottom: 15px;
+
+    }
+
+    #nav-profile-left {
+        display: flex;
+        gap: 20px;
+        font-size: clamp(14px, 1vw, 1.5vw);
+        align-items: center;
+    }
+
+    #nav-profile-left img {
+        height: 35px;
+    }
+
+
+    @media (max-width: 1050px) {
+        .nav-items {
+            padding-top: 10px;
+        }
+
+        #nav-item h4 {
+            display: none;
+        }
+
+        #side-nav {
+            height: 100%;
+            width: 50px;
+            background-color: black;
+            padding: 0 20px;
+        }
+
+        #nav-item img {
+            height: 25px;
+        }
+
+        #nav-content h5 {
+            display: none;
+        }
+
+        #nav-item:hover {
+            background-color: white;
+        }
+
+        #nav-item {
+            padding: 5px 0 5px 12px;
+            border-radius: 5px;
+
+        }
+
+        #nav-item:hover img {
+            /* filter: invert(99%) sepia(0%) saturate(628%) hue-rotate(236deg) brightness(109%) contrast(98%); */
+        }
+
+        #nav-logo-content h4 {
+            display: none;
+        }
+
+        #nav-logo-content {
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin-left: 5px;
+        }
+
+        #nav-profile {
+            padding-left: 5px;
+            /* margin-top: 80px; */
+            /* justify-content: flex-end; */
+        }
+        #nav-profile-left h5 {
+            display: none;
+        }
+
+        #side-nav {
+
+            padding: 0 10px;
+        }
+
+    }
+</style>
+
+
+
+<nav>
+    <div id="side-nav">
+        <div>
+            <div id="nav-logo">
+                <div id="nav-logo-content">
+                    <div id="nav-logo-img">
+                        <img src="{% static 'img/hack_logo.png' %}" />
+                    </div>
+                    <h4>Hack@10</h4>
+                </div>
+            </div>
+
+            <div id="nav-content">
+                <h5>
+                    Menu
+                </h5>
+                <div class="nav-items" id="home-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/home_icon.svg' %}" />
+                        </div>
+                        <h4>Home</h4>
+                    </div>
+                </div>
+                <div class="nav-items" id="case-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_cases_icon.svg' %}" />
+                        </div>
+                        <h4>Case Studies</h4>
+                    </div>
+                </div>
+                <div class="nav-items" id="group-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_group_icon.svg' %}" />
+                        </div>
+                        <h4>Grouping</h4>
+                    </div>
+                </div>
+                <div class="nav-items" id="submission-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_submission_icon.svg' %}" />
+                        </div>
+                        <h4>Submission</h4>
+                    </div>
+                </div>
+
+                <hr style="margin-top: 15px; margin-bottom: 15px;">
+                <div class="nav-items" id="rules-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_rules_icon.svg' %}" />
+                        </div>
+                        <h4>Rules</h4>
+                    </div>
+                </div>
+                <div class="nav-items" id="resources-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_resources_icon.svg' %}" />
+                        </div>
+                        <h4>Resources</h4>
+                    </div>
+                </div>
+                <div class="nav-items" id="profile-nav">
+                    <div id="nav-item">
+                        <div id="nav-item-img">
+                            <img src="{% static 'img/nav_profile_icon.svg' %}" />
+                        </div>
+                        <h4>Profile</h4>
+                    </div>
+                </div>
+
+
+                <style>
+
+                </style>
+
+            </div>
+        </div>
+        <div id="nav-profile">
+
+            <div id="nav-profile-left">
+                <img src="{% static 'img/nav_image_placeholder.svg' %}">
+
+                <div>
+                    <h5 id="nav-profile-left-name">
+                        Asal Design
+                    </h5>
+                    <h5 id="nav-profile-left-email">
+                        Asal@design.com
+                    </h5>
+                </div>
+
+            </div>
+            <div id="nav-profile-right">
+
+            </div>
+
+
+        </div>
+
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get references to the clickable divs
+        const home_nav = document.getElementById('home-nav');
+        const case_nav = document.getElementById('case-nav');
+        const group_nav = document.getElementById('group-nav');
+        const submission_nav = document.getElementById('submission-nav');
+        const rules_nav = document.getElementById('rules-nav');
+        const resources_nav = document.getElementById('resources-nav');
+        const profile_nav = document.getElementById('profile-nav');
+
+        // Define a common click event listener for all elements
+        function handleClick(element, redirectURL) {
+            element.addEventListener('click', function () {
+                window.location.href = redirectURL;
+            });
+        }
+
+        // Apply the click event listener to all elements with their respective redirect URLs
+        if (home_nav) {
+            handleClick(home_nav, '/hub'); // Replace with the desired URL for the "Home" element
+        }
+
+        if (case_nav) {
+            handleClick(case_nav, '/cases'); // Replace with the desired URL for the "Cases" element
+        }
+
+        if (group_nav) {
+            handleClick(group_nav, '/groups'); // Replace with the desired URL for the "Groups" element
+        }
+
+        if (submission_nav) {
+            handleClick(submission_nav, '/submission'); // Replace with the desired URL for the "Submissions" element
+        }
+
+        if (rules_nav) {
+            handleClick(rules_nav, '/rules'); // Replace with the desired URL for the "Rules" element
+        }
+
+        if (resources_nav) {
+            handleClick(resources_nav, '/resources'); // Replace with the desired URL for the "Resources" element
+        }
+
+        if (profile_nav) {
+            handleClick(profile_nav, '/profile'); // Replace with the desired URL for the "Profile" element
+        }
+    });
+</script>

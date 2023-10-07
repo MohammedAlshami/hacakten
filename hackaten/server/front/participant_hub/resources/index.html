@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/student_hub/hub_navbar.css' %}" />
+    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+        body {
+            background-color: white;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        }
+
+        #case_studies {
+            padding: 40px 250px;
+        }
+
+        #case_studies p {
+            line-height: 1.7;
+            font-size: 18px;
+            text-align: left;
+        }
+        p {
+            font-size: 18px !important;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'participant_hub/hub_main.html' %}
+    {% include 'participant_hub/hub_navbar.html' %}
+
+    <section id="case_studies">
+
+        <p style="font-size: 18px;">
+        <h1 style="font-size: 28px;">Artificial Intelligence</h1><br>
+        Social media has taken over many aspects of day to day life. Powered by BigData and Artificial Intelligence the
+        platforms have achieved record growth and profits. Yet the problems of such platforms have yet to be addressed.
+        Amongst the biggest issues caused by social media, mental health has recently been receiving increased
+        attention. New dynamics created by social media need to be dealt with such as echo chambers, body dysmorphia,
+        polarisation of opinions, toxic communities, cyber bullying, etc.
+
+        <br>
+        <br>
+        <b>Create an innovative solution that decreases the mental health impact of social media.</b>
+
+        <br>
+        <br>
+
+        </p>
+        <p style="font-size: 15px;">
+        <h1 style="font-size: 28px;">Financial Technology</h1><br>
+        Unique set of challenges are faced when it comes to transferring money across borders. Money transfer can be
+        done for situations such as payment for tuition, rent, investment, online payment and more. The complexity of
+        international transfer leads to several problems:
+
+        <ul>
+            <li>Long transfer times that can be prohibitive when the money is needed before a deadline.</li>
+
+            <li>High transfer fees that are particularly burdensome to lower income.</li>
+
+            <li>Lack of clear and comprehensive information about the process and the multiple ways to send money abroad
+            </li>
+
+        </ul>
+
+        <br>
+        <b>Create an innovative solution that makes it easier and more affordable to transfer money across borders. You
+            can choose to solve one or multiple of the previously mentioned problems.</b>
+
+        <br>
+        <br>
+
+        </p>
+        <p style="font-size: 15px;">
+        <h1 style="font-size: 28px;">Smart City and IoT </h1><br>
+        Green Deck is a unique and innovative social project in the heart of Hong Kong. The three-storey deck will be
+        situated above the Hung Hom Cross Harbour Tunnel Toll Plaza and located adjacent to multiple distinct
+        neighbourhoods (The Hong Kong Polytechnic University Main Campus, Hong Kong Coliseum, and Hung Hom Station).
+
+        This innovative solution aims to address the environmental issues and revitalize the district, connect the
+        adjacent areas, and form a landscaped platform over the vehicular traffic at the Toll Plaza. Create a solution
+        that can:
+
+        <ul>
+            <li> Help improve air quality & promote healthy living in the community.</li>
+            <li> Enhance community connectivity among neighbouring areas. </li>
+            <li>
+                Provide more space for community facilities; and
+            </li>
+            <li>
+                Help revitalise the local districts and support the economy.
+            </li>
+            <li>
+                Help resolve the extremely congested traffic around the tunnel area.
+            </li>
+
+
+        </ul>
+
+        <br>
+        <b>Create an innovative solution that makes it easier and more affordable to transfer money across borders. You
+            can choose to solve one or multiple of the previously mentioned problems.</b>
+
+        <br>
+        <br>
+
+        </p>
+    </section>
+</body>
+
+</html>
