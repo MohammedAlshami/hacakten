@@ -124,6 +124,7 @@ class Firebase:
 
             user_ref = db.child(user_table_name).child(user_id)
             user_ref.update({"group_id": group_id})
+            print(group_id, user_id)
 
             print("Group registered successfully with ID:", group_id)
             return True
@@ -136,7 +137,6 @@ class Firebase:
         db = self.firebase.database()
 
         is_group_exist = db.child(group_table_name).child(group_id)
-        print()
         if is_group_exist.get().val():
             group_record = is_group_exist.get().val()
 
@@ -145,19 +145,74 @@ class Firebase:
                     group_record["members"].append(user_id)
                 new_group_value = {
                     "group_id": group_id,
-                    "group_name":  group_record["group_name"],
+                    "group_name": group_record["group_name"],
                     "members": group_record["members"],
                 }
                 db.child(group_table_name).child(group_id).set(new_group_value)
+
+                user_ref = db.child(user_table_name).child(user_id)
+                user_ref.update({"group_id": group_id})
                 return 1
             else:
                 return 0
         return -1
+    def get_group(self, user_id):
+        print(user_id)
+        group_table_name = "hack10Groups"
+        user_table_name = "hack10User"
+        db = self.firebase.database()
+
+        is_group_exist = db.child(user_table_name).child(user_id)
+
+        group_id = None  # Initialize group_id to None
+
+        try:
+            group_id = is_group_exist.get().val()["group_id"]
+        except Exception as e:
+            pass
+
+        if group_id:
+            is_group_exist = db.child(group_table_name).child(group_id)
+            group_record = is_group_exist.get().val()
+            group_info =  {
+                "group_id": group_id,
+                "group_name": group_record["group_name"],
+                "members": [get_member(db, i) for i in group_record["members"]],
+                "members_len": len(group_record["members"])
+            }
+            print(group_info)
+            return group_info
+
         
+    def check_group(self, user_id):
+        db = self.firebase.database()
+        user_table_name = "hack10User"
+        is_group_exist = db.child(user_table_name).child(user_id).get().val()
+        is_group_involved = is_group_exist.get("group_id", None)
+        if is_group_involved:
+            return True
+        return False
+
         
+
+
+        #     if len(group_record["members"]) < 3:
+        #         if user_id not in group_record["members"]:
+        #             group_record["members"].append(user_id)
+        #         new_group_value = {
+        #             "group_id": group_id,
+        #             "group_name":  group_record["group_name"],
+        #             "members": group_record["members"],
+        #         }
+        #         db.child(group_table_name).child(group_id).set(new_group_value)
+        #         return 1
+        #     else:
+        #         return 0
+        # return -1
+
         # db.child(group_table_name).order_by_child("group_id").equal_to(f"'{group_id}'").get()
 
-            # print(is_group_exist)
+        # print(is_group_exist)
         # if is_group_exist.get().exists():
         #     print("Group Exists")
         # else:
@@ -187,6 +242,12 @@ class Firebase:
         #     return True
         # else:
         #     return False
+
+def get_member(db, user_id):
+    user_table_name = "hack10User"
+    is_group_exist = db.child(user_table_name).child(user_id)
+    group_record = is_group_exist.get().val()
+    return f'{group_record["first_name"]} {group_record["last_name"]}'
 
 
 def group_name_check(db, table_name, group_name, threshold=80):

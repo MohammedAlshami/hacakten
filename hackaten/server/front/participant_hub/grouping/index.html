@@ -317,7 +317,7 @@
                     if (data.status === 'success') {
                         const session_auth = data.session_auth;
                         setCookie("session_auth", session_auth, 7);
-                        window.location.href = '/hub'; // Redirect to the desired page
+                        window.location.href = '/groups/hub'; // Redirect to the desired page
                     } else {
 
                         create_group_input.style.border = "2px solid red";
@@ -360,9 +360,10 @@
             if (response.status === 200) {
                 response.json().then(data => {
                     if (data.status === 'success') {
+                        console.log("yay");
                         const session_auth = data.session_auth;
                         setCookie("session_auth", session_auth, 7);
-                        window.location.href = '/hub'; // Redirect to the desired page
+                        window.location.href = '/groups/hub'; // Redirect to the desired page
                     } else {
 
                         join_group_input.style.border = "2px solid red";

@@ -8,48 +8,84 @@
     <link rel="stylesheet" href="{% static 'css/student_hub/hub_navbar.css' %}" />
     <title>Document</title>
 
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
-
         body {
-            padding: 0;
-            margin: 0;
-            background-color: black;
-            color: white;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: white;
+            font-family: Helvetica, sans-serif;
         }
 
-        #case_studies {
-            padding: 40px 250px;
-            /* display: flex;
-            justify-content: center; */
+        #case_studies-div {
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 1;
+            padding-left: 10vw;
+
+            gap: 15px;
+
+        }
+
+        .case_studies-hub-title {
+            font-weight: bold;
+            font-size: clamp(25px, 2.2vw, 4vw);
             text-align: center;
-            /* width: 40; */
-
-
-
         }
 
-        #case_studies p {
-            line-height: 1.7;
-            font-size: 18px;
-
-
-        }
-
-        p {
-            font-size: 18px !important;
-        }
-
-        #case-studies-container {
-            background-color: rgba(17, 20, 27, .6);
-            backdrop-filter: blur(100px);
-
-
-            border: 2px solid #333;
-            padding: 100px;
+        .case-study-item {
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* align-items: center; */
+            width: 50vw;
             border-radius: 20px;
-            margin-bottom: 20px;
+            /* background-color: rgb(45, 45, 45); */
+
+        }
+
+        .case-study-item-title {
+            display: flex;
+            direction: column;
+            align-items: center;
+            height: 100px;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            color: white;
+            justify-content: space-between;
+            /* padding: 10px 20px; */
+
+            border-radius: 20px;
+
+            background-color: black;
+
+
+        }
+
+        .case-study-item-img {
+            height: clamp(35px, 2.8vw, 4vw);
+        }
+
+        .case-study-item-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 20px;
+
+
+        }
+
+        .case-study-img {
+            margin-top: 30px;
+            margin-right: -4px;
+            border-radius: 20px;
+            border-radius: 20px;
+            width: fit-content;
         }
     </style>
 </head>
@@ -57,89 +93,61 @@
 <body>
 
 
-
-    <!-- {% include 'participant_hub/hub_main.html' %} -->
     {% include 'participant_hub/hub_navbar.html' %}
-    <section id="case_studies">
 
-        <div id="case-studies-container" style="text-align: left;">
+    <section id="case_studies-div">
+        <h2 class="case_studies-hub-title">
+            Case Studies
+        </h2>
+
+        <div class="case-study-item">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
 
 
-            <p style="font-size: 18px;">
-            <h1 style="font-size: 28px;">Artificial Intelligence</h1><br>
-            Social media has taken over many aspects of day to day life. Powered by BigData and Artificial Intelligence
-            the
-            platforms have achieved record growth and profits. Yet the problems of such platforms have yet to be
-            addressed.
-            Amongst the biggest issues caused by social media, mental health has recently been receiving increased
-            attention. New dynamics created by social media need to be dealt with such as echo chambers, body
-            dysmorphia,
-            polarisation of opinions, toxic communities, cyber bullying, etc.
-            <br>
-            <br>
-            <b>Create an innovative solution that decreases the mental health impact of social media.</b>
-            <br>
-            <br>
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
+
+            </div>
+        </div>
+        <div class="case-study-item">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
+
+
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
+
+            </div>
+            <p style="color: white; padding-left: 30px; max-width: 100px;">
+                asdsadasdsajkjdhsajkdhsadhsadhjksadhjkahdkjsahdkjhadkshsaadasdsajkjdhsajkdhsadhsadhjksadhjkahdkjsahdkjhadkshsa
+                asdhadjksahdsadsadhsadhsadhkjsahdkjsahdkjhaskjdhaskj
+                dhaskdhsajkdhsajkdhsajdhsakjhdsjadh asdjhadjsadjh
+                asdhadjksahdsadsadhsadhsadhkjsahdkjsahdkjhaskjdhaskj
+                dhaskdhsajkdhsajkdhsajdhsakjhdsjadh asdjhadjsadjh
             </p>
-            <p style="font-size: 15px;">
-            <h1 style="font-size: 28px;">Financial Technology</h1><br>
-            Unique set of challenges are faced when it comes to transferring money across borders. Money transfer can be
-            done for situations such as payment for tuition, rent, investment, online payment and more. The complexity
-            of
-            international transfer leads to several problems:
+        </div>
+        <div class="case-study-item">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
 
-            <ul>
-                <li>Long transfer times that can be prohibitive when the money is needed before a deadline.</li>
 
-                <li>High transfer fees that are particularly burdensome to lower income.</li>
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
 
-                <li>Lack of clear and comprehensive information about the process and the multiple ways to send money
-                    abroad
-                </li>
-
-            </ul>
-
-            <br>
-            <b>Create an innovative solution that makes it easier and more affordable to transfer money across borders.
-                You
-                can choose to solve one or multiple of the previously mentioned problems.</b>
-            <br>
-            <br>
-            </p>
-            <p style="font-size: 15px;">
-            <h1 style="font-size: 28px;">Smart City and IoT </h1><br>
-            Green Deck is a unique and innovative social project in the heart of Hong Kong. The three-storey deck will
-            be
-            situated above the Hung Hom Cross Harbour Tunnel Toll Plaza and located adjacent to multiple distinct
-            neighbourhoods (The Hong Kong Polytechnic University Main Campus, Hong Kong Coliseum, and Hung Hom Station).
-
-            This innovative solution aims to address the environmental issues and revitalize the district, connect the
-            adjacent areas, and form a landscaped platform over the vehicular traffic at the Toll Plaza. Create a
-            solution
-            that can:
-            <ul>
-                <li> Help improve air quality & promote healthy living in the community.</li>
-                <li> Enhance community connectivity among neighbouring areas. </li>
-                <li>
-                    Provide more space for community facilities; and
-                </li>
-                <li>
-                    Help revitalise the local districts and support the economy.
-                </li>
-                <li>
-                    Help resolve the extremely congested traffic around the tunnel area.
-                </li>
-            </ul>
-
-            <br>
-            <b>Create an innovative solution that makes it easier and more affordable to transfer money across borders.
-                You
-                can choose to solve one or multiple of the previously mentioned problems.</b>
-
-            <br>
-            <br>
-
-            </p>
+            </div>
         </div>
     </section>
 </body>

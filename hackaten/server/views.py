@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import HttpResponse
 import json
 import os
@@ -118,6 +118,12 @@ def case_studies(request):
 def grouping(request):
     session_auth = request.COOKIES.get("session_auth")
     if session_auth:
+        user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+        userid = user_payload["user_id"]
+        check_group = firebase.check_group(userid)
+        if check_group:
+            return HttpResponseRedirect("/groups/hub")
+        
         if request.method == "POST":
             request_type = str(request.POST.get("type", ""))
             request_data = str(request.POST.get("data", ""))
@@ -178,13 +184,27 @@ def grouping(request):
                     }
                     return JsonResponse(response_data)
 
-
-
     return render(request, "participant_hub\grouping\index.html")
 
 
 def rules(request):
     return render(request, "participant_hub\\rules\index.html")
+
+
+def group_hub(request):
+    session_auth = request.COOKIES.get("session_auth")
+    user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+    userid = user_payload["user_id"]
+
+    check_group = firebase.check_group(userid)
+    if check_group:
+        payload = firebase.get_group(userid)
+        return render(request, "participant_hub\\grouping\group_hub.html", payload)
+    
+    return HttpResponseRedirect("/groups/")
+    # return render(request, "participant_hub\\grouping\index.html")
+
+    
 
 
 def mentors(request):

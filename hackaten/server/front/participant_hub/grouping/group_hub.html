@@ -221,13 +221,13 @@
 
                 <div class="group-cards-item">
                     <div class="left-align">
-                        <h4 style="text-align: left;">Members: 1</h4>
+                        <h4 style="text-align: left;">Members: {{members_len}}</h4>
                     </div>
 
                     <div id="group">
 
                         <img src="{% static 'img/group_join_icon.svg' %}" />
-                        <h3>Demirgues</h3>
+                        <h3>{{group_name}}</h3>
                     </div>
                 </div>
             </div>
@@ -237,18 +237,17 @@
                     <span style="font-size: 18px;">Send the group id to your teammates in order for them to join</span>
                 </h3>
                 <div class="group-input">
-                    fd076f56-4a6e-4c5b-80c2-3947e7e8e9e2
+                    {{group_id}}
                 </div>
             </div>
 
             <div style=" margin-top: 20px; margin-bottom: 50px; display: flex; flex-direction: column; gap: 20px;">
                 <h3 style="font-size: 22px;">Members</h3>
+                {% for member in members %}
                 <div class="group-input">
-                    Mohammed Alshami
+                    {{ member }}
                 </div>
-                <div class="group-input">
-                    Mohammed Alshami
-                </div>
+                {% endfor %}
 
             </div>
 
