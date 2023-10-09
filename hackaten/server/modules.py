@@ -156,6 +156,7 @@ class Firebase:
             else:
                 return 0
         return -1
+
     def get_group(self, user_id):
         print(user_id)
         group_table_name = "hack10Groups"
@@ -174,16 +175,15 @@ class Firebase:
         if group_id:
             is_group_exist = db.child(group_table_name).child(group_id)
             group_record = is_group_exist.get().val()
-            group_info =  {
+            group_info = {
                 "group_id": group_id,
                 "group_name": group_record["group_name"],
                 "members": [get_member(db, i) for i in group_record["members"]],
-                "members_len": len(group_record["members"])
+                "members_len": len(group_record["members"]),
             }
             print(group_info)
             return group_info
 
-        
     def check_group(self, user_id):
         db = self.firebase.database()
         user_table_name = "hack10User"
@@ -193,55 +193,99 @@ class Firebase:
             return True
         return False
 
-        
+    def create_project(
+        self,
+        user_id,
+        case_study,
+        project_name,
+        project_image,
+        project_description,
+        project_pdf,
+        project_github,
+        project_video,
+    ):
+        group_table_name = "hack10Groups"
+        project_table_name = "hack10Projects"
+        user_table_name = "hack10User"
+        db = self.firebase.database()
+
+        project_table_ref = db.child(project_table_name)
+        project_table_exists = project_table_ref.get().val() is not None
+
+        if not project_table_exists:
+            db.child(project_table_name).set({})
+
+        group_id = db.child(user_table_name).child(user_id).get().val().get("group_id", None)
+
+        project_ref = db.child(user_table_name).child(user_id)
+
+        project_id = None  # Initialize group_id to None
+
+        try:
+            project_id = project_ref.get().val()["project_id"]
+            print(project_id)
+        except Exception as e:
+            pass
+
+        if not project_id:
+            project_id = generate_uuid_from_group_name(group_id)
+
+        group_info = {
+            "project_id": project_id,
+            "case_study": case_study,
+            "project_name": project_name,
+            "project_image": project_image,
+            "project_description": project_description,
+            "project_pdf": project_pdf,
+            "project_github": project_github,
+            "project_video": project_video,
+            "group_id": group_id
+        }
+
+        db.child(project_table_name).child(project_id).set(group_info)
+
+        user_ref = db.child(user_table_name).child(user_id)
+        user_ref.update({"project_id": project_id})
 
 
-        #     if len(group_record["members"]) < 3:
-        #         if user_id not in group_record["members"]:
-        #             group_record["members"].append(user_id)
-        #         new_group_value = {
-        #             "group_id": group_id,
-        #             "group_name":  group_record["group_name"],
-        #             "members": group_record["members"],
-        #         }
-        #         db.child(group_table_name).child(group_id).set(new_group_value)
-        #         return 1
-        #     else:
-        #         return 0
-        # return -1
+        group_ref = db.child(group_table_name).child(group_id)
+        group_ref.update({"project_id": project_id})
 
-        # db.child(group_table_name).order_by_child("group_id").equal_to(f"'{group_id}'").get()
+        print("Project registered successfully with ID:", project_id)
 
-        # print(is_group_exist)
-        # if is_group_exist.get().exists():
-        #     print("Group Exists")
-        # else:
-        #     print("group doesn't exist")
-        # is_name_exist = group_name_check(db, group_table_name, group_name)
+    def get_project(self, user_id):
+        print(user_id)
+        group_table_name = "hack10Groups"
+        project_table_name = "hack10Projects"
+        user_table_name = "hack10User"
+        db = self.firebase.database()
 
-        # if is_name_exist:
-        #     user_table_ref = db.child(group_table_name)
-        #     user_table_exists = user_table_ref.get().val() is not None
+        project_ref = db.child(user_table_name).child(user_id)
 
-        #     if not user_table_exists:
-        #         db.child(group_table_name).set({})
+        project_id = None  # Initialize group_id to None
 
-        #     group_id = generate_uuid_from_group_name(group_name)
-        #     group_info = {
-        #         "group_id": group_id,
-        #         "group_name": group_name,
-        #         "members": [user_id],
-        #     }
+        try:
+            project_id = project_ref.get().val()["project_id"]
+        except Exception as e:
+            pass
 
-        #     db.child(group_table_name).child(group_id).set(group_info)
+        print(project_id)
+        if project_id:
+            project_ref = db.child(project_table_name).child(project_id)
+            project_record = project_ref.get().val()
+            project_info = {
+    
+            "project_id": project_id,
+            "case_study": project_record["case_study"],
+            "project_name": project_record["project_name"],
+            "project_image": project_record["project_image"],
+            "project_description": project_record["project_description"],
+            "project_pdf": project_record["project_pdf"],
+            "project_github": project_record["project_github"],
+            "project_video": project_record["project_video"],
+            }
+            return project_info
 
-        #     user_ref = db.child(user_table_name).child(user_id)
-        #     user_ref.update({"group_id": group_id})
-
-        #     print("Group registered successfully with ID:", group_id)
-        #     return True
-        # else:
-        #     return False
 
 def get_member(db, user_id):
     user_table_name = "hack10User"

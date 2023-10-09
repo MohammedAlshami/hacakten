@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -320,21 +321,11 @@
                 </h3>
 
                 <select id="case-studies">
-                    <option>
-                        Choose Case Study
-                    </option>
-                    <option>
-                        Enteratinement
-                    </option>
-                    <option>
-                        Art
-                    </option>
-                    <option>
-                        Enteratinement
-                    </option>
-                    <option>
-                        Wild Card
-                    </option>
+                    <option>Choose Case Study</option>
+                    <option>Enteratinement</option>
+                    <option>Art</option>
+                    <option>Enteratinement</option>
+                    <option>Wild Card</option>
                 </select>
                 <p>
                 </p>
@@ -343,7 +334,7 @@
                 <h3>
                     Enter Project Name
                 </h3>
-                <input type="text" placeholder="Project Name" class="submission-input" id="project-name">
+                <input type="text" placeholder="Project Name" class="submission-input" id="project-name" value="{{project_name}}">
                 <p>
                     Note: Once you have joined a group you cannot change the group.
                 </p>
@@ -352,7 +343,7 @@
                 <h3>
                     Enter Project Image Link
                 </h3>
-                <input type="text" placeholder="Image Link" class="submission-input" id="project-image">
+                <input type="text" placeholder="Image Link" class="submission-input" id="project-image" value="{{project_image}}">
                 <p>
                     Note: The Project image link needs to be public in order for our judges to access.<br>
                     Format:
@@ -363,7 +354,7 @@
                     Enter Project Description
                 </h3>
                 <textarea placeholder="Project Description" class="submission-textarea" maxlength="300"
-                    id="project-description"></textarea>
+                    id="project-description">{{project_description}}</textarea>
                 <p>
                     Note: Describe your project in 300 characters
                 </p>
@@ -372,7 +363,7 @@
                 <h3>
                     Enter GitHub Repository Link
                 </h3>
-                <input type="text" placeholder="Repository Link" class="submission-input" id="github-link">
+                <input type="text" placeholder="Repository Link" class="submission-input" id="github-link" value="{{project_github}}">
                 <p>
                     Note: The GitHub repository needs to be public in order for our judges to access<br>
                     Format:
@@ -382,7 +373,7 @@
                 <h3>
                     Enter Pitch Deck PDF Link
                 </h3>
-                <input type="text" placeholder="Pitch Deck Link" class="submission-input" id="pitch-link">
+                <input type="text" placeholder="Pitch Deck Link" class="submission-input" id="pitch-link" value="{{project_pdf}}">
                 <p>
                     Note: The slides link needs to be public in order for our judges to access.<br>Format:
                 </p>
@@ -391,7 +382,7 @@
                 <h3>
                     Enter Presentation Video Link
                 </h3>
-                <input type="text" placeholder="Presentation Video Link" class="submission-input" id="video-link">
+                <input type="text" placeholder="Presentation Video Link" class="submission-input" id="video-link" value="{{project_video}}">
                 <p>
                     Note: The presentation video link needs to be public in order for our judges to access.<br>
                     Format:
@@ -518,6 +509,7 @@
                     response.json().then(data => {
                         if (data.status === 'success') {
                             console.log("Yay");
+                            window.location.href = '/submission/project'; 
                             // const session_auth = data.session_auth;
                             // setCookie("session_auth", session_auth, 7);
                             // window.location.href = '/groups/hub'; // Redirect to the desired page
@@ -542,6 +534,23 @@
 
 
     </script>
+
+<script>
+    function changeSelectedOptionByValue(newValue) {
+        // Get a reference to the select element
+        var selectElement = document.getElementById('case-studies');
+
+        // Iterate through the options to find the one with the desired value
+        for (var i = 0; i < selectElement.options.length; i++) {
+            if (selectElement.options[i].value === newValue) {
+                // Set the selected attribute for the matching option
+                selectElement.options[i].selected = true;
+                break; // Exit the loop once a match is found
+            }
+        }
+    }
+    changeSelectedOptionByValue("{{case_study}}")
+</script>
 
 
 

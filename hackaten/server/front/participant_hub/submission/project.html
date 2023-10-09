@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/student_hub/hub_navbar.css' %}" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        background-color: white;
+        font-family: Helvetica, sans-serif;
+    }
+
+    img {
+        -webkit-user-drag: none;
+    }
+
+    #project-div {
+        padding-left: 15vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding-bottom: 60px;
+
+    }
+
+    .group-hub-title {
+        font-weight: bold;
+        font-size: clamp(25px, 2.2vw, 4vw);
+        text-align: center;
+    }
+
+    .project-background {
+        padding: 0px;
+        /* width: 50vw; */
+        height: 20vw;
+        background-color: black;
+        overflow-x: hidden;
+        overflow-y: hidden;
+
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+
+        border-radius: 15px;
+        /* gap: 20px; */
+        position: relative;
+        /* Set the position of the parent div to relative */
+
+    }
+
+    .project-background-img {
+        /* margin-top: -45px; */
+        width: 50vw;
+        display: block;
+        /* height: 80px; */
+        /* height: 500px; */
+    }
+
+    .project-name {
+        padding-top: 5px;
+        color: white;
+    }
+
+    .project-details {
+        display: flex;
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .project-detail-item {
+        background-color: black;
+
+        padding: 10px 20px;
+        /* width: 40vw; */
+        border-radius: 15px;
+    }
+
+    .project-detail-item h3 {
+        color: white;
+        font-size: clamp(14px, 1.2vw, 2vw);
+
+    }
+
+    a {
+        color: #02A1E5;
+        max-width: 10px;
+        /* font-size: clamp(8px, 1.2vw, 2vw); */
+
+
+    }
+
+    .submission-content-container {
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+    }
+</style>
+
+
+<style>
+    .guidelines {
+        /* flex-grow: 1; */
+        background-color: black;
+        /* width: 45vw; */
+        border-radius: 15px;
+
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px;
+        /* transition: all .5s; */
+
+    }
+
+    .guidelines-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 47vw;
+    }
+
+    .guidelines h3 {
+        color: white;
+        font-size: clamp(14px, 1.2vw, 2vw);
+    }
+
+    .guidelines img {
+        height: 20px;
+    }
+
+    .guidelines:hover {
+        cursor: pointer;
+    }
+
+    .guidelines p {
+        color: white;
+        max-width: 40vw;
+        line-height: 2;
+
+        /* margin-bottom: 10px; */
+    }
+
+    .guidelines a {
+        font-size: clamp(14px, 1.2vw, 2vw);
+
+    }
+    #guidelines-paragraph {
+        display: none;
+    }
+
+    #submission-remove-btn {
+        display: none;
+        height: 4px;
+
+    }
+
+    .guidelines-div-container {
+        width: 56vw;
+        margin-left: -15px;
+
+    }
+
+    .guidelines-div-container p {
+        color: #898989;
+    }
+
+    @media (max-width: 1050px) {
+        .project-background-img {
+            width: 60vw;
+
+        }
+
+        #project-div {
+            padding-left: 9vw;
+        }
+
+        .submission-content-container {
+            width: 60vw;
+        }
+
+        .guidelines-title {
+
+            /* gap: 35vw; */
+            width: 56vw;
+
+        }
+
+
+        .guidelines-div-container {
+            width: 73.5vw;
+        }
+
+        .guidelines p {
+            color: white;
+            max-width: 50vw;
+            line-height: 2;
+            /* margin-bottom: 10px; */
+            /* font-size: clamp(14px, 1.2vw, 2vw); */
+
+        }
+
+    }
+
+    @media (max-width: 700px) {
+
+        .project-background-img {
+            width: 70vw;
+
+        }
+
+        #project-div {
+            padding-left: 17vw;
+        }
+
+        .submission-content-container {
+            width: 70vw;
+        }
+
+        .guidelines-title {
+            width: 63vw;
+        }
+
+        .guidelines-div-container {
+            width: 63.5vw;
+        }
+
+
+        .guidelines p {
+            color: white;
+            max-width: 50vw;
+            line-height: 2;
+            /* margin-bottom: 10px; */
+        }
+    }
+
+    @media (max-width: 400px) {
+        .project-background-img {
+            width: 70vw;
+
+        }
+
+        #project-div {
+            /* padding-left: 20vw; */
+        }
+
+        .submission-content-container {
+            width: 60vw;
+        }
+
+        .guidelines-title {
+            width: 63vw;
+        }
+    }
+</style>
+
+<body>
+    {% include 'participant_hub/hub_navbar.html' %}
+
+    <section id="project-div">
+
+        <h2 class="group-hub-title">
+            Project Submission
+        </h2>
+
+        <style>
+            /* ... Your existing styles ... */
+
+            /* Add a class for the "Edit" div */
+            .edit-div {
+                margin: 10px;
+                position: absolute;
+                /* Position absolutely within the parent */
+                top: 0;
+                /* Place it at the top */
+                right: 0;
+                /* Place it at the right */
+                background-color: red;
+                /* Background color for the "Edit" div */
+                color: white;
+                /* Text color for the "Edit" text */
+                padding: 5px 10px;
+                /* Padding for the "Edit" div */
+                z-index: 2;
+                /* Place it above all other elements within the parent div */
+                cursor: pointer;
+                /* Change cursor to pointer for interaction */
+                background-color: black;
+                padding: 10px 30px;
+                border-radius: 10px;
+            }
+
+            .edit-div:hover {
+
+                color: black;
+                background-color: white;
+                /* transition: all .4s; */
+            }
+
+            /* Styling for the "Edit" text */
+            .edit-text {
+                margin: 0;
+            }
+        </style>
+
+
+        <div class="submission-content-container">
+
+            <div class="project-details">
+                <div class="project-background">
+                    <img src="{% static 'img\project_background.png' %}" class="project-background-img">
+
+                    <!-- Add the "Edit" div with the "edit-div" class -->
+                    <div class="edit-div" id="edit-div">
+                        <p class="edit-text">Edit</p>
+                    </div>
+                </div>
+                <h3>
+                    Project Details
+                </h3>
+                <div class="project-detail-item">
+                    <h3>
+                        Project Name: {{project_name}}
+                    </h3>
+                </div>
+                <div class="project-detail-item">
+                    <h3>
+                        Case Study: {{case_study}}
+                    </h3>
+                </div>
+                <div class="guidelines" id="guidelines">
+                    <div class="guidelines-title ">
+                        <h3>
+                            Project Description
+                        </h3>
+                        <img src="{% static 'img/add_btn.svg' %}" id="submission-add-btn" />
+                        <img src="{% static 'img/remove_btn.svg' %}" id="submission-remove-btn" />
+                    </div>
+                    <div id="guidelines-paragraph">
+                        <p>
+                            {{project_description}}
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="project-detail-item">
+                    <h3>
+                        <a href="{{project_github}}">Github Link</a>
+                    </h3>
+                </div>
+                <div class="project-detail-item">
+                    <h3>
+                        <a href="{{project_video}}">Video Presentation Link</a>
+                    </h3>
+                </div>
+                <div class="project-detail-item">
+                    <h3><a
+                            href="{{project_image}}">Project Image Link</a>
+                    </h3>
+                </div>
+                <div class="project-detail-item">
+                    <h3><a
+                            href="{{project_pdf}}">Pitch Deck Link</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const edit_btn = document.getElementById("edit-div");
+
+            edit_btn.addEventListener("click", function(){
+                location.href='/submission/project/edit';
+            })
+        })
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get references to the clickable divs
+            const guidelines = document.getElementById('guidelines');
+            const guide_para = document.getElementById('guidelines-paragraph');
+            const add_btn = document.getElementById('submission-add-btn');
+            const remove_btn = document.getElementById('submission-remove-btn');
+
+            guidelines.addEventListener('click', function () {
+                if (guide_para.style.display === "none" || guide_para.style.display === "") {
+                    guide_para.style.display = "block";
+                    remove_btn.style.display = "block";
+                    add_btn.style.display = "none";
+                } else {
+                    guide_para.style.display = "none";
+                    remove_btn.style.display = "none";
+                    add_btn.style.display = "block";
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

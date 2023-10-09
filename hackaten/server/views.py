@@ -123,14 +123,14 @@ def grouping(request):
         check_group = firebase.check_group(userid)
         if check_group:
             return HttpResponseRedirect("/groups/hub")
-        
+
         if request.method == "POST":
             request_type = str(request.POST.get("type", ""))
             request_data = str(request.POST.get("data", ""))
 
             if request_type == "create":
                 user_payload = decode_jwt_token(session_auth, SECRET_KEY)
-                userid = user_payload["user_id"]    
+                userid = user_payload["user_id"]
                 is_create = firebase.create_group(userid, request_data)
 
                 if is_create:
@@ -140,48 +140,47 @@ def grouping(request):
                         "status": "success",
                         "session_auth": str(
                             generate_jwt_token(
-                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
+                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2",
+                                "user@example9.com",
+                                SECRET_KEY,
                             )
                         ),
-                        
                     }
                     return JsonResponse(response_data)
                 else:
                     response_data = {
                         "status": "fail",
-                        "msg": "Group Name Already Exists, Please Choose A different Name."
+                        "msg": "Group Name Already Exists, Please Choose A different Name.",
                     }
-                    
+
                     return JsonResponse(response_data)
-                
+
             if request_type == "join":
                 user_payload = decode_jwt_token(session_auth, SECRET_KEY)
-                userid = user_payload["user_id"]    
+                userid = user_payload["user_id"]
                 is_create = firebase.join_group(userid, request_data)
 
                 if is_create == 1:
                     response_data = {
-                            "status": "success",
-                            "session_auth": str(
-                                generate_jwt_token(
-                                    "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
-                                )
-                            ),
-                            
-                        }
+                        "status": "success",
+                        "session_auth": str(
+                            generate_jwt_token(
+                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2",
+                                "user@example9.com",
+                                SECRET_KEY,
+                            )
+                        ),
+                    }
                     return JsonResponse(response_data)
                 elif is_create == 0:
                     response_data = {
                         "status": "fail",
-                        "msg": "Sorry but the group is already full"
+                        "msg": "Sorry but the group is already full",
                     }
-                    
+
                     return JsonResponse(response_data)
                 elif is_create == -1:
-                    response_data = {
-                        "status": "fail",
-                        "msg": "Group Doesn't Exist"
-                    }
+                    response_data = {"status": "fail", "msg": "Group Doesn't Exist"}
                     return JsonResponse(response_data)
 
     return render(request, "participant_hub\grouping\index.html")
@@ -200,11 +199,9 @@ def group_hub(request):
     if check_group:
         payload = firebase.get_group(userid)
         return render(request, "participant_hub\\grouping\group_hub.html", payload)
-    
+
     return HttpResponseRedirect("/groups/")
     # return render(request, "participant_hub\\grouping\index.html")
-
-    
 
 
 def mentors(request):
@@ -216,4 +213,55 @@ def resources(request):
 
 
 def submission(request):
+    session_auth = request.COOKIES.get("session_auth")
+    if session_auth:
+        user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+        user_id = user_payload["user_id"]
+        if request.method == "POST":
+            case_study = str(request.POST.get("case_study", ""))
+            project_name = str(request.POST.get("project_name", ""))
+            project_image = str(request.POST.get("project_image", ""))
+            project_description = str(request.POST.get("project_description", ""))
+            project_github = str(request.POST.get("project_github", ""))
+            project_pdf = str(request.POST.get("project_pdf", ""))
+            project_video = str(request.POST.get("project_video", ""))
+
+            firebase.create_project(
+                user_id,
+                case_study,
+                project_name,
+                project_image,
+                project_description,
+                project_pdf,
+                project_github,
+                project_video,
+            )
+
+            response_data = {
+                "status": "success",
+                "session_auth": str(
+                    generate_jwt_token(
+                        "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
+                    )
+                ),
+            }
+            return JsonResponse(response_data)
+
     return render(request, "participant_hub\\submission\index.html")
+
+
+def project(request):
+    session_auth = request.COOKIES.get("session_auth")
+    user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+    userid = user_payload["user_id"]
+    project = firebase.get_project(userid)
+    return render(request, "participant_hub\\submission\project.html", project)
+
+def project_edit(request):
+    session_auth = request.COOKIES.get("session_auth")
+    user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+    userid = user_payload["user_id"]
+    project = firebase.get_project(userid)
+
+    print(project)
+    return render(request, "participant_hub\\submission\project_edit.html", project)
