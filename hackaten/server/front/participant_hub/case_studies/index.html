@@ -46,24 +46,29 @@
             border-radius: 20px;
             /* background-color: rgb(45, 45, 45); */
 
+
+        }
+
+        .case-study-item:hover {
+            cursor: pointer;
         }
 
         .case-study-item-title {
             display: flex;
             direction: column;
             align-items: center;
-            height: 100px;
+            height: 130px;
             overflow-y: hidden;
             overflow-x: hidden;
             color: white;
             justify-content: space-between;
             /* padding: 10px 20px; */
 
-            border-radius: 20px;
+            border-radius: 10px;
 
             background-color: black;
 
-
+            user-select: none;
         }
 
         .case-study-item-img {
@@ -81,11 +86,59 @@
         }
 
         .case-study-img {
-            margin-top: 30px;
+            margin-top: 0px;
             margin-right: -4px;
-            border-radius: 20px;
-            border-radius: 20px;
-            width: fit-content;
+            border-radius: 00px;
+            /* width: fit-content; */
+            /* height: 10vw; */
+            /* height: 130px; */
+        }
+
+        p {
+            padding-left: 30px;
+            color: white;
+            max-width: 40vw;
+            line-height: 2;
+            display: none;
+        }
+
+        @media (max-width: 1050px) {
+            p {
+                max-width: 50vw;
+            }
+
+            .case-study-item {
+                width: 70vw;
+            }
+
+            #case_studies-div {
+                padding-left: 8vw;
+
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            #case_studies-div {
+                padding-left: 14vw;
+
+            }
+
+            .case-study-item {
+                width: 72vw;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            #case_studies-div {
+                padding-left: 17vw;
+
+            }
+
+            .case-study-item {
+                width: 72vw;
+            }
         }
     </style>
 </head>
@@ -100,7 +153,8 @@
             Case Studies
         </h2>
 
-        <div class="case-study-item">
+
+        <div class="case-study-item" onclick="openCase(1)">
             <div class="case-study-item-title">
                 <div class="case-study-item-left">
                     <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
@@ -113,29 +167,14 @@
                 <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
 
             </div>
-        </div>
-        <div class="case-study-item">
-            <div class="case-study-item-title">
-                <div class="case-study-item-left">
-                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
-                    <h3>
-                        Aritifical Intellgience
-                    </h3>
-                </div>
-
-
-                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
-
-            </div>
-            <p style="color: white; padding-left: 30px; max-width: 100px;">
-                asdsadasdsajkjdhsajkdhsadhsadhjksadhjkahdkjsahdkjhadkshsaadasdsajkjdhsajkdhsadhsadhjksadhjkahdkjsahdkjhadkshsa
-                asdhadjksahdsadsadhsadhsadhkjsahdkjsahdkjhaskjdhaskj
-                dhaskdhsajkdhsajkdhsajdhsakjhdsjadh asdjhadjsadjh
-                asdhadjksahdsadsadhsadhsadhkjsahdkjsahdkjhaskjdhaskj
-                dhaskdhsajkdhsajkdhsajdhsakjhdsjadh asdjhadjsadjh
+            <p id="1" style="display: none;">
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
             </p>
         </div>
-        <div class="case-study-item">
+
+        <div class="case-study-item" onclick="openCase(1)">
             <div class="case-study-item-title">
                 <div class="case-study-item-left">
                     <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
@@ -148,8 +187,105 @@
                 <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
 
             </div>
+            <p id="1" style="display: none;">
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+            </p>
         </div>
+
+        <div class="case-study-item" onclick="openCase(1)">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
+
+
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
+
+            </div>
+            <p id="1" style="display: none;">
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+            </p>
+        </div>
+
+        <div class="case-study-item" onclick="openCase(1)">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
+
+
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
+
+            </div>
+            <p id="1" style="display: none;">
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+            </p>
+        </div>
+
+        <div class="case-study-item" onclick="openCase(1)">
+            <div class="case-study-item-title">
+                <div class="case-study-item-left">
+                    <img src="{% static 'img\art_icon.svg' %}" class="case-study-item-img" />
+                    <h3>
+                        Aritifical Intellgience
+                    </h3>
+                </div>
+
+
+                <img src="{% static 'img\case_study_image_1.svg' %}" class="case-study-img" />
+
+            </div>
+            <p id="1" style="display: none;">
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+                I don't know what to say but this is the description of this case study
+            </p>
+        </div>
+
+
+  
+
     </section>
 </body>
+
+<script>
+    onclick = "theFunction()"
+    function openCase(x) {
+        const div_ref = document.getElementById(x.toString())
+        if (div_ref.style.display != "block") {
+            div_ref.style.display = "block";
+
+            for (i = 0; i < 10; i++) {
+                try {
+                    // Code that may throw an exception
+                    if (i != x) {
+                        const element = document.getElementById(i.toString())
+                        element.style.display = "none";
+                    }
+
+                } catch (error) {
+                    // Code to handle the exception
+                }
+            }
+        }
+        else {
+            div_ref.style.display = "none";
+
+        }
+
+    }
+</script>
 
 </html>

@@ -6,6 +6,7 @@ from tqdm import tqdm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from django.template import RequestContext
 
 # importing firebase for authentication
 from .modules import Firebase, generate_jwt_token, decode_jwt_token, SECRET_KEY
@@ -17,7 +18,7 @@ from django.http import JsonResponse
 import json
 
 
-def say_hello(request):
+def sign_in(request):
     session_auth = request.COOKIES.get("session_auth")
     if session_auth is None:
         if request.method == "POST":
@@ -33,7 +34,7 @@ def say_hello(request):
                 # Return a JSON response with status and user name
                 response_data = {
                     "status": "success",
-                    "session_auth": isAuthValid[1],  # Replace with the actual username
+                    "session_auth": isAuthValid,  # Replace with the actual username
                 }
                 return JsonResponse(response_data)
             else:
@@ -42,7 +43,7 @@ def say_hello(request):
 
         return render(request, "signin/index.html")
     else:
-        return render(request, "participant_hub\index.html")
+       return HttpResponseRedirect("/hub")
 
 
 def signup(request):
@@ -115,12 +116,19 @@ def case_studies(request):
     return render(request, "participant_hub\case_studies\index.html")
 
 
+def custom_404(request, *args, **argv):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
 def grouping(request):
     session_auth = request.COOKIES.get("session_auth")
     if session_auth:
         user_payload = decode_jwt_token(session_auth, SECRET_KEY)
         userid = user_payload["user_id"]
         check_group = firebase.check_group(userid)
+        print(check_group)
         if check_group:
             return HttpResponseRedirect("/groups/hub")
 
@@ -183,7 +191,10 @@ def grouping(request):
                     response_data = {"status": "fail", "msg": "Group Doesn't Exist"}
                     return JsonResponse(response_data)
 
-    return render(request, "participant_hub\grouping\index.html")
+        else:
+            return render(request, "participant_hub\grouping\index.html")
+        
+    return HttpResponseRedirect("/login")
 
 
 def rules(request):
@@ -192,15 +203,19 @@ def rules(request):
 
 def group_hub(request):
     session_auth = request.COOKIES.get("session_auth")
-    user_payload = decode_jwt_token(session_auth, SECRET_KEY)
-    userid = user_payload["user_id"]
+    if session_auth:
+        user_payload = decode_jwt_token(session_auth, SECRET_KEY)
+        userid = user_payload["user_id"]
+        print(userid)
 
-    check_group = firebase.check_group(userid)
-    if check_group:
-        payload = firebase.get_group(userid)
-        return render(request, "participant_hub\\grouping\group_hub.html", payload)
+        check_group = firebase.check_group(userid)
+        if check_group:
+            payload = firebase.get_group(userid)
+            return render(request, "participant_hub\\grouping\group_hub.html", payload)
+        
+        return HttpResponseRedirect("/groups/")
 
-    return HttpResponseRedirect("/groups/")
+    return HttpResponseRedirect("/login")
     # return render(request, "participant_hub\\grouping\index.html")
 
 

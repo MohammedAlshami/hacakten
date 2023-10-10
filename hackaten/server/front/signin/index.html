@@ -285,31 +285,33 @@
                         }, 800);
                         error.innerText = "Sorry, your email/password was incorrect. Please double-check your email/password.";
                         return;
+                    } else {
+
+                        if (!isEmailValid()) {
+                            emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                            emailInput.style.border = "2px solid red";
+                            setTimeout(function () {
+                                emailInput.style.animation = "none";
+                                // emailInput.style.border = "none";
+                                document.body.innerHTML += '<style> input:focus {border: 2px solid #0198FF;}</style>'
+
+                            }, 800);
+                            error.innerText = "email needs to follow this format: email@example.com";
+                            return;
+                        }
+                        if (!isPasswordValid()) {
+                            passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                            passwordInput.style.border = "2px solid red";
+                            setTimeout(function () {
+                                passwordInput.style.animation = "none";
+                                // passwordInput.style.border = "2px solid blue";
+                            }, 800);
+                            error.innerText = "Please format the password correctly. You need one special character, one uppercase, one lowercase, one number, and a length > 8";
+                            return;
+                        }
+
                     }
 
-
-                    if (!isEmailValid()) {
-                        emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                        emailInput.style.border = "2px solid red";
-                        setTimeout(function () {
-                            emailInput.style.animation = "none";
-                            // emailInput.style.border = "none";
-                            document.body.innerHTML += '<style> input:focus {border: 2px solid #0198FF;}</style>'
-
-                        }, 800);
-                        error.innerText = "email needs to follow this format: email@example.com";
-                        return;
-                    }
-                    if (!isPasswordValid()) {
-                        passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                        passwordInput.style.border = "2px solid red";
-                        setTimeout(function () {
-                            passwordInput.style.animation = "none";
-                            // passwordInput.style.border = "2px solid blue";
-                        }, 800);
-                        error.innerText = "Please format the password correctly. You need one special character, one uppercase, one lowercase, one number, and a length > 8";
-                        return;
-                    }
 
                 }
 
@@ -356,7 +358,7 @@
                     password: passwordValue
                 };
                 const payload = JSON.stringify(data)
-                fetch('/', {
+                fetch('/login/', {
                     method: 'POST',
                     body: payload,
                     headers: headers,

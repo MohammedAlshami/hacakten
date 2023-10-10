@@ -137,8 +137,10 @@ class Firebase:
         db = self.firebase.database()
 
         is_group_exist = db.child(group_table_name).child(group_id)
-        if is_group_exist.get().val():
-            group_record = is_group_exist.get().val()
+        group_val = is_group_exist.get().val()
+        print(group_val)
+        if group_val:
+            group_record = group_val
 
             if len(group_record["members"]) < 3:
                 if user_id not in group_record["members"]:
@@ -177,8 +179,8 @@ class Firebase:
             group_record = is_group_exist.get().val()
             group_info = {
                 "group_id": group_id,
-                "group_name": group_record["group_name"],
-                "members": [get_member(db, i) for i in group_record["members"]],
+                "group_name": group_record.get("group_name", "UKNOWN"),
+                "members": [get_member(db, i) for i in group_record.get("members", "UNKNOWN")],
                 "members_len": len(group_record["members"]),
             }
             print(group_info)
@@ -188,9 +190,10 @@ class Firebase:
         db = self.firebase.database()
         user_table_name = "hack10User"
         is_group_exist = db.child(user_table_name).child(user_id).get().val()
-        is_group_involved = is_group_exist.get("group_id", None)
-        if is_group_involved:
-            return True
+        if is_group_exist:
+            is_group_involved = is_group_exist.get("group_id", None)
+            if is_group_involved:
+                return True
         return False
 
     def create_project(
@@ -291,10 +294,10 @@ def get_member(db, user_id):
     user_table_name = "hack10User"
     is_group_exist = db.child(user_table_name).child(user_id)
     group_record = is_group_exist.get().val()
-    return f'{group_record["first_name"]} {group_record["last_name"]}'
+    return f'{group_record.get("first_name", "UKNOWN")} {group_record.get("last_name", "UKNOWN")}'
 
 
-def group_name_check(db, table_name, group_name, threshold=80):
+def group_name_check(db, table_name, group_name, threshold=95):
     record_ids = []
 
     # Reference to your Firebase database table

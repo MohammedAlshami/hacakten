@@ -5,15 +5,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Card Layout</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
 
+        .hub-section {
 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            padding-bottom: 60px;
+        }
+
+        .containers {
+            padding-left: 15vw;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+
+        }
+
+        .custom-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+
+            border-radius: 10px;
+            border: 1px solid grey;
+            width: 15vw;
+            height: 14vw;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            background-color: #ffffff92;
+            user-select: none;
+        }
+
+        .custom-card:hover {
+            cursor: pointer;
+        }
+
+        .custom-card img {
+            width: 7vw;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .custom-card img {
+            max-width: 100%;
+        }
+
+        .title {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .description {
+            color: grey;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        /* @media screen and (min-width: 800px) {
+            .container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+            }
+        } */
+
+        .group-hub-title {
+            padding-left: 17vw;
+            font-weight: bold;
+            font-size: clamp(25px, 2.2vw, 4vw);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-div {
+            padding-left: 18.5vw;
+            display: flex;
+            flex-direction: row;
+            /* justify-content: space-between; */
+            /* align-items: center; */
+            gap: 35vw;
+        }
+
+        .profile-div-left {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+        }
+        .profile-div-left img {
+            width: 170px;
+        }
+
+        .profile-div-right {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .profile-div-right-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: .9vw;
+        }
+
+        .profile-div-divider {
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* justify-content: ; */
+            background-color: black;
+            width: 4px;
+            height:60%;
+        }
+        #profile-div-left-btn {
+            /* padding-top: 300px; */
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            /* width: 200px; */
+            padding: 10px 5px;
+            border-radius: 10px;
+            color: white;
+            
+            user-select: none;
+        }
+        #profile-div-left-btn:hover {
+            cursor: pointer;
+        }
+        .containers-title {
+            margin-top: 5vw;
+            padding-left: 4vw;
+        }
+    </style>
 </head>
 
 <body>
-
-
     {% include 'participant_hub/hub_navbar.html' %}
+
+    <section id="hub-section">
+        <h2 class="group-hub-title">
+            Project Submission
+        </h2>
+
+        <div class="profile-div">
+            <div class="profile-div-left">
+                <img src="{% static 'img/profile_image.jpg' %}" />
+                <div>
+                    <h3>Participant</h3>
+                    <h4>Mohammed Alshami</h4>
+                    <div id="profile-div-left-btn">
+                        view profile
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-div-right">
+                <div class="profile-div-right-item">
+                    <h3>Age: <span>32</span></h3>
+                    <h3>Age: <span>32</span></h3>
+
+                </div>
+                <div class="profile-div-divider">
+
+                </div>
+                <div class="profile-div-right-item">
+                    <h3>Age: <span>32</span></h3>
+                    <h3>Age: <span>32</span></h3>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="containers">
+            <h3 class="containers-title">System Components</h3>
+            <div class="container">
+                <div class="custom-card">
+                    <img src="{% static 'img/group_illustrate.svg' %}" alt="Logo 1">
+                    <div class="title">Group</div>
+                    <div class="description">Create A group</div>
+                </div>
+
+                      <div class="custom-card">
+                    <img src="{% static 'img/rules_illustrate.svg' %}" alt="Logo 1">
+                    <div class="title">Group</div>
+                    <div class="description">Create A group</div>
+                </div>
+
+                <div class="custom-card">
+                    <img src="{% static 'img/group_create_icon.svg' %}" alt="Logo 1">
+                    <div class="title">Group</div>
+                    <div class="description">Create A group</div>
+                </div>
+                <div class="custom-card">
+                    <img src="{% static 'img/group_create_icon.svg' %}" alt="Logo 1">
+                    <div class="title">Group</div>
+                    <div class="description">Create A group</div>
+                </div>
+
+                <!-- Repeat for other cards... -->
+
+            </div>
+            
+    
+        </div>
+
+    </section>
+
 
 </body>
 
