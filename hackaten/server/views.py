@@ -84,7 +84,7 @@ def signup(request):
                 }
                 return JsonResponse(response_data)
             else:
-                response_data = {"status": "fail"}
+                response_data = {"status": "fail", "reason": "User Email Already Exists"}
                 return JsonResponse(response_data)
             # resume_file = request.FILES.get("resume", None)
 
@@ -104,6 +104,7 @@ def signup(request):
         else:
             return render(request, "signup/index.html")
     else:
+        return HttpResponseRedirect("/hub")
         return render(request, "participant_hub\index.html")
 
 
@@ -148,8 +149,7 @@ def grouping(request):
                         "status": "success",
                         "session_auth": str(
                             generate_jwt_token(
-                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2",
-                                "user@example9.com",
+                                userid,
                                 SECRET_KEY,
                             )
                         ),
@@ -173,8 +173,7 @@ def grouping(request):
                         "status": "success",
                         "session_auth": str(
                             generate_jwt_token(
-                                "ju9MG6Li6cSHlx5UEx3LFXXivIZ2",
-                                "user@example9.com",
+                                userid,
                                 SECRET_KEY,
                             )
                         ),
@@ -256,7 +255,7 @@ def submission(request):
                 "status": "success",
                 "session_auth": str(
                     generate_jwt_token(
-                        "ju9MG6Li6cSHlx5UEx3LFXXivIZ2", "user@example9.com", SECRET_KEY
+                        user_id, SECRET_KEY
                     )
                 ),
             }

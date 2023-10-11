@@ -23,7 +23,7 @@ class Firebase:
         try:
             auth = self.firebase.auth()
             user = auth.sign_in_with_email_and_password(email, password)
-            jwtToken = generate_jwt_token(user["localId"], email, SECRET_KEY)
+            jwtToken = generate_jwt_token(user["localId"], SECRET_KEY)
             return jwtToken
         except Exception as ex:
             print(ex)
@@ -55,9 +55,13 @@ class Firebase:
             # Create the "hack10User" table if it doesn't exist
             db.child("hack10Users").set({})
 
-        # Authentication: Register a user (replace with your email and password)
-        email = f"{uuid.uuid4()}@gmail.com"
-        password = "password"
+
+        try:
+            auth.get_user_by_email(email)
+            print("User with this email already exists.")
+            return None  # You can handle this case as needed
+        except:
+            pass
 
         try:
             user = auth.create_user_with_email_and_password(email, password)
@@ -97,7 +101,7 @@ class Firebase:
                 db.child("hack10User").child(user_id).set(user_info)
                 print("User registered successfully with ID:", user_id)
                 print("Resume file uploaded to:", file_url)
-                return generate_jwt_token(user_id, email, SECRET_KEY)
+                return generate_jwt_token(user_id, SECRET_KEY)
         return None
 
     def create_group(self, user_id, group_name):
@@ -336,11 +340,11 @@ def generate_uuid_from_file_name(file_name):
     return uuid.UUID(bytes=uuid_bytes, version=4)  # version 4 UUID
 
 
-def generate_jwt_token(user_id, email, secret_key, expiration_days=7):
+def generate_jwt_token(user_id,  secret_key):
+    expiration_days=7
     # Create a payload (a dictionary containing data)
     payload = {
         "user_id": user_id,
-        "username": email,
         "exp": datetime.datetime.utcnow()
         + datetime.timedelta(days=expiration_days),  # Token expiration time
     }
