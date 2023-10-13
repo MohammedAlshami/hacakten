@@ -187,6 +187,12 @@
             color: red;
             text-align: center;
         }
+        .forgot-password {
+            text-align: right;
+            color: #0198FF !important;
+            
+        }
+    
     </style>
 </head>
 
@@ -199,7 +205,7 @@
         <div class="login-top">
             <img src="{% static 'img/hack_logo.png' %}" />
             <h3 style="font-weight: bold; color: white; margin-bottom: 20px;">Join Hack@10</h3>
-            <p>Don't Have An Account Yet? <span>Create One</span></p>
+            <p>Don't Have An Account Yet? <span><a href="/register">Create One</a></span></p>
 
             <div class="login-top-divider ">
                 <div class="login-top-divider1"></div>
@@ -215,6 +221,9 @@
             </div>
             <div class="form-input">
                 <input type="text" id="passwordInput" placeholder="Password">
+            </div>
+            <div class="forgot-password">
+                <a href="/reset">Fogot Password?</a>
             </div>
             <div class="form-btn" id="loginButton">
                 Login

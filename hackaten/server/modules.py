@@ -4,6 +4,7 @@ import datetime
 import uuid
 import hashlib
 from fuzzywuzzy import fuzz
+from cryptography.fernet import Fernet
 
 SECRET_KEY = "2B1fGuGYqV445v9x4Dn9HX0vtBmDFRgP"
 
@@ -18,6 +19,30 @@ class Firebase:
             "serviceAccount": r"D:\Desktop_1\Hack@10\Server\hackaten\server\credentials\firebase_access.json",
         }
         self.firebase = pyrebase.initialize_app(config)
+
+    def verify_password(self, new_password, verification_code):
+        auth = self.firebase.auth()
+
+        print("veryfiing password")
+        try:
+            auth.verify_password_reset_code(verification_code, "123@asdsadA")
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+        
+    def password_reset(self, email):
+        print("password_reset")
+        auth = self.firebase.auth()
+        try:
+            auth.send_password_reset_email(email)
+            return email
+        except Exception as ex:
+            print(ex)
+            return False
+        
+
+
 
     def register_user(self, email, password):
         try:
@@ -54,7 +79,6 @@ class Firebase:
         if not user_table_exists:
             # Create the "hack10User" table if it doesn't exist
             db.child("hack10Users").set({})
-
 
         try:
             auth.get_user_by_email(email)
@@ -184,7 +208,9 @@ class Firebase:
             group_info = {
                 "group_id": group_id,
                 "group_name": group_record.get("group_name", "UKNOWN"),
-                "members": [get_member(db, i) for i in group_record.get("members", "UNKNOWN")],
+                "members": [
+                    get_member(db, i) for i in group_record.get("members", "UNKNOWN")
+                ],
                 "members_len": len(group_record["members"]),
             }
             print(group_info)
@@ -222,7 +248,9 @@ class Firebase:
         if not project_table_exists:
             db.child(project_table_name).set({})
 
-        group_id = db.child(user_table_name).child(user_id).get().val().get("group_id", None)
+        group_id = (
+            db.child(user_table_name).child(user_id).get().val().get("group_id", None)
+        )
 
         project_ref = db.child(user_table_name).child(user_id)
 
@@ -246,14 +274,13 @@ class Firebase:
             "project_pdf": project_pdf,
             "project_github": project_github,
             "project_video": project_video,
-            "group_id": group_id
+            "group_id": group_id,
         }
 
         db.child(project_table_name).child(project_id).set(group_info)
 
         user_ref = db.child(user_table_name).child(user_id)
         user_ref.update({"project_id": project_id})
-
 
         group_ref = db.child(group_table_name).child(group_id)
         group_ref.update({"project_id": project_id})
@@ -281,15 +308,14 @@ class Firebase:
             project_ref = db.child(project_table_name).child(project_id)
             project_record = project_ref.get().val()
             project_info = {
-    
-            "project_id": project_id,
-            "case_study": project_record["case_study"],
-            "project_name": project_record["project_name"],
-            "project_image": project_record["project_image"],
-            "project_description": project_record["project_description"],
-            "project_pdf": project_record["project_pdf"],
-            "project_github": project_record["project_github"],
-            "project_video": project_record["project_video"],
+                "project_id": project_id,
+                "case_study": project_record["case_study"],
+                "project_name": project_record["project_name"],
+                "project_image": project_record["project_image"],
+                "project_description": project_record["project_description"],
+                "project_pdf": project_record["project_pdf"],
+                "project_github": project_record["project_github"],
+                "project_video": project_record["project_video"],
             }
             return project_info
 
@@ -340,8 +366,8 @@ def generate_uuid_from_file_name(file_name):
     return uuid.UUID(bytes=uuid_bytes, version=4)  # version 4 UUID
 
 
-def generate_jwt_token(user_id,  secret_key):
-    expiration_days=7
+def generate_jwt_token(user_id, secret_key):
+    expiration_days = 7
     # Create a payload (a dictionary containing data)
     payload = {
         "user_id": user_id,
@@ -366,3 +392,14 @@ def decode_jwt_token(token, secret_key):
     except jwt.InvalidTokenError:
         print("Invalid token.")
         return None
+
+def encrypt_text(text, key):
+    fernet = Fernet(key)
+    encrypted_text = fernet.encrypt(text.encode())
+    return encrypted_text
+
+
+def decrypt_text(encrypted_text, key):
+    fernet = Fernet(key)
+    decrypted_text = fernet.decrypt(encrypted_text).decode()
+    return decrypted_text

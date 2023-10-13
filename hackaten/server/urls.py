@@ -1,10 +1,13 @@
-from django.urls import path 
+from django.urls import path
 from . import views
 from django.conf.urls import handler404
 
 
-urlpatterns = [ 
+urlpatterns = [
+    path("", views.landing_page),
     path("register/", views.signup),
+    path("reset/", views.password_reset),
+    path("reset/confirm/", views.password_confirm),
     path("login/", views.sign_in),
     path("hub/", views.participant_hub),
     path("cases/", views.case_studies),
@@ -15,8 +18,7 @@ urlpatterns = [
     path("resources/", views.resources),
     path("submission/", views.submission),
     path("submission/project/", views.project),
-    path("submission/project/edit", views.project_edit)
-
+    path("submission/project/edit", views.project_edit),
 ]
 
 # handler404 = views.custom_404

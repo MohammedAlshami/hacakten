@@ -116,12 +116,12 @@
             animation: shake 0.5s, colorChange 0.5s;
         }
 
+
         .login-form {
-            margin: 13vw auto;
+            margin: 10vw auto;
             width: clamp(350px, 25vw, 30vw);
 
         }
-
 
         @media screen and (max-width: 700px) {
             .login-form {
@@ -197,18 +197,25 @@
     <div class="login-form">
 
         <div class="login-top">
-            <!--  -->
-            <h3 style="font-weight: bold; color: white; margin-bottom: 60px;">Password Reset</h3>
+            <img src="{% static 'img/hack_logo.png' %}" />
 
+            <!--  -->
+            <h3 style="font-weight: bold; color: white; margin-bottom: 20px;">Password Reset</h3>
+
+
+            <div class="login-top-divider ">
+                <div class="login-top-divider1"></div>
+                <div class="login-top-divider3"></div>
+            </div>
         </div>
-        <div style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 30px;">
 
 
             <div>
-                <h6 style="color: white; text-align: left;">Enter your email</h6>
+                <h6 style="color: white; text-align: left;">Email</h6>
             </div>
             <div class="form-input">
-                <input type="text" id="passwordInput" placeholder="Email">
+                <input type="email" id="emailInput" placeholder="Enter Your Email">
             </div>
             <div class="form-btn" id="loginButton">
                 Reset
@@ -241,19 +248,7 @@
                 return emailRegex.test(emailValue);
             }
 
-            // Function to validate password
-            function isPasswordValid() {
-                const passwordInput = document.getElementById('passwordInput');
-                const passwordValue = passwordInput.value;
 
-                return (
-                    passwordValue.length >= 8 &&
-                    /[a-z]/.test(passwordValue) &&
-                    /[A-Z]/.test(passwordValue) &&
-                    /\d/.test(passwordValue) &&
-                    /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(passwordValue)
-                );
-            }
 
             // Function to handle login
             function handleLogin() {
@@ -262,18 +257,13 @@
                 function checkBoth() {
 
                     const emailInput = document.getElementById('emailInput');
-                    const passwordInput = document.getElementById('passwordInput');
                     const error = document.getElementById('error');
                     const emailValue = emailInput.value;
-                    const passwordValue = passwordInput.value;
 
-                    if (!isEmailValid() && !isPasswordValid()) {
-                        passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                        passwordInput.style.border = "2px solid red";
+                    if (!isEmailValid()) {
                         emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
                         emailInput.style.border = "2px solid red";
                         setTimeout(function () {
-                            passwordInput.style.animation = "none";
                             emailInput.style.animation = "none";
                             // passwordInput.style.border = "2px solid blue";
                         }, 800);
@@ -293,16 +283,7 @@
                             error.innerText = "email needs to follow this format: email@example.com";
                             return;
                         }
-                        if (!isPasswordValid()) {
-                            passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                            passwordInput.style.border = "2px solid red";
-                            setTimeout(function () {
-                                passwordInput.style.animation = "none";
-                                // passwordInput.style.border = "2px solid blue";
-                            }, 800);
-                            error.innerText = "Please format the password correctly. You need one special character, one uppercase, one lowercase, one number, and a length > 8";
-                            return;
-                        }
+
 
                     }
 
@@ -310,16 +291,13 @@
                 }
 
                 checkBoth();
-                // checkEmail();
-                // checkPassword();
+
 
 
 
                 const emailInput = document.getElementById('emailInput');
-                const passwordInput = document.getElementById('passwordInput');
                 const error = document.getElementById('error');
                 const emailValue = emailInput.value;
-                const passwordValue = passwordInput.value;
 
                 // Add a focus event listener to each input element
 
@@ -342,17 +320,18 @@
                     //return unescape(dc.substring(begin + prefix.length, end));
                     return decodeURI(dc.substring(begin + prefix.length, end));
                 }
-                var csrftoken = getCookie('csrftoken');
+                // var csrftoken = getCookie('csrftoken');
                 var headers = new Headers();
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
                 headers.append('X-CSRFToken', csrftoken);
 
 
                 const data = {
                     email: emailValue,
-                    password: passwordValue
                 };
+                console.log(data)
                 const payload = JSON.stringify(data)
-                fetch('/login/', {
+                fetch('/reset/', {
                     method: 'POST',
                     body: payload,
                     headers: headers,
@@ -361,9 +340,8 @@
                     if (response.status === 200) {
                         response.json().then(data => {
                             if (data.status === 'success') {
-                                const session_auth = data.session_auth;
-                                setCookie("session_auth", session_auth, 7);
-                                window.location.href = '/hub'; // Redirect to the desired page
+                                const temp_auth = data.temp_auth;
+                                setCookie("temp_auth", temp_auth, 7);
                             } else {
                                 checkBoth()
                             }

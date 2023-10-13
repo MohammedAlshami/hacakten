@@ -109,10 +109,15 @@
         gap: 20px;
         font-size: clamp(14px, 1vw, 1.5vw);
         align-items: center;
+        justify-content: space-between;
     }
 
     #nav-profile-left img {
         height: 35px;
+    }
+
+    .logout:hover {
+        cursor: pointer;
     }
 
 
@@ -169,6 +174,7 @@
             /* margin-top: 80px; */
             /* justify-content: flex-end; */
         }
+
         #nav-profile-left h5 {
             display: none;
         }
@@ -270,13 +276,8 @@
             <div id="nav-profile-left">
                 <img src="{% static 'img/nav_image_placeholder.svg' %}">
 
-                <div>
-                    <h5 id="nav-profile-left-name">
-                        Asal Design
-                    </h5>
-                    <h5 id="nav-profile-left-email">
-                        Asal@design.com
-                    </h5>
+                <div class="logout" onclick="destroyCookieAndRedirect()">
+                    <img src="{% static 'img/log-out.svg' %}" style="height: 25px;" />
                 </div>
 
             </div>
@@ -291,6 +292,19 @@
 </nav>
 
 <script>
+    function destroyCookieAndRedirect() {
+        const cookieName = 'session_auth';
+        const basePageURL = "/landing"
+        // Check if the cookie exists
+        if (document.cookie.indexOf(cookieName) !== -1) {
+            // Expire the cookie by setting an expiration date in the past
+            document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+
+            // Redirect to the base page
+            window.location.href = basePageURL;
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         // Get references to the clickable divs
         const home_nav = document.getElementById('home-nav');

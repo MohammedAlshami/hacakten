@@ -5,6 +5,8 @@ import os
 from tqdm import tqdm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import urllib.parse
+
 
 from django.template import RequestContext
 
@@ -16,6 +18,59 @@ firebase = Firebase()
 
 from django.http import JsonResponse
 import json
+
+
+def landing_page(request):
+    return render(request, "landing/index.html")
+
+
+def password_reset(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        email = str(data.get("email"))
+
+        is_email_exist = firebase.password_reset(email)
+        if is_email_exist:
+            response_data = {
+                "status": "success",
+                "temp_auth": email
+            }
+            return JsonResponse(response_data)
+        else:
+            response_data = {"status": "fail"}
+            return JsonResponse(response_data)
+
+    return render(request, "signin/email_reset.html")
+
+
+def password_confirm(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        oob_code = str(data.get("oobCode", None))
+        if oob_code:
+            email = request.COOKIES.get("temp_auth")
+            email =  urllib.parse.unquote(email)
+            
+            password = str(data.get("password"))
+            is_reset_success = firebase.verify_password(password, oob_code)
+            if is_reset_success:
+                isAuthValid = firebase.register_user(email, password)
+                print("password reseted successfully")
+                # Return a JSON response with status and user name
+                response_data = {
+                    "status": "success",
+                    "session_auth": isAuthValid,  # Replace with the actual username
+                }
+                return JsonResponse(response_data)
+            else:
+                response_data = {"status": "fail", "reason": "Password is bad"}
+                return JsonResponse(response_data)
+        else:
+            response_data = {"status": "fail", "reason": "no oopcode"}
+            return JsonResponse(response_data)
+
+        # print(oob_code)
+    return render(request, "signin/password_reset.html")
 
 
 def sign_in(request):
@@ -43,7 +98,7 @@ def sign_in(request):
 
         return render(request, "signin/index.html")
     else:
-       return HttpResponseRedirect("/hub")
+        return HttpResponseRedirect("/hub")
 
 
 def signup(request):
@@ -84,7 +139,10 @@ def signup(request):
                 }
                 return JsonResponse(response_data)
             else:
-                response_data = {"status": "fail", "reason": "User Email Already Exists"}
+                response_data = {
+                    "status": "fail",
+                    "reason": "User Email Already Exists",
+                }
                 return JsonResponse(response_data)
             # resume_file = request.FILES.get("resume", None)
 
@@ -118,10 +176,12 @@ def case_studies(request):
 
 
 def custom_404(request, *args, **argv):
-    response = render_to_response('404.html', {},
-                                  context_instance=RequestContext(request))
+    response = render_to_response(
+        "404.html", {}, context_instance=RequestContext(request)
+    )
     response.status_code = 404
     return response
+
 
 def grouping(request):
     session_auth = request.COOKIES.get("session_auth")
@@ -192,7 +252,7 @@ def grouping(request):
 
         else:
             return render(request, "participant_hub\grouping\index.html")
-        
+
     return HttpResponseRedirect("/login")
 
 
@@ -211,7 +271,7 @@ def group_hub(request):
         if check_group:
             payload = firebase.get_group(userid)
             return render(request, "participant_hub\\grouping\group_hub.html", payload)
-        
+
         return HttpResponseRedirect("/groups/")
 
     return HttpResponseRedirect("/login")
@@ -253,11 +313,7 @@ def submission(request):
 
             response_data = {
                 "status": "success",
-                "session_auth": str(
-                    generate_jwt_token(
-                        user_id, SECRET_KEY
-                    )
-                ),
+                "session_auth": str(generate_jwt_token(user_id, SECRET_KEY)),
             }
             return JsonResponse(response_data)
 
@@ -270,6 +326,7 @@ def project(request):
     userid = user_payload["user_id"]
     project = firebase.get_project(userid)
     return render(request, "participant_hub\\submission\project.html", project)
+
 
 def project_edit(request):
     session_auth = request.COOKIES.get("session_auth")
