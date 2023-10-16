@@ -7,6 +7,8 @@
         margin: 0;
         padding: 0;
         gap: 30px;
+
+        font-family: 'Times New Roman', Times, serif;
     }
 
     .about-right-item-icon {
@@ -30,14 +32,17 @@
         color: #2DD4BF;
         margin: 0;
         padding: 0;
-        font-size: 1.2vw;
+        font-size: clamp(20px, 1.2vw, 2vw);
     }
 
     .about-right-item-content h5 {
         margin: 0;
         padding: 0;
         color: #91949E;
-        font-size:1vw;
+        font-size: 1vw;
+        font-size: clamp(20px, 1vw, 2vw);
+
+        font-weight: 200;
 
     }
 
@@ -71,6 +76,11 @@
         padding: 0;
         color: #91949E;
         padding-bottom: 30px;
+        font-size: 1.2vw;
+        font-family: 'Times New Roman', Times, serif;
+
+        width: 38vw;
+
     }
 
     .about-container {
@@ -78,13 +88,13 @@
         flex-direction: row;
         justify-content: center;
         /* align-items: ; */
-        gap: 40px;
+        gap: 100px;
 
     }
 
     .about-img img {
         border-radius: 20px;
-        width: 44vw;
+        width: 40vw;
     }
 
     @media (max-width: 1200px) {
@@ -93,6 +103,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             /* align-items: ; */
             gap: 40px;
 
@@ -100,21 +111,42 @@
 
         .about-right {
             gap: 20px;
+            align-items: center;
+
+        }
+
+        .about-right-item-content h4 {
+
+            font-size: clamp(30px, 2vw, 2vw);
+        }
+
+        .about-right-item-content h5 {
+
+            font-size: clamp(30px, 2vw, 2vw);
+
+
         }
 
         .about-img img {
             border-radius: 20px;
-            width: 100%;
+            width: 60vw;
         }
 
         .about-right {
             width: 100%;
         }
+        .about-right p{
+            font-size: clamp(10px, 2vw, 2vw);
+            width: 50vw;
+
+        }
 
         .about-right-items {
-            display: flex;
+            /* display: flex;
             flex-direction: row;
             justify-content: space-between;
+            align-items: center; */
+
         }
 
         .about-right-item-icon svg {
@@ -142,30 +174,21 @@
 
     <div class="about-container">
         <div class="about-img">
-            <img data-src="{% static 'img\cases_bg.webp' %}" src="{% static 'img\cases_bg_compressed.webp' %}" class="lazyload" alt="Image 1" loading="lazy"/>
+            <img data-src="{% static 'img\cases_bg.webp' %}"
+                src="https://firebasestorage.googleapis.com/v0/b/realtimedatabasetest-f226a.appspot.com/o/Website_resources%2FMain_bg1-min.jpg?alt=media"
+                class="lazyload" alt="Image 1" loading="lazy" />
         </div>
         <div class="about-right">
             <h1>
                 What is Hack@10?
             </h1>
             <p>
-                Hack@10 is a hackathon-style competition that commenced its journey in 2012 when it was
-                first hosted at UNITEN, continued in 2018 and 2021, and is set to return this year in
-                2023. It is organized through the collaboration of two clubs: CLICQ Club and Pro-C Club,
-                with the primary objective of providing participants with practical exposure to
-                real-world challenges, enabling them to tackle authentic problems and refine their
-                problem-solving skills, with a focus on exploring problem-solving through the
-                application of artificial intelligence (AI) in 2023.
-
-                <br>
-                <br>
-
-                <br>
-
+                Hack@10 is a hackathon-style competition that commenced its journey in 2012 when it was first hosted at
+                UNITEN, continued in 2018 and 2021, and is set to return this year in 2023. It is organized through the
+                collaboration of two clubs: CLICQ Club and Pro-C Club, with the primary objective of providing
                 participants with practical exposure to real-world challenges, enabling them to tackle authentic
                 problems and refine their problem-solving skills, with a focus on exploring problem-solving through the
                 application of artificial intelligence (AI) in 2023.
-
             </p>
             <div class="about-right-items" style="justify-content: bottom;">
                 <div class="about-right-item">
