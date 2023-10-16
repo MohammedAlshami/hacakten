@@ -6,6 +6,7 @@ from django.conf.urls import handler404
 urlpatterns = [
     path("", views.landing_page),
     path("register/", views.signup),
+    path("register/verify", views.register_verify),
     path("reset/", views.password_reset),
     path("reset/confirm/", views.password_confirm),
     path("login/", views.sign_in),

@@ -1,0 +1,218 @@
+{% load static %}
+<style>
+    .about-right-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        gap: 30px;
+    }
+
+    .about-right-item-icon {
+        background-color: #10142F;
+        border-radius: 5px;
+        padding: 12px;
+    }
+
+    .about-right-item-icon svg {
+        width: 1.8vw;
+
+    }
+
+    .about-right-item-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .about-right-item-content h4 {
+        color: #2DD4BF;
+        margin: 0;
+        padding: 0;
+        font-size: 1.2vw;
+    }
+
+    .about-right-item-content h5 {
+        margin: 0;
+        padding: 0;
+        color: #91949E;
+        font-size:1vw;
+
+    }
+
+    .about-right-items {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .about-right {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        /* gap: 40px; */
+        justify-content: space-between;
+
+        color: white;
+        width: 40vw;
+    }
+
+    .about-right h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 2vw;
+        padding-bottom: 30px;
+    }
+
+    .about-right p {
+        margin: 0;
+        padding: 0;
+        color: #91949E;
+        padding-bottom: 30px;
+    }
+
+    .about-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        /* align-items: ; */
+        gap: 40px;
+
+    }
+
+    .about-img img {
+        border-radius: 20px;
+        width: 44vw;
+    }
+
+    @media (max-width: 1200px) {
+
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* align-items: ; */
+            gap: 40px;
+
+        }
+
+        .about-right {
+            gap: 20px;
+        }
+
+        .about-img img {
+            border-radius: 20px;
+            width: 100%;
+        }
+
+        .about-right {
+            width: 100%;
+        }
+
+        .about-right-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .about-right-item-icon svg {
+            width: 2.5vw;
+
+        }
+
+        .about-right-item-content h4 {
+            color: #2DD4BF;
+            margin: 0;
+            padding: 0;
+            font-size: 1.7vw;
+        }
+
+        .about-right-item-content h5 {
+
+            font-size: 1.4vw;
+
+        }
+
+    }
+</style>
+
+<section>
+
+    <div class="about-container">
+        <div class="about-img">
+            <img data-src="{% static 'img\cases_bg.webp' %}" src="{% static 'img\cases_bg_compressed.webp' %}" class="lazyload" alt="Image 1" loading="lazy"/>
+        </div>
+        <div class="about-right">
+            <h1>
+                What is Hack@10?
+            </h1>
+            <p>
+                Hack@10 is a hackathon-style competition that commenced its journey in 2012 when it was
+                first hosted at UNITEN, continued in 2018 and 2021, and is set to return this year in
+                2023. It is organized through the collaboration of two clubs: CLICQ Club and Pro-C Club,
+                with the primary objective of providing participants with practical exposure to
+                real-world challenges, enabling them to tackle authentic problems and refine their
+                problem-solving skills, with a focus on exploring problem-solving through the
+                application of artificial intelligence (AI) in 2023.
+
+                <br>
+                <br>
+
+                <br>
+
+                participants with practical exposure to real-world challenges, enabling them to tackle authentic
+                problems and refine their problem-solving skills, with a focus on exploring problem-solving through the
+                application of artificial intelligence (AI) in 2023.
+
+            </p>
+            <div class="about-right-items" style="justify-content: bottom;">
+                <div class="about-right-item">
+                    <div class="about-right-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#2DD4BF" class="bi bi-clock-fill"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                        </svg>
+                    </div>
+                    <div class="about-right-item-content">
+                        <h4>
+                            Time & Date
+                        </h4>
+                        <h5>
+                            November 27 - December 17
+                        </h5>
+                    </div>
+                </div>
+
+
+                <div class="about-right-item">
+                    <div class="about-right-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#00b7ff" class="bi bi-geo-alt-fill"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                        </svg>
+                    </div>
+                    <div class="about-right-item-content">
+                        <h4>
+                            Location
+                        </h4>
+                        <h5>
+                            November 27 - December 17
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</section>

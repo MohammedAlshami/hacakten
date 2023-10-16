@@ -5,7 +5,7 @@ import uuid
 import hashlib
 from fuzzywuzzy import fuzz
 from cryptography.fernet import Fernet
-
+import json
 SECRET_KEY = "2B1fGuGYqV445v9x4Dn9HX0vtBmDFRgP"
 
 
@@ -23,14 +23,30 @@ class Firebase:
     def verify_password(self, new_password, verification_code):
         auth = self.firebase.auth()
 
-        print("veryfiing password")
         try:
-            auth.verify_password_reset_code(verification_code, "123@asdsadA")
+            auth.verify_password_reset_code(verification_code, new_password)
             return True
         except Exception as ex:
             print(ex)
             return False
         
+    def verify_register(self, verification_code):
+        auth = self.firebase.auth()
+        try:
+            auth.verify_password_reset_code(verification_code, "")
+            
+            return True
+        except Exception as ex:
+            json_str = str(ex).split('] ')[1]
+
+            error_dict = dict(json.loads(json_str))["error"]["message"]
+
+            if error_dict == "WEAK_PASSWORD":
+                return True
+            
+            return False
+ 
+
     def password_reset(self, email):
         print("password_reset")
         auth = self.firebase.auth()
@@ -49,10 +65,30 @@ class Firebase:
             auth = self.firebase.auth()
             user = auth.sign_in_with_email_and_password(email, password)
             jwtToken = generate_jwt_token(user["localId"], SECRET_KEY)
-            return jwtToken
+            response_data = {
+                    "status": "success",
+                    "session_auth": jwtToken,  # Replace with the actual username
+                }
+            return (True, response_data)
         except Exception as ex:
-            print(ex)
-            return False
+            json_str = str(ex).split('] ')[1]
+
+            # Convert the JSON string to a dictionary
+            error_dict = dict(json.loads(json_str))["error"]["message"]
+
+            response_data = {
+                    "status": "fail",
+                }
+            if error_dict.startswith("TOO_MANY_ATTEMPTS_TRY_LATER"):
+                response_data["type"] = "requests"
+                response_data["message"] = "You have sent too many requests"
+            elif error_dict.startswith("INVALID_PASSWORD"):
+                response_data["type"] = "password"
+                response_data["message"] = "Your password is wrong"
+            elif error_dict.startswith("EMAIL_NOT_FOUND"):
+                response_data["type"] = "email"
+                response_data["message"] = "Email doesn't exist"
+            return (False, response_data)
 
     def upload_user_info(
         self,
@@ -125,6 +161,9 @@ class Firebase:
                 db.child("hack10User").child(user_id).set(user_info)
                 print("User registered successfully with ID:", user_id)
                 print("Resume file uploaded to:", file_url)
+
+                # sending email verification
+                auth.send_email_verification(user_id)
                 return generate_jwt_token(user_id, SECRET_KEY)
         return None
 

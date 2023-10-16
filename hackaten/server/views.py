@@ -43,25 +43,31 @@ def password_reset(request):
     return render(request, "signin/email_reset.html")
 
 
+
+def register_verify(request):
+
+    oob_code = request.GET.get('oobCode', None)
+    email = request.GET.get('email', None)
+
+    if oob_code and email:
+        firebase.verify_register(oob_code)
+
+        # print(oob_code)
+    # return render(request, "signin/password_reset.html")
+
 def password_confirm(request):
     if request.method == "POST":
         data = json.loads(request.body)
         oob_code = str(data.get("oobCode", None))
         if oob_code:
-            email = request.COOKIES.get("temp_auth")
-            email =  urllib.parse.unquote(email)
-            
+            email = str(data.get("email", None))
             password = str(data.get("password"))
             is_reset_success = firebase.verify_password(password, oob_code)
             if is_reset_success:
                 isAuthValid = firebase.register_user(email, password)
-                print("password reseted successfully")
+                print(isAuthValid[1])
                 # Return a JSON response with status and user name
-                response_data = {
-                    "status": "success",
-                    "session_auth": isAuthValid,  # Replace with the actual username
-                }
-                return JsonResponse(response_data)
+                return JsonResponse(isAuthValid[1])
             else:
                 response_data = {"status": "fail", "reason": "Password is bad"}
                 return JsonResponse(response_data)
@@ -85,16 +91,12 @@ def sign_in(request):
             # Assuming firebase.register_user returns True for successful authentication
             isAuthValid = firebase.register_user(email, password)
 
-            if isAuthValid:
+            if isAuthValid[0]:
                 # Return a JSON response with status and user name
-                response_data = {
-                    "status": "success",
-                    "session_auth": isAuthValid,  # Replace with the actual username
-                }
-                return JsonResponse(response_data)
+                return JsonResponse(isAuthValid[1])
             else:
-                response_data = {"status": "fail"}
-                return JsonResponse(response_data)
+                print(isAuthValid[1])
+                return JsonResponse(isAuthValid[1])
 
         return render(request, "signin/index.html")
     else:

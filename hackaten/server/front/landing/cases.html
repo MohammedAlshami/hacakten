@@ -10,7 +10,7 @@
 
     .cases-section-title {
         font-family: Helvetica;
-        font-size: clamp(35px, 2vw, 8vw);
+        font-size: clamp(35px, 3vw, 8vw);
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -28,6 +28,8 @@
         clip-path: polygon(4 0% 0, 100% 0, 100% 100%, 0% 100%);
         margin: 0 auto;
         /* Center the container horizontally */
+        border-radius: 0 10px 10px 0;
+
 
 
     }
@@ -39,6 +41,7 @@
         /* Maintain the image's aspect ratio */
         display: block;
         /* Remove extra space below the image */
+
     }
 
     .case-studies-container {
@@ -50,9 +53,10 @@
         width: 80vw;
         /* max-height: 30vw; */
         color: white;
-        border: 0.826px solid #FFF;
+        border: 0.826px solid #333333;
 
         background: #11141B;
+        border-radius: 10px;
 
     }
 
@@ -88,14 +92,19 @@
     .case-studies-item p {
         margin: 0;
         /* Remove the margin between these elements */
+        font-family: Arial, Helvetica, sans-serif;
+
     }
 
     .case-studies-item h1 {
         font-size: clamp(25px, 2.5vw, 3vw);
+
     }
 
     .case-studies-item p {
         font-size: clamp(15px, 1vw, 3vw);
+        color: #808080;
+
     }
 
     @media (max-width: 1000px) {

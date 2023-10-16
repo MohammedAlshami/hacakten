@@ -1,7 +1,6 @@
 {% load static %}
 
 <style>
-
     .FAQ-section-container {
         display: flex;
         flex-direction: row;
@@ -34,6 +33,10 @@
         /* Hide the paragraph by default */
         opacity: 0;
         transition: all 0.1s;
+        line-height: 1.6;
+        font-family: 'Times New Roman', Times, serif !important;
+
+        font-size: clamp(18px, 1.2vw, 5vw);
         /* Add expansion animation */
     }
 
@@ -64,23 +67,13 @@
     .FAQ-item-content h5 {
         color: #FFF;
         font-family: Helvetica;
-        font-size: clamp(18.444px, 1.2vw, 5vw);
+        font-size: clamp(18.444px, 1.3vw, 5vw);
         font-style: normal;
         font-weight: 500;
         line-height: normal;
     }
 
-    .FAQ-item-content h3 {
-        font-family: Helvetica;
-        font-size: 24.164px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        background: linear-gradient(90deg, #EB06C7 0%, rgba(2, 229, 229, 0.67) 141.32%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+
 
     #FAQ-section {
         display: flex;
@@ -92,7 +85,7 @@
 
     .FAQ-section-title {
         font-family: Helvetica;
-        font-size: clamp(35px, 2vw, 8vw);
+        font-size: clamp(35px, 3vw, 8vw);
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -118,7 +111,7 @@
             font-size: clamp(35px, 4vw, 8vw);
         }
 
-        .FAQ-item-content h3 {
+        .FAQ-item-content h5 {
             font-size: 20.164px;
         }
     }
@@ -133,19 +126,22 @@
             gap: 40px;
         }
 
-        .FAQ-item-content h3 {
+        .FAQ-item-content h5 {
             font-size: 19.164px;
         }
     }
 
     @media (max-width: 400px) {
         .FAQ-item-answer {
-            max-width: 75vw;
+            max-width: 70vw;
         }
 
         .FAQ-item {
-            width: 75vw;
+            width: 70vw;
             gap: 40px;
+        }
+        .FAQ-item-content h5 {
+            font-size: 4.5vw;
         }
     }
 </style>
@@ -165,14 +161,9 @@
                         <img src="{% static 'img/add_btn_icon.svg' %}" />
                     </div>
                 </div>
-                <p class="FAQ-item-answer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut maximus
-                    tempor convallis. Etiam dapibus justo turpis, tempus mattis dolor ullamcorper at. Nulla
-                    convallis in
-                    dolor eget molestie. In quis tempus lectus. Mauris porttitor a massa sit amet cursus. Maecenas
-                    id
-                    ligula ut nisi pharetra euismod. Sed auctor augue sit amet nulla tincidunt gravida. Morbi id
-                    volutpat
-                    ante, ut tincidunt ligula. In rutrum felis ut ex rhoncus vulputate.</p>
+                <p class="FAQ-item-answer">Accessibility is important for a website because it ensures that people with
+                    disabilities can access and use the site, promoting inclusivity and equal access to information and
+                    services.</p>
             </div>
             <div class="FAQ-item-p">
                 <div class="FAQ-item">

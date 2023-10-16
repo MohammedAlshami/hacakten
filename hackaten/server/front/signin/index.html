@@ -187,12 +187,12 @@
             color: red;
             text-align: center;
         }
+
         .forgot-password {
             text-align: right;
             color: #0198FF !important;
-            
+
         }
-    
     </style>
 </head>
 
@@ -217,7 +217,7 @@
         <div style="text-align: center; margin-top: 10px;">
 
             <div class="form-input">
-                <input type="text" id="emailInput" placeholder="Email">
+                <input type="email" id="emailInput" placeholder="Email">
             </div>
             <div class="form-input">
                 <input type="text" id="passwordInput" placeholder="Password">
@@ -271,6 +271,53 @@
             }
 
             // Function to handle login
+
+            function password_error(error_msg) {
+                const passwordInput = document.getElementById('passwordInput');
+                const error = document.getElementById('error');
+                const passwordValue = passwordInput.value;
+                passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                passwordInput.style.border = "2px solid red";
+
+                setTimeout(function () {
+                    passwordInput.style.animation = "none";
+                }, 800);
+                error.innerText = error_msg;
+            }
+            function email_error(error_msg) {
+                const emailInput = document.getElementById('emailInput');
+                const error = document.getElementById('error');
+                const emailValue = emailInput.value;
+                emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                emailInput.style.border = "2px solid red";
+
+                setTimeout(function () {
+                    emailInput.style.animation = "none";
+                }, 800);
+                error.innerText = error_msg;
+            }
+
+            function request_error(error_msg) {
+
+                const emailInput = document.getElementById('emailInput');
+                const passwordInput = document.getElementById('passwordInput');
+                const error = document.getElementById('error');
+                const emailValue = emailInput.value;
+                const passwordValue = passwordInput.value;
+
+                passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                passwordInput.style.border = "2px solid red";
+                emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                emailInput.style.border = "2px solid red";
+                setTimeout(function () {
+                    passwordInput.style.animation = "none";
+                    emailInput.style.animation = "none";
+                    // passwordInput.style.border = "2px solid blue";
+                }, 800);
+                error.innerText = error_msg;
+                return;
+            }
+
             function handleLogin() {
 
 
@@ -357,7 +404,7 @@
                     //return unescape(dc.substring(begin + prefix.length, end));
                     return decodeURI(dc.substring(begin + prefix.length, end));
                 }
-                var csrftoken = getCookie('csrftoken');
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
                 var headers = new Headers();
                 headers.append('X-CSRFToken', csrftoken);
 
@@ -380,7 +427,18 @@
                                 setCookie("session_auth", session_auth, 7);
                                 window.location.href = '/hub'; // Redirect to the desired page
                             } else {
-                                checkBoth()
+                                const error_message = data.message;
+                                console.log(error_message);
+                                if (data.type === 'email') {
+                                    email_error(error_message)
+                                }
+                                if (data.type === 'password') {
+                                    password_error(error_message)
+                                }
+                                if (data.type === 'requests') {
+                                    request_error(error_message)
+                                }
+
                             }
                         });
                     } else {

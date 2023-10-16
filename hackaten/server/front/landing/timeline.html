@@ -20,7 +20,7 @@
 
     .timeline-item {
         background-color: #11141B;
-        padding: 0px 40px;
+        padding: 30px 40px;
         /* Adjust the padding */
         display: flex;
         flex-direction: row;
@@ -38,29 +38,38 @@
     }
 
     .timeline-item-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         color: white;
     }
 
     .timeline-item-content h5 {
         color: #FFF;
         font-family: Helvetica;
-        font-size: 16.444px;
+        font-size: 17.444px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+
+        margin: 0;
+        padding: 0;
     }
 
     .timeline-item-content h3 {
-        font-family: Helvetica;
+        font-family: Helvetica, sans-serif;
         font-size: 24.164px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 600;
         line-height: normal;
 
         background: linear-gradient(90deg, #EB06C7 0%, rgba(2, 229, 229, 0.67) 141.32%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+
+        margin: 0;
+        padding: 0;
     }
 
     .timeline-sidebar {
@@ -77,7 +86,7 @@
 
     .timeline-section-title {
         font-family: Helvetica;
-        font-size: clamp(35px, 2vw, 8vw);
+        font-size: clamp(35px, 3vw, 8vw);
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -127,7 +136,6 @@
     @media (max-width: 400px) {
 
         .timeline-item {
-            width: 75vw;
             gap: 40px;
         }
 
@@ -145,10 +153,8 @@
                     <img src="{% static 'img/calendar_icon.svg' %}" />
                 </div>
                 <div class="timeline-item-content">
-                    <div>
-                        <h5>Registration</h5> <!-- Typo fixed here -->
-                        <h3>Oct 20 - Nov 26, 2023</h3>
-                    </div>
+                    <h5>Registration</h5> 
+                    <h3>Oct 20 - Nov 26, 2023</h3>
                 </div>
             </div>
             <div class="timeline-items-container">
@@ -157,10 +163,8 @@
                         <img src="{% static 'img/calendar_icon.svg' %}" />
                     </div>
                     <div class="timeline-item-content">
-                        <div>
-                            <h5>Preliminary Round</h5> <!-- Typo fixed here -->
+                            <h5>Preliminary Round</h5>
                             <h3>Nov 27 - Dec 3, 2023</h3>
-                        </div>
                     </div>
                 </div>
                 <div class="timeline-items-container">
@@ -169,10 +173,8 @@
                             <img src="{% static 'img/calendar_icon.svg' %}" />
                         </div>
                         <div class="timeline-item-content">
-                            <div>
                                 <h5>Finalists Announcement</h5> <!-- Typo fixed here -->
                                 <h3>Dec 8, 2023</h3>
-                            </div>
                         </div>
                     </div>
                     <div class="timeline-items-container">
@@ -181,10 +183,8 @@
                                 <img src="{% static 'img/calendar_icon.svg' %}" />
                             </div>
                             <div class="timeline-item-content">
-                                <div>
                                     <h5>Finals</h5> <!-- Typo fixed here -->
                                     <h3>Dec 16 - 17, 2023</h3>
-                                </div>
                             </div>
                         </div>
                         <div class="timeline-item">
@@ -192,10 +192,8 @@
                                 <img src="{% static 'img/calendar_icon.svg' %}" />
                             </div>
                             <div class="timeline-item-content">
-                                <div>
                                     <h5>Closing Ceremony</h5> <!-- Typo fixed here -->
                                     <h3>Dec 17, 2023</h3>
-                                </div>
                             </div>
                         </div>
 

@@ -1,4 +1,6 @@
 {% load static %}
+
+
 <style>
     #prizes-section {
         display: flex;
@@ -10,7 +12,7 @@
 
     .prizes-section-title {
         font-family: Helvetica;
-        font-size: clamp(35px, 2vw, 8vw);
+        font-size: clamp(35px, 3vw, 8vw);
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -19,6 +21,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
 
     .all-prizes-container {
         display: flex;
@@ -70,16 +73,17 @@
         border-radius: 6px;
     }
 
+
     #prizes-container h4 {
         color: #FFF;
-        font-size: 20px;
+        font-size: clamp(20px, 1.5vw, 5vw);
         font-weight: 900;
         margin: 0;
     }
 
     #prizes-container h3 {
         color: #1ACFE2;
-        font-size: 35px;
+        font-size: clamp(35px, 2vw, 5vw);
         font-weight: 700;
         margin: 0;
     }
@@ -117,18 +121,49 @@
         }
 
         #prizes-container {
-            width: 90vw;
+            width: 80vw;
         }
     }
 
     @media (max-width: 400px) {}
+</style>
+
+<style>
+    .box:before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(-59deg, #e81cff 32%, #40c9ff 128%);
+        filter: blur(10px);
+        opacity: var(0.43);
+        transition: opacity 0.8s;
+        border-radius: inherit;
+    }
+
+    .box::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: inherit;
+        border-radius: inherit;
+    }
+
+   
 </style>
 <section id="prizes-section">
     <h2 class="prizes-section-title">Prizes</h2>
     <div class="all-prizes-container">
         <div id="prizes-container">
             <div>
-                <h4>First Champion</h4>
+                <h4>Champion</h4>
                 <h3>RM 5,000</h3>
             </div>
         </div>
@@ -139,6 +174,7 @@
                     <h3>RM 3,000</h3>
                 </div>
             </div>
+
             <div id="prizes-container">
                 <div>
                     <h4>2nd Runner Up</h4>

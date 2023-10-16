@@ -1,0 +1,82 @@
+{% load static %}
+<style>
+    .footer-socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        gap: 4vw;
+
+    }
+
+    .footer-socials-container {
+        display: flex;
+        flex-direction: row;
+        gap: 4vw;
+    }
+
+    .footer-socials-container img {
+        width: clamp(80px, 6vw, 10vw);
+        pointer-events: none;
+        /* Disable interaction with the image, including right-click */
+        user-select: none;
+        /* Disable text selection */
+        -webkit-user-drag: none;
+        /* Disable image dragging on Safari */
+    }
+
+    @media (max-width: 900px) {
+
+
+        .footer-socials-container img {
+            width: clamp(70px, 12vw, 15vw);
+
+        }
+    }
+
+    @media (max-width: 500px) {
+        .footer-socials {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 8vw;
+
+        }
+
+        .footer-socials-container {
+            display: flex;
+            flex-direction: row;
+            gap: 8vw;
+        }
+
+        .footer-socials-container img {
+            width: clamp(100px, 15vw, 20vw);
+
+        }
+
+    }
+</style>
+
+<section id="footer-socials">
+    <div class="footer-socials">
+        <div class="footer-socials-container">
+            <a href="https://www.tiktok.com/@hackaten"><img src="{% static 'img\tiktok.svg' %}" /></a>
+
+            <a href="https://www.facebook.com/profile.php?id=100095414205084"><img
+                    src="{% static 'img\facebook.svg' %}" /></a>
+        </div>
+
+        <div class="footer-socials-container">
+            <a href="https://www.instagram.com/hackaten"> <img src="{% static 'img\instagram.svg' %}" /></a>
+            <a href="https://twitter.com/hackaten"><img src="{% static 'img\twitter.svg' %}" /></a>
+        </div>
+
+        <div class="footer-socials-container">
+            <a href="https://www.linkedin.com/in/hackaten-uniten-1aa056287/"><img
+                    src="{% static 'img\linkedin.svg' %}" /></a>
+        </div>
+    </div>
+</section>
