@@ -16,6 +16,20 @@
 
     <link href="https://unpkg.com/filepond@4/dist/filepond.css" rel="stylesheet">
 
+    <script>
+        function deleteCookie(cookieName) {
+            // Set the expiration date to a past time (e.g., one second before the current time)
+            var expirationDate = new Date();
+            expirationDate.setSeconds(expirationDate.getSeconds() - 1);
+
+            // Set the cookie's expiration date to delete it
+            document.cookie = cookieName + "=; expires=" + expirationDate.toUTCString() + "; path=/";
+
+            // Note: You should also specify the same path and domain that were used when the cookie was originally set to ensure the correct cookie is deleted.
+        }
+        deleteCookie("reset_auth");
+
+    </script>
     <style>
         body {
             background-color: black;
@@ -118,7 +132,7 @@
 
 
         .login-form {
-            margin: 4.5vw auto;
+            margin: 11vw auto;
             width: clamp(350px, 25vw, 30vw);
 
         }
@@ -138,6 +152,11 @@
 
         .login-top {
             text-align: center;
+
+        }
+
+        .login-top h3 {
+            font-size: clamp(15px, 1.5vw, 2vw);
 
         }
 
@@ -194,34 +213,19 @@
 
 
 
-    <div class="login-form"
-        style="border: 3px solid #2A2A2A; padding: 50px 50px 50px 50px; border-radius: 10px; width: 30vw;">
+    <div class="login-form" style="border: 3px solid #2A2A2A; padding: 50px; border-radius: 10px; width: 35vw;">
 
         <div class="login-top">
             <img src="{% static 'img/hack_logo.png' %}" />
 
             <!--  -->
-            <h3 style="font-weight: 600; color: white; margin-bottom: 20px;">Find Your Account</h3>
-
-
-            <div class="login-top-divider ">
-                <div class="login-top-divider1"></div>
-                <div class="login-top-divider3"></div>
-            </div>
+            <h3 style="font-weight: 600; color: white; margin-bottom: 20px;">Reset Link has been sent to <br>
+                {{email}}</h3>
         </div>
         <div style="text-align: center; margin-top: 30px;">
 
 
-            <div>
-                <h6 style="color: white; text-align: left; padding-left: 5px; margin-bottom: 20px;">Please enter the
-                    email address associated with your registered account.</h6>
-            </div>
-            <div class="form-input" style="margin-top: 15px;">
-                <input type="email" id="emailInput" placeholder="Enter Your Email">
-            </div>
-            <div class="form-btn" id="loginButton" style="margin-top: 15px;">
-                Reset
-            </div>
+
             <p id="error"></p>
         </div>
 
@@ -250,25 +254,8 @@
                 return emailRegex.test(emailValue);
             }
 
-            function add_error(error_msg) {
-                const error = document.getElementById('error');
-                error.innerText = error_msg;
-
-            }
 
 
-            function email_not_exist() {
-                emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                emailInput.style.border = "2px solid red";
-                setTimeout(function () {
-                    emailInput.style.animation = "none";
-                    // emailInput.style.border = "none";
-
-                }, 800);
-                error.innerText = "The email address you provided does not exist.";
-                return - 1;
-
-            }
             // Function to handle login
             function handleLogin() {
 
@@ -286,8 +273,8 @@
                             emailInput.style.animation = "none";
                             // passwordInput.style.border = "2px solid blue";
                         }, 800);
-                        error.innerText = "email needs to follow this format: email@example.com.";
-                        return -1;
+                        error.innerText = "Sorry, your email/password was incorrect. Please double-check your email/password.";
+                        return;
                     } else {
 
                         if (!isEmailValid()) {
@@ -296,10 +283,11 @@
                             setTimeout(function () {
                                 emailInput.style.animation = "none";
                                 // emailInput.style.border = "none";
+                                document.body.innerHTML += '<style> input:focus {border: 2px solid #0198FF;}</style>'
 
                             }, 800);
-                            error.innerText = "email needs to follow this format: email@example.com.";
-                            return - 1;
+                            error.innerText = "email needs to follow this format: email@example.com";
+                            return;
                         }
 
 
@@ -308,9 +296,7 @@
 
                 }
 
-                if (checkBoth() == -1) {
-                    return -1;
-                }
+                checkBoth();
 
 
 
@@ -360,13 +346,10 @@
                     if (response.status === 200) {
                         response.json().then(data => {
                             if (data.status === 'success') {
-
-                                setCookie("reset_auth", data.reset_auth, 7)
-                                window.location.href = window.location.href;
-                                console.log("Error");
+                                const temp_auth = data.temp_auth;
+                                setCookie("temp_auth", temp_auth, 7);
                             } else {
-                                const error_reason = data.reason;
-                                email_not_exist();
+                                checkBoth()
                             }
                         });
                     } else {

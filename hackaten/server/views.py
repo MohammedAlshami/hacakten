@@ -6,6 +6,7 @@ from tqdm import tqdm
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import urllib.parse
+from django.urls import reverse
 
 
 from django.template import RequestContext
@@ -25,35 +26,62 @@ def landing_page(request):
 
 
 def password_reset(request):
+
+    email_cookie = request.COOKIES.get("reset_auth")
+
+    if email_cookie:
+        response = HttpResponse('blah')
+        # response.set_cookie('reset_auth', domain="", max_age_seconds=0.1)
+
+        email_valid  = decode_jwt_token(email_cookie, SECRET_KEY)
+        if email_valid:
+            email = email_valid["user_id"]
+            return render(request, "signin/email_sent.html", {"email": email})
+
     if request.method == "POST":
         data = json.loads(request.body)
         email = str(data.get("email"))
 
         is_email_exist = firebase.password_reset(email)
         if is_email_exist:
+            print(1)
             response_data = {
-                "status": "success",
-                "temp_auth": email
+                "status": "success", 
+                "reset_auth": generate_jwt_token(email, SECRET_KEY)
             }
             return JsonResponse(response_data)
         else:
-            response_data = {"status": "fail"}
+            response_data = {
+                "status": "fail",
+                "reason": "The email address you provided does not exist.",
+            }
             return JsonResponse(response_data)
 
     return render(request, "signin/email_reset.html")
 
 
+def reset_msg(request, **kwargs):
+    # email = request.GET.get('email', None)
+    # if email:
+    return render(request, "signin/email_sent.html")
+
 
 def register_verify(request):
+    oob_code = request.GET.get("oobCode", None)
+    email = request.GET.get("email", None)
 
-    oob_code = request.GET.get('oobCode', None)
-    email = request.GET.get('email', None)
 
     if oob_code and email:
-        firebase.verify_register(oob_code)
+        is_reset_success = firebase.verify_register(oob_code)
+        if is_reset_success:
+            return HttpResponseRedirect("/hub")
+        else:
+            return render(request, "404.html")
+
 
         # print(oob_code)
     # return render(request, "signin/password_reset.html")
+
 
 def password_confirm(request):
     if request.method == "POST":
@@ -104,6 +132,7 @@ def sign_in(request):
 
 
 def signup(request):
+    print(1)
     session_auth = request.COOKIES.get("session_auth")
     if session_auth is None:
         if request.method == "POST":
@@ -164,8 +193,7 @@ def signup(request):
         else:
             return render(request, "signup/index.html")
     else:
-        return HttpResponseRedirect("/hub")
-        return render(request, "participant_hub\index.html")
+        return HttpResponseRedirect("/register")
 
 
 def participant_hub(request):

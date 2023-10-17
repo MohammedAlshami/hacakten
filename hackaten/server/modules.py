@@ -27,15 +27,13 @@ class Firebase:
             auth.verify_password_reset_code(verification_code, new_password)
             return True
         except Exception as ex:
-            print(ex)
             return False
         
     def verify_register(self, verification_code):
         auth = self.firebase.auth()
         try:
             auth.verify_password_reset_code(verification_code, "")
-            
-            return True
+            return False
         except Exception as ex:
             json_str = str(ex).split('] ')[1]
 
@@ -81,13 +79,13 @@ class Firebase:
                 }
             if error_dict.startswith("TOO_MANY_ATTEMPTS_TRY_LATER"):
                 response_data["type"] = "requests"
-                response_data["message"] = "You have sent too many requests"
+                response_data["message"] = "You have exceeded the maximum number of allowed requests. Please try again later."
             elif error_dict.startswith("INVALID_PASSWORD"):
                 response_data["type"] = "password"
-                response_data["message"] = "Your password is wrong"
+                response_data["message"] = "The password you entered is incorrect."
             elif error_dict.startswith("EMAIL_NOT_FOUND"):
                 response_data["type"] = "email"
-                response_data["message"] = "Email doesn't exist"
+                response_data["message"] = "The email address you provided does not exist."
             return (False, response_data)
 
     def upload_user_info(

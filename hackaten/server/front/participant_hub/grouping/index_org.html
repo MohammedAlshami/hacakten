@@ -1,0 +1,398 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        font-family: Helvetica, sans-serif;
+        /* margin: 80px; */
+                    background-color: #222131;
+
+
+    }
+
+    .group-center-div {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        max-height: 100%;
+        overflow-y: scroll;
+        z-index: 1;
+        padding-left: 17vw;
+
+
+    }
+
+    .group-container {
+        /* display: flex;
+        justify-content: space-between; */
+    }
+
+    .group-hub-title {
+        font-weight: bold;
+        font-size: clamp(25px, 2.2vw, 4vw);
+        text-align: center;
+    }
+
+    .group-content-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .group-cards {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        gap: 15vw;
+
+        background-color: #39394B;
+
+        /* padding: 100%; */
+        width: 80vw;
+    }
+
+    .group-cards-item {
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        /* width: 400px; */
+        padding: 2.5vw 7vw 1vw 7vw;
+        border-radius: 20px;
+        gap: 20px;
+    }
+
+    .group-cards-item:hover {
+        cursor: pointer;
+    }
+
+    .group-cards-item img {
+        height: 10vw;
+    }
+
+    .group-cards-item h3 {
+        color: white;
+        text-align: center;
+    }
+
+    .group-input {
+
+        border: 1.99px solid #EBEBEB;
+        border-radius: 10.932px;
+
+        /* height: 84px; */
+        padding: 20px 20px;
+        color: #000000;
+        font-family: Helvetica;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+    }
+
+    .group-input::placeholder {
+        color: #9b9b9b;
+        font-family: Helvetica;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .group-btn {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        background-color: black;
+        border-radius: 10.932px;
+        font-size: 17px;
+        font-family: Helvetica;
+        color: white;
+        cursor: pointer;
+
+        user-select: none;
+    }
+
+    @media (max-width: 1050px) {
+
+        .group-cards {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10vw;
+        }
+
+        .group-cards-item {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            /* width: 400px; */
+            padding: 6vw 20vw 1vw 20vw;
+            /* width: ; */
+            border-radius: 20px;
+            gap: 20px;
+        }
+
+        .group-cards-item img {
+            height: 20vw;
+        }
+
+        .group-center-div {
+
+            padding-left: 100px;
+            padding-right: 20px;
+
+        }
+
+
+    }
+
+    .create-group {
+        display: none;
+        flex-direction: column;
+
+    }
+</style>
+
+<body>
+
+</body>
+
+</html>
+
+<div class="group-container">
+    {% include 'participant_hub/new_navbar.html' %}
+
+    <div class="group-center-div">
+        <div>
+            <div class="group-content-container">
+                <h2 class="group-hub-title">
+                    Group Hub
+                </h2>
+
+                <div class="group-cards">
+                    <div class="group-cards-item" id="create-group">
+                        <img src="{% static 'img/group_create_icon.svg' %}" />
+                        <h3>
+                            Create Group
+                        </h3>
+                    </div>
+                    <div class="group-cards-item" id="join-group">
+                        <img src="{% static 'img/group_join_icon.svg' %}" />
+                        <h3>
+                            Join Group
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div class="create-group" id="create-group-form">
+                    <h3>
+                        Enter Group Name
+                    </h3>
+                    <input type="text" placeholder="Type The Group Name" class="group-input" id="create-group-input">
+
+                    <div class="group-btn" id="create-group-btn">
+                        <h3>Create Group</h3>
+                    </div>
+                    <p id="create-group-error">
+                        Note: Once you have created the group you cannot change the group name
+                    </p>
+
+                </div>
+
+                <div class="create-group" id="join-group-form">
+                    <h3>
+                        Join Group
+                    </h3>
+                    <input type="text" placeholder="Type The Group ID" class="group-input" id="join-group-input">
+
+                    <div class="group-btn" id="join-group-btn">
+                        <h3>Join Group</h3>
+                    </div>
+                    <p id="join-group-error">
+                        Note: Once you have joined a group you cannot change the group.
+
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div></div> -->
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get references to the clickable divs
+        const create_group = document.getElementById('create-group');
+        const join_group = document.getElementById('join-group');
+        const join_group_form = document.getElementById('join-group-form');
+        const create_group_form = document.getElementById('create-group-form');
+
+
+
+        create_group.addEventListener('click', function () {
+            // window.location.href = redirectURL;
+            join_group_form.style.display = "none";
+            create_group_form.style.display = "flex";
+        });
+
+        join_group.addEventListener('click', function () {
+            // window.location.href = redirectURL;
+            join_group_form.style.display = "flex";
+            create_group_form.style.display = "none";
+        });
+
+        // Apply
+    });
+</script>
+
+
+<script>
+
+    const create_group_btn = document.getElementById("create-group-btn");
+    const create_group_input = document.getElementById("create-group-input");
+    const create_group_error = document.getElementById("create-group-error");
+
+    const join_group_btn = document.getElementById("join-group-btn");
+    const join_group_input = document.getElementById("join-group-input");
+    const join_group_error = document.getElementById("join-group-error");
+    // create_group_input = create_group_input.value;
+
+    function setCookie(name, value, daysToExpire) {
+        // Calculate the expiration date
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
+        // Format the cookie string
+        const cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
+
+        // Set the cookie
+        document.cookie = cookieString;
+    }
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    create_group_btn.addEventListener('click', function () {
+
+
+
+        var csrftoken = getCookie('csrftoken');
+        console.log(csrftoken);
+        var headers = new Headers();
+        headers.append('X-CSRFToken', csrftoken);
+
+
+        const formData = new FormData();
+        formData.append("type", "create");
+        formData.append("data", create_group_input.value.trim());
+        fetch('/groups/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie("csrftoken")
+            },
+            credentials: 'include'
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.status === 'success') {
+                        const session_auth = data.session_auth;
+                        setCookie("session_auth", session_auth, 7);
+                        window.location.href = '/groups/hub'; // Redirect to the desired page
+                    } else {
+
+                        create_group_input.style.border = "2px solid red";
+                        const msg = data.msg;
+                        create_group_error.style.color = "red";
+                        create_group_error.innerHTML = msg;
+                        console.log("error")
+                    }
+                });
+            } else {
+                console.log("error")
+            }
+        })
+            .catch(error => {
+                console.log("error")
+            });
+    });
+
+    join_group_btn.addEventListener('click', function () {
+
+
+
+        var csrftoken = getCookie('csrftoken');
+        console.log(csrftoken);
+        var headers = new Headers();
+        headers.append('X-CSRFToken', csrftoken);
+
+
+        const formData = new FormData();
+        formData.append("type", "join");
+        formData.append("data", join_group_input.value.trim());
+        fetch('/groups/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie("csrftoken")
+            },
+            credentials: 'include'
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.status === 'success') {
+                        console.log("yay");
+                        const session_auth = data.session_auth;
+                        setCookie("session_auth", session_auth, 7);
+                        window.location.href = '/groups/hub'; // Redirect to the desired page
+                    } else {
+
+                        join_group_input.style.border = "2px solid red";
+                        const msg = data.msg;
+                        join_group_error.style.color = "red";
+                        join_group_error.innerHTML = msg;
+                        console.log("error")
+                    }
+                });
+            } else {
+                console.log("error")
+            }
+        })
+            .catch(error => {
+                console.log("error")
+            });
+    });
+
+</script>
+
+
+
+
+<body>

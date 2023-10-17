@@ -118,7 +118,7 @@
 
 
         .login-form {
-            margin: 4.5vw auto;
+            margin: 2.2vw auto;
             width: clamp(350px, 25vw, 30vw);
 
         }
@@ -139,6 +139,10 @@
         .login-top {
             text-align: center;
 
+        }
+
+        .login-top a {
+            text-decoration: none;
         }
 
         .login-top img {
@@ -188,10 +192,48 @@
             text-align: center;
         }
 
+        .forgot-password a {
+            text-decoration: none;
+
+        }
+
         .forgot-password {
             text-align: right;
             color: #0198FF !important;
 
+        }
+    </style>
+
+    <style>
+        .slide-top {
+            /* -webkit-animation: slide-top .8s cubic-bezier(.25, .46, .45, .94) both;
+            animation: slide-top .8s cubic-bezier(.25, .46, .45, .94) both */
+        }
+
+
+
+        @-webkit-keyframes slide-top {
+            0% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0)
+            }
+
+            100% {
+                -webkit-transform: translateY(-30px);
+                transform: translateY(-30px)
+            }
+        }
+
+        @keyframes slide-top {
+            0% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0)
+            }
+
+            100% {
+                -webkit-transform: translateY(-30px);
+                transform: translateY(-30px)
+            }
         }
     </style>
 </head>
@@ -200,7 +242,9 @@
 
 
 
-    <div class="login-form">
+    <div class="login-form slide-top"
+        style="border: 3px solid #2A2A2A; padding: 50px; border-radius: 10px; width: 35vw;">
+
 
         <div class="login-top">
             <img src="{% static 'img/hack_logo.png' %}" />
@@ -220,7 +264,7 @@
                 <input type="email" id="emailInput" placeholder="Email">
             </div>
             <div class="form-input">
-                <input type="text" id="passwordInput" placeholder="Password">
+                <input type="password" id="passwordInput" placeholder="Password">
             </div>
             <div class="forgot-password">
                 <a href="/reset">Fogot Password?</a>
@@ -262,11 +306,7 @@
                 const passwordValue = passwordInput.value;
 
                 return (
-                    passwordValue.length >= 8 &&
-                    /[a-z]/.test(passwordValue) &&
-                    /[A-Z]/.test(passwordValue) &&
-                    /\d/.test(passwordValue) &&
-                    /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(passwordValue)
+                    passwordValue.length >= 8
                 );
             }
 
@@ -329,44 +369,43 @@
                     const emailValue = emailInput.value;
                     const passwordValue = passwordInput.value;
 
-                    if (!isEmailValid() && !isPasswordValid()) {
-                        passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                        passwordInput.style.border = "2px solid red";
+                    if (!isEmailValid()) {
                         emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
                         emailInput.style.border = "2px solid red";
                         setTimeout(function () {
-                            passwordInput.style.animation = "none";
                             emailInput.style.animation = "none";
+                            // emailInput.style.border = "none";
+
+                        }, 800);
+                        error.innerText = "Please enter a valid email address in the format: email@example.com";
+                        return;
+                    }
+                    if (!isPasswordValid()) {
+                        passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                        passwordInput.style.border = "2px solid red";
+                        setTimeout(function () {
+                            passwordInput.style.animation = "none";
                             // passwordInput.style.border = "2px solid blue";
                         }, 800);
-                        error.innerText = "Sorry, your email/password was incorrect. Please double-check your email/password.";
+                        error.innerText = "Password must be at least 8 characters long.";
                         return;
-                    } else {
-
-                        if (!isEmailValid()) {
-                            emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                            emailInput.style.border = "2px solid red";
-                            setTimeout(function () {
-                                emailInput.style.animation = "none";
-                                // emailInput.style.border = "none";
-                                document.body.innerHTML += '<style> input:focus {border: 2px solid #0198FF;}</style>'
-
-                            }, 800);
-                            error.innerText = "email needs to follow this format: email@example.com";
-                            return;
-                        }
-                        if (!isPasswordValid()) {
-                            passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
-                            passwordInput.style.border = "2px solid red";
-                            setTimeout(function () {
-                                passwordInput.style.animation = "none";
-                                // passwordInput.style.border = "2px solid blue";
-                            }, 800);
-                            error.innerText = "Please format the password correctly. You need one special character, one uppercase, one lowercase, one number, and a length > 8";
-                            return;
-                        }
-
                     }
+
+                    // if (!isEmailValid() && !isPasswordValid()) {
+                    //     passwordInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                    //     passwordInput.style.border = "2px solid red";
+                    //     emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                    //     emailInput.style.border = "2px solid red";
+                    //     setTimeout(function () {
+                    //         passwordInput.style.animation = "none";
+                    //         emailInput.style.animation = "none";
+                    //         // passwordInput.style.border = "2px solid blue";
+                    //     }, 800);
+                    //     error.innerText = "Sorry, your email/password was incorrect. Please double-check your email/password.";
+                    //     return;
+                    // } else {
+
+                    // }
 
 
                 }
