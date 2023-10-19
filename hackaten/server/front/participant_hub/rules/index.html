@@ -11,10 +11,12 @@
         body {
             background-color: white;
             font-family: Helvetica, sans-serif;
+            background-color: #222131;
+
         }
 
         #rules-div {
-            padding-left: 17vw;
+            padding-left: 14vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -25,9 +27,17 @@
 
         .rules-container {
             background-color: black;
-            width: 70vw;
             border-radius: 20px;
             padding-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            background-color: #39394B;
+            border-radius: 20px;
+            /* padding: 40px; */
+            border: 2px solid #554dfe;
+            width: 60vw;
         }
 
         .rules-item {
@@ -37,6 +47,7 @@
             color: white;
             line-height: 2;
         }
+
         .rules-item li {
             font-size: clamp(15px, 1.2vw, 4vw);
 
@@ -46,6 +57,18 @@
             font-weight: bold;
             font-size: clamp(25px, 2vw, 4vw);
             text-align: center;
+            color: white;
+        }
+
+        @media (max-width: 1050px) {
+            #rules-div {
+                margin-top: 70px;
+                padding-left: 0;
+            }
+
+            .rules-container {
+                width: 80vw;
+            }
         }
     </style>
 </head>
@@ -54,7 +77,7 @@
 
 <body>
 
-    {% include 'participant_hub/hub_navbar.html' %}
+    {% include 'participant_hub/new_navbar.html' %}
 
 
     <section id="rules-div">
@@ -62,12 +85,15 @@
             Rules and Regulations
         </h3>
         <div class="rules-container">
+
+
+
             <div class="rules-item">
                 <h3>
                     Submission Guidelines
                 </h3>
                 <p>
-                <ol>
+                <ul>
                     <li>Eligibility: Participants must meet the eligibility criteria specified for the hackathon,
                         including
                         age,
@@ -87,69 +113,178 @@
                         Harassment,
                         discrimination, or any form of misconduct will not be tolerated.
                     </li>
-                </ol>
-                </p>
-
-            </div>
-
-            <div class="rules-item">
-                <h3>
-                    Submission Guidelines
-                </h3>
-                <p>
-                <ol>
-                    <li>Eligibility: Participants must meet the eligibility criteria specified for the hackathon,
-                        including
-                        age,
-                        skill level, and any other relevant requirements.
-                    </li>
-                    <li>Team Size: Teams should consist of the maximum number of members allowed, as specified in the
-                        hackathon
-                        guidelines. No exceptions will be made.
-                    </li>
-                    <li>Registration: All participants must register in advance through the official registration
-                        process.
-                        Late
-                        registrations may not be accepted.
-                    </li>
-                    <li>
-                        Code of Conduct: Respectful and inclusive behavior is expected from all participants.
-                        Harassment,
-                        discrimination, or any form of misconduct will not be tolerated.
-                    </li>
-                </ol>
+                </ul>
                 </p>
 
             </div>
             <div class="rules-item">
                 <h3>
-                    Submission Guidelines
+                    Eligibility Criteria:
                 </h3>
-                <p>
-                <ol>
-                    <li>Eligibility: Participants must meet the eligibility criteria specified for the hackathon,
-                        including
-                        age,
-                        skill level, and any other relevant requirements.
-                    </li>
-                    <li>Team Size: Teams should consist of the maximum number of members allowed, as specified in the
-                        hackathon
-                        guidelines. No exceptions will be made.
-                    </li>
-                    <li>Registration: All participants must register in advance through the official registration
-                        process.
-                        Late
-                        registrations may not be accepted.
+
+                <ul>
+                    <li>
+                        Participants must be at least 18 years of age.
                     </li>
                     <li>
-                        Code of Conduct: Respectful and inclusive behavior is expected from all participants.
-                        Harassment,
-                        discrimination, or any form of misconduct will not be tolerated.
+                        Participants must be individuals, not teams or organizations, for this hackathon.
                     </li>
-                </ol>
-                </p>
-
+                    <li>
+                        The hackathon is open to participants worldwide, unless otherwise specified.
+                    </li>
+                    <li>
+                        Each participant must register individually for the hackathon.
+                    </li>
+                    <li>
+                        Team formation, if allowed, should follow the specified guidelines regarding team size and
+                        composition.
+                    </li>
+                    <li>
+                        Participants should have access to a stable internet connection throughout the event.
+                    </li>
+                    <li>
+                        Participants must have the necessary hardware and software required for coding and project
+                        development.
+                    </li>
+                    <li>
+                        Basic knowledge of programming and AI concepts is recommended but not mandatory.
+                    </li>
+                    <li>
+                        All participants are expected to follow the event's Code of Conduct.
+                    </li>
+                    <li>
+                        Any violation of the Code of Conduct may lead to disqualification and removal from the event.
+                    </li>
+                    <li>
+                        Previous winners of the same hackathon may not be eligible to participate, depending on the
+                        event's rules.
+                    </li>
+                    <li>
+                        Judges, organizers, and their immediate family members are not eligible to participate in the
+                        hackathon.
+                    </li>
+                    <li>
+                        Projects that have been published as open source or have won prizes in other competitions may
+                        have specific eligibility requirements.
+                    </li>
+                    <li>
+                        Participants are usually allowed to submit only one project. If multiple entries are allowed,
+                        they should follow the specified guidelines.
+                    </li>
+                    <li>
+                        Participants affiliated with the hackathon's organizers or sponsors may have special eligibility
+                        considerations. Check the rules for details.
+                    </li>
+                    <li>
+                        Certain hackathons may have additional eligibility criteria or restrictions, which will be
+                        clearly stated in the event guidelines.
+                    </li>
+                </ul>
             </div>
+
+            <div class="rules-item">
+                <h3>
+                    Project Submission Rules:
+                </h3>
+                <ul>
+                    <li>
+                        Submission Deadline - Projects must be submitted before the specified deadline; late submissions
+                        may not be accepted.
+                    </li>
+                    <li>
+                        Team Collaboration - If team participation is allowed, all team members must be registered
+                        participants of the hackathon.
+                    </li>
+                    <li>
+                        Originality - Projects should be entirely original and created during the hackathon. Plagiarism
+                        or using pre-existing projects is not allowed.
+                    </li>
+                    <li>
+                        Project Documentation - Participants must provide comprehensive project documentation or a
+                        README file explaining the project's purpose, how to run it, and any dependencies.Project
+                        Documentation - Participants must provide comprehensive project documentation or a README file
+                        explaining the project's purpose, how to run it, and any dependencies.
+                    </li>
+                    <li>Code Repository - If applicable, project code should be hosted on a specified platform (e.g.,
+                        GitHub), with a provided link.
+                    </li>
+                    <li>
+                        Video Presentation - A brief video presentation or demo of the project may be required;
+                        guidelines for format and length should be followed.
+                    </li>
+                    <li>Submission Format - Submissions should follow the specified format, including file types and
+                        naming conventions.
+                    </li>
+                    <li>Source Code Sharing - In some cases, participants may be required to share their project's
+                        source code with the organizers for evaluation.
+                    </li>
+                    <li>
+                        Intellectual Property - Participants typically retain ownership of their projects, but
+                        organizers may have limited rights for promotion and display purposes.
+                    </li>
+                    <li>
+                        Multiple Submissions - Clarify whether participants can submit multiple projects and any
+                        restrictions on doing so.
+                    </li>
+                    <li>
+                        Accessibility - Projects should be accessible and usable by judges for evaluation. Provide clear
+                        instructions for access and usage.
+                    </li>
+                    <li>
+                        Language - Project documentation and presentation should be in a specified language or format if
+                        required.
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="rules-item">
+                <h3>House Rules:</h3>
+                <ul>
+                    <li>
+                        Respect and Politeness: Treat all participants, judges, and organizers with respect and
+                        politeness. Harassment, discrimination, or disrespectful behavior will not be tolerated.
+                    </li>
+                    <li>
+                        Code of Conduct: Adhere to the event's Code of Conduct, which outlines the expected behavior and
+                        consequences for violations.
+                    </li>
+                    <li>
+                        Cooperation: Encourage cooperation and collaboration among participants. This is a learning
+                        experience, and sharing knowledge is encouraged.
+                    </li>
+                    <li>
+                        Safe Environment: Create and maintain a safe and inclusive environment where everyone feels
+                        comfortable and valued.
+                    </li>
+                    <li>No Cheating: Cheating, including but not limited to plagiarism, using unauthorized resources, or
+                        unauthorized collaboration, is strictly prohibited.
+                    </li>
+                    <li>Fair Play: Follow the rules and guidelines of the hackathon to ensure fair competition.</li>
+                    <li>
+                        Good Sportsmanship: Display good sportsmanship whether you win or lose. Respect the judges'
+                        decisions and fellow participants.
+                    </li>
+                    <li>No Mishandling of Data: Ensure the ethical and responsible handling of data. Respect privacy and
+                        confidentiality.
+                    </li>
+                    <li>Abide by Laws: Comply with all local, national, and international laws and regulations.
+                    </li>
+                    <li>Responsible Use of AI: If AI models or tools are provided, use them responsibly and avoid
+                        generating harmful or inappropriate content.</li>
+                    <li>
+                        Reporting Violations: If you witness any violations of these rules, report them to the event
+                        organizers promptly.
+                    </li>
+                    <li>
+                        Consequences: Violating these house rules may lead to disqualification and removal from the
+                        hackathon. Organizers have the authority to enforce consequences as deemed necessary to maintain
+                        a respectful and fair environment.
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
 
     </section>

@@ -22,18 +22,26 @@ import json
 
 
 def landing_page(request):
-    return render(request, "landing/index.html")
+    session_auth = request.COOKIES.get("session_auth")
+    is_session_valid = decode_jwt_token(session_auth, SECRET_KEY)
+
+    if is_session_valid:
+        is_session_valid = True
+    else:
+        is_session_valid = False
+
+    if session_auth:
+        return render(request, "landing/index.html", {"user_exist": is_session_valid})
 
 
 def password_reset(request):
-
     email_cookie = request.COOKIES.get("reset_auth")
 
     if email_cookie:
-        response = HttpResponse('blah')
+        response = HttpResponse("blah")
         # response.set_cookie('reset_auth', domain="", max_age_seconds=0.1)
 
-        email_valid  = decode_jwt_token(email_cookie, SECRET_KEY)
+        email_valid = decode_jwt_token(email_cookie, SECRET_KEY)
         if email_valid:
             email = email_valid["user_id"]
             return render(request, "signin/email_sent.html", {"email": email})
@@ -46,8 +54,8 @@ def password_reset(request):
         if is_email_exist:
             print(1)
             response_data = {
-                "status": "success", 
-                "reset_auth": generate_jwt_token(email, SECRET_KEY)
+                "status": "success",
+                "reset_auth": generate_jwt_token(email, SECRET_KEY),
             }
             return JsonResponse(response_data)
         else:
@@ -70,14 +78,12 @@ def register_verify(request):
     oob_code = request.GET.get("oobCode", None)
     email = request.GET.get("email", None)
 
-
     if oob_code and email:
         is_reset_success = firebase.verify_register(oob_code)
         if is_reset_success:
             return HttpResponseRedirect("/hub")
         else:
             return render(request, "404.html")
-
 
         # print(oob_code)
     # return render(request, "signin/password_reset.html")
@@ -132,7 +138,6 @@ def sign_in(request):
 
 
 def signup(request):
-    print(1)
     session_auth = request.COOKIES.get("session_auth")
     if session_auth is None:
         if request.method == "POST":
@@ -193,7 +198,7 @@ def signup(request):
         else:
             return render(request, "signup/index.html")
     else:
-        return HttpResponseRedirect("/register")
+        return HttpResponseRedirect("/hub")
 
 
 def participant_hub(request):
@@ -213,13 +218,28 @@ def custom_404(request, *args, **argv):
     return response
 
 
+def group_join(request):
+    return render(request, "participant_hub\grouping\join.html")
+
+
+def group_create(request):
+    return render(request, "participant_hub\grouping\create.html")
+
+
+def register_options(request):
+    session_auth = request.COOKIES.get("session_auth")
+    if session_auth:
+        return HttpResponseRedirect("/hub")
+
+    return render(request, "signup\options.html")
+
+
 def grouping(request):
     session_auth = request.COOKIES.get("session_auth")
     if session_auth:
         user_payload = decode_jwt_token(session_auth, SECRET_KEY)
         userid = user_payload["user_id"]
         check_group = firebase.check_group(userid)
-        print(check_group)
         if check_group:
             return HttpResponseRedirect("/groups/hub")
 
@@ -292,17 +312,25 @@ def rules(request):
 
 def group_hub(request):
     session_auth = request.COOKIES.get("session_auth")
+
     if session_auth:
         user_payload = decode_jwt_token(session_auth, SECRET_KEY)
         userid = user_payload["user_id"]
-        print(userid)
+
+        if request.method == "POST":
+            leave_request = str(request.POST.get("type", ""))
+            is_leave_success = firebase.remove_group(userid)
+            if is_leave_success:
+                response_data = {"status": "success"}
+                return JsonResponse(response_data)
+            else:
+                response_data = {"status": "fail"}
+                return JsonResponse(response_data)
 
         check_group = firebase.check_group(userid)
         if check_group:
             payload = firebase.get_group(userid)
             return render(request, "participant_hub\\grouping\group_hub.html", payload)
-
-        return HttpResponseRedirect("/groups/")
 
     return HttpResponseRedirect("/login")
     # return render(request, "participant_hub\\grouping\index.html")

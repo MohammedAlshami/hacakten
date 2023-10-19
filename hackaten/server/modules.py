@@ -6,6 +6,7 @@ import hashlib
 from fuzzywuzzy import fuzz
 from cryptography.fernet import Fernet
 import json
+
 SECRET_KEY = "2B1fGuGYqV445v9x4Dn9HX0vtBmDFRgP"
 
 
@@ -28,22 +29,21 @@ class Firebase:
             return True
         except Exception as ex:
             return False
-        
+
     def verify_register(self, verification_code):
         auth = self.firebase.auth()
         try:
             auth.verify_password_reset_code(verification_code, "")
             return False
         except Exception as ex:
-            json_str = str(ex).split('] ')[1]
+            json_str = str(ex).split("] ")[1]
 
             error_dict = dict(json.loads(json_str))["error"]["message"]
 
             if error_dict == "WEAK_PASSWORD":
                 return True
-            
+
             return False
- 
 
     def password_reset(self, email):
         print("password_reset")
@@ -54,9 +54,6 @@ class Firebase:
         except Exception as ex:
             print(ex)
             return False
-        
-
-
 
     def register_user(self, email, password):
         try:
@@ -64,28 +61,32 @@ class Firebase:
             user = auth.sign_in_with_email_and_password(email, password)
             jwtToken = generate_jwt_token(user["localId"], SECRET_KEY)
             response_data = {
-                    "status": "success",
-                    "session_auth": jwtToken,  # Replace with the actual username
-                }
+                "status": "success",
+                "session_auth": jwtToken,  # Replace with the actual username
+            }
             return (True, response_data)
         except Exception as ex:
-            json_str = str(ex).split('] ')[1]
+            json_str = str(ex).split("] ")[1]
 
             # Convert the JSON string to a dictionary
             error_dict = dict(json.loads(json_str))["error"]["message"]
 
             response_data = {
-                    "status": "fail",
-                }
+                "status": "fail",
+            }
             if error_dict.startswith("TOO_MANY_ATTEMPTS_TRY_LATER"):
                 response_data["type"] = "requests"
-                response_data["message"] = "You have exceeded the maximum number of allowed requests. Please try again later."
+                response_data[
+                    "message"
+                ] = "You have exceeded the maximum number of allowed requests. Please try again later."
             elif error_dict.startswith("INVALID_PASSWORD"):
                 response_data["type"] = "password"
                 response_data["message"] = "The password you entered is incorrect."
             elif error_dict.startswith("EMAIL_NOT_FOUND"):
                 response_data["type"] = "email"
-                response_data["message"] = "The email address you provided does not exist."
+                response_data[
+                    "message"
+                ] = "The email address you provided does not exist."
             return (False, response_data)
 
     def upload_user_info(
@@ -263,6 +264,59 @@ class Firebase:
                 return True
         return False
 
+    def remove_group(self, user_id):
+        group_table_name = "hack10Groups"
+        user_table_name = "hack10User"
+        db = self.firebase.database()
+
+        print(user_id)
+        user_ref = db.child(user_table_name).child(user_id)
+        user_info = dict(user_ref.get().val())
+        group_id = user_info["group_id"]
+        user_info.pop("group_id")
+        db.child(user_table_name).child(user_id).set(user_info)
+
+        group_ref = db.child(group_table_name).child(group_id)
+        group_info = dict(group_ref.get().val())
+        if user_id in group_info["members"]:
+            group_info["members"].remove(user_id)
+            if len(group_info["members"]) == 0:
+                db.child(group_table_name).child(group_id).remove()
+            else:
+                db.child(group_table_name).child(group_id).set(group_info)
+            return True
+        
+        # print(user_data)
+        # user_data.pop('group_id')
+        # if user_data:
+            
+            # group_id = user_data.get("group_id")
+
+            # Step 2: Delete the group_id from the user record
+            # user_ref.update({"group_id": "1"})
+            # user_ref = db.child(user_table_name).child(user_id)
+            # user_data = user_ref.get().val()
+            # print(user_data)
+            # Step 3: Find the group by group_id and remove user_id from the members list
+            # group_ref = db.child(group_table_name).child(group_id)
+            # group_data = group_ref.get().val()
+            # print(group_data)
+            # if group_data:
+            #     members = group_data.get("members", [])
+            #     if user_id in members:
+            #         members.remove(user_id)
+            #         group_ref.update({"members": members})
+            #         return True
+            #     else:
+            #         print("User not found in group members list.")
+            #         return False
+            # else:
+            #     print("Group not found.")
+            #     return False
+        # else:
+        #     print("User not found.")
+        #     return False
+
     def create_project(
         self,
         user_id,
@@ -429,6 +483,7 @@ def decode_jwt_token(token, secret_key):
     except jwt.InvalidTokenError:
         print("Invalid token.")
         return None
+
 
 def encrypt_text(text, key):
     fernet = Fernet(key)

@@ -1,0 +1,104 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        font-family: Helvetica, sans-serif;
+        /* margin: 80px; */
+        background-color: #222131;
+
+
+    }
+    .page-title {
+        color: white;
+        font-weight: 400;
+        margin-left: 1.8vw;
+        margin-top: 40px;
+    }
+
+    .group {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: column; */
+        
+        padding-left: 13.7vw;
+
+    }
+
+    .groups-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .groups-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        background-color: #39394B;
+        width: 50%;
+        height: fit-content;
+        padding: 40px;
+        border-radius: 10px;
+    }
+    .group-card {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        height: 180px;
+        border-radius: 20px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+    .group-card img {
+        margin-top: 300px;
+        margin-right: -150px;
+        width: 30vw;
+    }
+</style>
+
+<body>
+    {% include 'participant_hub/new_navbar.html' %}
+
+
+    <div class="group">
+        <h1 class="page-title">
+            Group
+        </h1>
+        <div class="groups-content">
+            <div class="groups-cards-container">
+                <div class="group-card">
+                    <h1>
+                        Create A group
+                    </h1>
+                    <img src="{% static 'img\group_illustrate.svg' %}"/>
+
+                </div>
+                <div class="group-card">
+                    <h1>
+                        Join A group
+                    </h1>
+                    <img src="{% static 'img\group_join_icon.svg' %}"/>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  
+   
+</body>
+
+</html>

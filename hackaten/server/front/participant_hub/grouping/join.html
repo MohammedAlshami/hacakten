@@ -28,7 +28,6 @@
 
 
 
-
     }
 
     .group-container {
@@ -47,7 +46,7 @@
     .group-content-container {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 5px;
     }
 
     .group-cards {
@@ -60,30 +59,32 @@
     }
 
     .group-cards-item {
+
+
+
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
         justify-content: space-between;
         background-color: rgb(255, 255, 255);
         /* width: 400px; */
-        padding: 2.5vw 3vw 1vw 7vw;
+        padding: 0 5%;
         border-radius: 20px;
-        gap: 10px;
+        /* gap: 10px; */
 
-        width: 40vw;
-        height: 10vw;
+        width: 90%;
+        height: 180px;
 
         overflow: hidden;
         transition: transform 0.3s, box-shadow 0.3s;
+        user-zoom: none;
 
-    }
-
-    .group-cards-item:hover {
-        cursor: pointer;
         transform: translateY(-10px);
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 
     }
+
+
 
     .group-cards-item img {
         height: 15vw;
@@ -91,12 +92,13 @@
 
     .group-cards-item h3 {
         color: black;
-        font-size: clamp(20px, 2vw, 4vw);
+        font-size: clamp(25px, 2vw, 3vw);
         text-align: center;
         margin-top: 15px;
     }
 
     .group-input {
+
 
         border: 1.99px solid #EBEBEB;
         border-radius: 10.932px;
@@ -109,6 +111,10 @@
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+
+
+        width: 100%;
+
 
     }
 
@@ -125,51 +131,75 @@
         margin-top: 20px;
         display: flex;
         justify-content: center;
-        background-color: black;
+        background-color: #7F79FE;
         border-radius: 10.932px;
         font-size: 17px;
         font-family: Helvetica;
         color: white;
         cursor: pointer;
-
         user-select: none;
     }
 
-    @media (max-width: 1050px) {
 
-        .group-center-div {
-            padding-left: 10vw;
-        }
+
+    .create-group {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
     }
 
-    @media (max-width: 700px) {
+    .create-group h3 {
+        color: white;
+    }
+
+    .cards-body {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        background-color: #39394B;
+        border-radius: 20px;
+        padding: 40px;
+        border: 2px solid #554dfe;
+        width: 50vw;
+
+    }
+
+    #join-group-error {
+        color: white;
+    }
+
+    @media (max-width: 900px) {
+
         .group-center-div {
             padding-left: 0;
         }
 
+        .group-cards-item h3 {
+            margin-top: 30px;
+            display: none;
+        }
+
         .group-cards-item {
-            width: 60vw;
-            height: 20vw;
+
+
+
+            flex-direction: column-reverse;
+
 
         }
 
-    }
+        .group-cards-item img {
+            height: clamp(150px, 25vw, 40vw);
+        }
 
-    .create-group {
-        display: none;
-        flex-direction: column;
+        .cards-body {
+   
+            width: 70vw;
 
-    }
+        }
 
-    .cards-body {
-        background-color: #39394B;
-        border-radius: 20px;
-        padding: 40px;
-        /* padding: 100%; */
-        /* padding-top: 30px;
-        height: 30vw; */
 
-        border: 2px solid #554dfe;
 
     }
 </style>
@@ -189,41 +219,22 @@
                 </h2>
 
                 <div class="cards-body">
+
+
                     <div class="group-cards">
                         <div class="group-cards-item" id="create-group">
-                            <img src="{% static 'img/group_create_img1.svg' %}" />
-                            <h3>
-                                Create Group
-                            </h3>
-                        </div>
-                        <div class="group-cards-item" id="join-group">
                             <img src="{% static 'img/group_join_img1.svg' %}" />
                             <h3>
                                 Join Group
                             </h3>
                         </div>
-
                     </div>
 
 
 
-                    <div class="create-group" id="create-group-form">
-                        <h3>
-                            Enter Group Name
-                        </h3>
-                        <input type="text" placeholder="Type The Group Name" class="group-input"
-                            id="create-group-input">
-
-                        <div class="group-btn" id="create-group-btn">
-                            <h3>Create Group</h3>
-                        </div>
-                        <p id="create-group-error">
-                            Note: Once you have created the group you cannot change the group name
-                        </p>
-
-                    </div>
 
                     <div class="create-group" id="join-group-form">
+
                         <h3>
                             Join Group
                         </h3>
@@ -250,41 +261,10 @@
 </div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get references to the clickable divs
-        const create_group = document.getElementById('create-group');
-        const join_group = document.getElementById('join-group');
-        const join_group_form = document.getElementById('join-group-form');
-        const create_group_form = document.getElementById('create-group-form');
-
-
-
-        create_group.addEventListener('click', function () {
-            window.location.href = "/groups/create"
-            // window.location.href = redirectURL;
-            // join_group_form.style.display = "none";
-            // create_group_form.style.display = "flex";
-        });
-
-        join_group.addEventListener('click', function () {
-            window.location.href = "/groups/join"
-            // // window.location.href = redirectURL;
-            // join_group_form.style.display = "flex";
-            // create_group_form.style.display = "none";
-        });
-
-        // Apply
-    });
-</script>
-
 
 <script>
 
-    const create_group_btn = document.getElementById("create-group-btn");
-    const create_group_input = document.getElementById("create-group-input");
-    const create_group_error = document.getElementById("create-group-error");
-
+   
     const join_group_btn = document.getElementById("join-group-btn");
     const join_group_input = document.getElementById("join-group-input");
     const join_group_error = document.getElementById("join-group-error");
@@ -316,51 +296,7 @@
         }
         return cookieValue;
     }
-    create_group_btn.addEventListener('click', function () {
-
-
-
-        var csrftoken = getCookie('csrftoken');
-        console.log(csrftoken);
-        var headers = new Headers();
-        headers.append('X-CSRFToken', csrftoken);
-
-
-        const formData = new FormData();
-        formData.append("type", "create");
-        formData.append("data", create_group_input.value.trim());
-        fetch('/groups/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': getCookie("csrftoken")
-            },
-            credentials: 'include'
-        }).then(response => {
-            if (response.status === 200) {
-                response.json().then(data => {
-                    if (data.status === 'success') {
-                        const session_auth = data.session_auth;
-                        setCookie("session_auth", session_auth, 7);
-                        window.location.href = '/groups/hub'; // Redirect to the desired page
-                    } else {
-
-                        create_group_input.style.border = "2px solid red";
-                        const msg = data.msg;
-                        create_group_error.style.color = "red";
-                        create_group_error.innerHTML = msg;
-                        console.log("error")
-                    }
-                });
-            } else {
-                console.log("error")
-            }
-        })
-            .catch(error => {
-                console.log("error")
-            });
-    });
-
+ 
     join_group_btn.addEventListener('click', function () {
 
 

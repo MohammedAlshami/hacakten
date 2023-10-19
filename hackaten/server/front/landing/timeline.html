@@ -18,6 +18,9 @@
 
     }
 
+   
+
+
     .timeline-item {
         background-color: #11141B;
         padding: 30px 40px;
@@ -29,10 +32,20 @@
         /* justify-content: center; */
         border-radius: 20px;
         width: 40vw;
+        transition: transform 0.3s, box-shadow 0.3s;
+
 
         /* Set the width to 20vw */
     }
 
+    .timeline-item:hover {
+        transform: translateY(-10px);
+        /* Move the container up */
+        box-shadow: 0 0 20px rgba(6, 193, 235, 0.7);
+        border-radius: 20px;
+
+        /* Add a pink glowy shadow */
+    }
     .timeline-item-img img {
         width: 50px;
     }
@@ -153,7 +166,7 @@
                     <img src="{% static 'img/calendar_icon.svg' %}" />
                 </div>
                 <div class="timeline-item-content">
-                    <h5>Registration</h5> 
+                    <h5>Registration</h5>
                     <h3>Oct 20 - Nov 26, 2023</h3>
                 </div>
             </div>
@@ -163,8 +176,8 @@
                         <img src="{% static 'img/calendar_icon.svg' %}" />
                     </div>
                     <div class="timeline-item-content">
-                            <h5>Preliminary Round</h5>
-                            <h3>Nov 27 - Dec 3, 2023</h3>
+                        <h5>Preliminary Round</h5>
+                        <h3>Nov 27 - Dec 3, 2023</h3>
                     </div>
                 </div>
                 <div class="timeline-items-container">
@@ -173,8 +186,8 @@
                             <img src="{% static 'img/calendar_icon.svg' %}" />
                         </div>
                         <div class="timeline-item-content">
-                                <h5>Finalists Announcement</h5> <!-- Typo fixed here -->
-                                <h3>Dec 8, 2023</h3>
+                            <h5>Finalists Announcement</h5> <!-- Typo fixed here -->
+                            <h3>Dec 8, 2023</h3>
                         </div>
                     </div>
                     <div class="timeline-items-container">
@@ -183,8 +196,8 @@
                                 <img src="{% static 'img/calendar_icon.svg' %}" />
                             </div>
                             <div class="timeline-item-content">
-                                    <h5>Finals</h5> <!-- Typo fixed here -->
-                                    <h3>Dec 16 - 17, 2023</h3>
+                                <h5>Finals</h5> <!-- Typo fixed here -->
+                                <h3>Dec 16 - 17, 2023</h3>
                             </div>
                         </div>
                         <div class="timeline-item">
@@ -192,8 +205,8 @@
                                 <img src="{% static 'img/calendar_icon.svg' %}" />
                             </div>
                             <div class="timeline-item-content">
-                                    <h5>Closing Ceremony</h5> <!-- Typo fixed here -->
-                                    <h3>Dec 17, 2023</h3>
+                                <h5>Closing Ceremony</h5> <!-- Typo fixed here -->
+                                <h3>Dec 17, 2023</h3>
                             </div>
                         </div>
 

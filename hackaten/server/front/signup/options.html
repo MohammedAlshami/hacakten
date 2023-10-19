@@ -117,28 +117,21 @@
         }
 
 
-        #login-form {
+        .login-form {
             margin: 2.2vw auto;
-            /* width: ; */
-
-            border: 3px solid #2A2A2A;
-            padding: 50px;
-            border-radius: 10px;
-            width: clamp(500px, 40vw, 45vw);
+            width: clamp(350px, 25vw, 30vw);
 
         }
 
         @media screen and (max-width: 700px) {
-            #login-form {
-
-                /* width: clamp(350px, 25vw, 30vw); */
+            .login-form {
 
                 width: auto;
 
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
-                margin: 100px 20px;
+                margin: 100px 40px;
 
             }
         }
@@ -249,7 +242,9 @@
 
 
 
-    <div class="slide-top" id="login-form">
+    <div class="login-form slide-top"
+        style="border: 3px solid #2A2A2A; padding: 50px; border-radius: 10px; width: 35vw;">
+
 
         <div class="login-top">
             <img src="{% static 'img/hack_logo.png' %}" />
@@ -258,30 +253,70 @@
 
             <div class="login-top-divider ">
                 <div class="login-top-divider1"></div>
-                <div class="login-top-divider2">or</div>
                 <div class="login-top-divider3"></div>
             </div>
 
-        </div>
-        <div style="text-align: center; margin-top: 10px;">
+            <style>
+                .register-options {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    gap: 20px;
+                    /* align-items: center; */
+                }
 
-            <div class="form-input">
-                <input type="email" id="emailInput" placeholder="Email">
+                .options-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 40px;
+                    width: 14vw;
+                    height: 14vw;
+                    padding: 20px;
+
+                    /* border: 1px solid #ffffff; */
+                    border-radius: 10px;
+                    background-color: #ffffff;
+                    user-select: none;
+                    transition: transform 0.3s, box-shadow 0.3s;
+
+
+                }
+
+                .options-item:hover {
+                    cursor: pointer;
+                    transform: translateY(-10px);
+
+                }
+
+                .options-item h2,
+                p {
+                    color: rgb(0, 0, 0);
+                }
+
+                .options-item p {
+                    color: black;
+                }
+            </style>
+
+            <div class="register-options">
+                <div class="options-item" onclick="redirectTo('register/international')">
+                    <h2>Internationl</h2>
+                    <p>Choose this if you live outside malaysia</p>
+                </div>
+                <div class="options-item" onclick="redirectTo('register/local')">
+                    <h2>Local</h2>
+                    <p>Choose this if you're malaysian, resident of malaysia or live in malaysia</p>
+                </div>
+                
             </div>
-            <div class="form-input">
-                <input type="password" id="passwordInput" placeholder="Password">
-            </div>
-            <div class="forgot-password">
-                <a href="/reset">Fogot Password?</a>
-            </div>
-            <div class="form-btn" id="loginButton">
-                Login
-            </div>
-            <p id="error"></p>
+            <p>Choose this if you're malaysian, resident of malaysia or live in malaysia</p>    
         </div>
 
 
         <script>
+            function redirectTo(url) {
+                window.location.href = url;
+            }
             function setCookie(name, value, daysToExpire) {
                 // Calculate the expiration date
                 const expirationDate = new Date();
@@ -327,8 +362,6 @@
                 setTimeout(function () {
                     passwordInput.style.animation = "none";
                 }, 800);
-                const loginForm = document.getElementById("login-form");
-                loginForm.style.padding = "50px 50px 10px 50px";
                 error.innerText = error_msg;
             }
             function email_error(error_msg) {
@@ -341,8 +374,6 @@
                 setTimeout(function () {
                     emailInput.style.animation = "none";
                 }, 800);
-                const loginForm = document.getElementById("login-form");
-                loginForm.style.padding = "50px 50px 10px 50px";
                 error.innerText = error_msg;
             }
 
@@ -363,8 +394,6 @@
                     emailInput.style.animation = "none";
                     // passwordInput.style.border = "2px solid blue";
                 }, 800);
-                const loginForm = document.getElementById("login-form");
-                loginForm.style.padding = "50px 50px 10px 50px";
                 error.innerText = error_msg;
                 return;
             }
@@ -388,8 +417,6 @@
                             // emailInput.style.border = "none";
 
                         }, 800);
-                        const loginForm = document.getElementById("login-form");
-                        loginForm.style.padding = "50px 50px 10px 50px";
                         error.innerText = "Please enter a valid email address in the format: email@example.com";
                         return;
                     }
@@ -400,8 +427,6 @@
                             passwordInput.style.animation = "none";
                             // passwordInput.style.border = "2px solid blue";
                         }, 800);
-                        const loginForm = document.getElementById("login-form");
-                        loginForm.style.padding = "50px 50px 10px 50px";
                         error.innerText = "Password must be at least 8 characters long.";
                         return;
                     }

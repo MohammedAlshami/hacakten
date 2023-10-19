@@ -155,46 +155,46 @@
 
 <style>
     /* Style for the dropdown button */
-.dropdown .dropbtn {
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
-    color: #ffffff;
+    .dropdown .dropbtn {
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        color: #ffffff;
 
-}
+    }
 
 
-/* Style for the dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #11141B;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    
-}
+    /* Style for the dropdown content (hidden by default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #11141B;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 
-/* Style for the dropdown links */
-.dropdown-content a {
-    display: block;
-    padding: 12px 16px;
-    text-decoration: none;
-}
+    }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-    background-color: #000000;
-}
+    /* Style for the dropdown links */
+    .dropdown-content a {
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+    }
 
-/* Show the dropdown content when hovering over the dropdown button */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.cover-sub a{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-}
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+        background-color: #000000;
+    }
 
+    /* Show the dropdown content when hovering over the dropdown button */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .cover-sub a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+    }
 </style>
 <div id="nav-animation">
     <nav>
@@ -222,7 +222,12 @@
         </ul>
 
         <div class="nav-right" id="register" style="display: hidden;">
+            {% if user_exist %}
+            <a href="/hub">Profile</a>
+            {% else %}
             <a href="/login">Login</a>
+            {% endif %}
+            
         </div>
     </nav>
 
@@ -240,7 +245,7 @@
 
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn" style="color: black;">More</a>
-                    <div class="dropdown-content cover-sub" >
+                    <div class="dropdown-content cover-sub">
                         <a href="#faq-section">Team</a>
                         <a href="#faq-section-2">Mentors</a>
                         <a href="#faq-section-2">Speakers</a>

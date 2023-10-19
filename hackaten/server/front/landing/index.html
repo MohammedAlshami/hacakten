@@ -28,13 +28,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
+    {% include 'landing\nav.html' %}
+    <!-- {% include 'landing\page_bg.html' %} -->
+
+    {% include 'landing\main.html' %}
+
 
     <div class="landing-sections" style="margin-top: 100px;">
 
         <!-- {% include 'landing\scroll_icon.html' %} -->
 
+        {% include 'landing\about.html' %}
+        {% include 'landing\cases.html' %}
+        {% include 'landing\prizes.html' %}
+        {% include 'landing\timeline.html' %}
         {% include 'landing\sponsors.html' %}
-      
+
+        {% include 'landing\partners.html' %}
+        {% include 'landing\faq.html' %}
+        {% include 'landing\countdown.html' %}
+
+        
+
+
+        <!-- {% include 'landing\sponsors.html' %} -->
+
+
+
 
 
     </div>

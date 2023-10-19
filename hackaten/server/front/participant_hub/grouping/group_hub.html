@@ -13,6 +13,8 @@
     body {
         font-family: Helvetica, sans-serif;
         /* margin: 80px; */
+        background-color: #222131;
+
 
     }
 
@@ -25,7 +27,8 @@
         overflow-y: auto;
         overflow-x: hidden;
         z-index: 1;
-        padding-left: 17vw;
+        padding-left: 13vw;
+        margin-bottom: 50px;
 
     }
 
@@ -38,6 +41,7 @@
         font-weight: bold;
         font-size: clamp(25px, 2.2vw, 4vw);
         text-align: center;
+        color: white;
     }
 
     .group-content-container {
@@ -59,10 +63,12 @@
 
     .group-cards-item {
 
-        background-color: black;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         border-radius: 20px;
         padding: 0 2vw;
     }
+
 
     #group {
         display: flex;
@@ -74,7 +80,7 @@
 
 
     .group-cards-item h4 {
-        color: white;
+        color: rgb(255, 255, 255);
         font-size: 20px;
         /* text-align: left; */
     }
@@ -95,12 +101,12 @@
     }
 
     .group-cards-item h3 {
-        color: white;
+        color: rgb(0, 0, 0);
         /* text-align: center; */
     }
 
     .group-cards-item h4 {
-        color: white;
+        color: rgb(0, 0, 0);
         font-size: clamp(17px, 1.5vw, 2vw);
     }
 
@@ -108,15 +114,18 @@
 
         /* border: 1.99px solid #EBEBEB; */
         border-radius: 10.932px;
-        background-color: black;
+        background-color: rgb(255, 255, 255);
         /* height: 84px; */
         padding: 20px 20px;
-        color: #ffffff;
+        color: #000000;
         font-family: Helvetica;
         font-size: clamp(15px, 1.3vw, 1.9vw);
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+
 
     }
 
@@ -171,8 +180,9 @@
 
         .group-center-div {
 
-            padding-left: 100px;
-            padding-right: 20px;
+            padding-top: 50px;
+            padding-left: 0;
+            /* padding-right: 20px; */
 
         }
 
@@ -199,16 +209,49 @@
         flex-direction: column;
 
     }
+
+    .group-hub-body {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        background-color: #39394B;
+        border-radius: 20px;
+        padding: 40px;
+        border: 2px solid #554dfe;
+        width: 65vw;
+    }
+
+    .left-align {
+        margin-top: .5vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .leave-btn {
+        background-color: #7F79FE;
+        padding: 10px 2vw;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .leave-btn:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+
+    }
+
+    .leave-btn svg {
+        /* font-size: 15px; */
+        fill: #ffff;
+        width: clamp(20px, 2vw, 3vw);
+
+    }
 </style>
 
-<body>
-
-</body>
-
-</html>
 
 <div class="group-container">
-    {% include 'participant_hub/hub_navbar.html' %}
+    {% include 'participant_hub/new_navbar.html' %}
 
     <div class="group-center-div">
         <div>
@@ -217,39 +260,63 @@
                     Group Hub
                 </h2>
 
+                <div class="group-hub-body">
 
 
-                <div class="group-cards-item">
-                    <div class="left-align">
-                        <h4 style="text-align: left;">Members: {{members_len}}</h4>
+                    <div class="group-cards-item">
+                        <div class="left-align">
+                            <!-- Members: {{members_len}} -->
+                            <h4 style="text-align: left;"></h4>
+                            <div class="leave-btn" id="leave-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <g fill-rule="evenodd" clip-rule="evenodd">
+                                        <path
+                                            d="M15.027 7.232a1 1 0 0 1 1.408.128l2.083 2.5a1 1 0 0 1-1.536 1.28l-2.083-2.5a1 1 0 0 1 .128-1.408Z" />
+                                        <path
+                                            d="M15.027 13.768a1 1 0 0 1-.129-1.408l2.084-2.5a1 1 0 1 1 1.536 1.28l-2.083 2.5a1 1 0 0 1-1.408.128Z" />
+                                        <path
+                                            d="M17.5 10.5a1 1 0 0 1-1 1H10a1 1 0 1 1 0-2h6.5a1 1 0 0 1 1 1ZM3 3.5a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm0 14a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Z" />
+                                        <path
+                                            d="M13 2.5a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm0 10a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm-9-10a1 1 0 0 1 1 1v14a1 1 0 1 1-2 0v-14a1 1 0 0 1 1-1Z" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div id="group">
+
+                            <img src="{% static 'img/group_join_icon.svg' %}" />
+                            <h3>{{group_name}}</h3>
+                        </div>
                     </div>
 
-                    <div id="group">
-
-                        <img src="{% static 'img/group_join_icon.svg' %}" />
-                        <h3>{{group_name}}</h3>
+                    <div style=" margin-top: 10px; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 22px; color: white;">GROUP ID<br> <br>
+                            <span style="font-size: 18px;">Send the group id to your teammates in order for them to
+                                join</span>
+                        </h3>
+                        <div class="group-input">
+                            {{group_id}}
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div style=" margin-top: 10px; display: flex; flex-direction: column;">
-                <h3 style="font-size: 22px;">GROUP ID<br> <br>
-                    <span style="font-size: 18px;">Send the group id to your teammates in order for them to join</span>
-                </h3>
-                <div class="group-input">
-                    {{group_id}}
-                </div>
-            </div>
+                    <div
+                        style=" margin-top: 20px; margin-bottom: 50px; display: flex; flex-direction: column; gap: 20px;">
+                        <h3 style="font-size: 22px; color: white;">Members</h3>
+                        {% for member in members %}
+                        <div class="group-input">
+                            {{ member }}
+                        </div>
+                        {% endfor %}
 
-            <div style=" margin-top: 20px; margin-bottom: 50px; display: flex; flex-direction: column; gap: 20px;">
-                <h3 style="font-size: 22px;">Members</h3>
-                {% for member in members %}
-                <div class="group-input">
-                    {{ member }}
+                    </div>
+
+
                 </div>
-                {% endfor %}
+
 
             </div>
+
 
 
 
@@ -257,8 +324,73 @@
     </div>
 </div>
 
-</div>
+<script>
 
+    const leave_btn = document.getElementById("leave-btn");
+
+
+    function setCookie(name, value, daysToExpire) {
+        // Calculate the expiration date
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
+        // Format the cookie string
+        const cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
+
+        // Set the cookie
+        document.cookie = cookieString;
+    }
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+    leave_btn.addEventListener('click', function () {
+        const csrftoken = getCookie("csrftoken");
+        console.log(csrftoken);
+        var headers = new Headers();
+        headers.append('X-CSRFToken', csrftoken);
+
+
+        const formData = new FormData();
+        formData.append("type", "leave");
+        fetch('/groups/hub', {
+            method: 'POST',
+            body: formData,
+            headers: headers,
+            credentials: 'include'
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    if (data.status === 'success') {
+                        console.log("error");
+                        window.location.href = '/groups'; // Redirect to the desired page
+                    } else {
+                        console.log("error");
+                    }
+                });
+            } else {
+                console.log("error")
+            }
+        })
+            .catch(error => {
+                console.log("error")
+            });
+    });
+
+</script>
 
 
 
