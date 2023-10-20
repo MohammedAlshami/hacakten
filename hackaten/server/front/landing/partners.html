@@ -53,7 +53,7 @@
         .partners-item img {
             border-radius: 20px;
             margin: 0;
-            width: 150px;
+            width: 10vw;
         }
     </style>
     <style>
@@ -110,8 +110,25 @@
             z-index: -1;
             border-radius: 20px;
         }
+
         a {
             text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .partners-items-container {
+                flex-direction: column;
+            }
+
+            .partners-container {
+                width: 80vw;
+                height: 60vw;
+            }
+
+            .partners-container img {
+                width: 40vw;
+
+            }
         }
     </style>
 </head>
@@ -125,82 +142,112 @@
 
         <div class="partners-items-container">
 
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img
-                        src="https://scontent-kul3-1.xx.fbcdn.net/v/t39.30808-6/326496119_875249970378675_671812262120782368_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JKzBd5gzhHgAX97woK3&_nc_oc=AQk6qCE21HBygw1_s7Pb5AIryFU9Am5uSS9V6vbYAv64vrX2WD6Q1LsgRGg1NkdXBPs&_nc_ht=scontent-kul3-1.xx&oh=00_AfCuVeOhqmWQAXJaWwOGB8Usw9ExCj9-UZacNN3agT3Vug&oe=65338BBD" />
-                    <h2>
-                        PRO-C UNITEN
-                    </h2>
-                </div>
-            </div>
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img src="{% static 'img\partners\gdcs_tayler.jpg' %}" />
-                    <h2>
-                        GDCS TAYLER
-                    </h2>
-                </div>
-            </div>
 
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img
-                        src="https://scontent-kul3-1.xx.fbcdn.net/v/t39.30808-6/326496119_875249970378675_671812262120782368_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JKzBd5gzhHgAX97woK3&_nc_oc=AQk6qCE21HBygw1_s7Pb5AIryFU9Am5uSS9V6vbYAv64vrX2WD6Q1LsgRGg1NkdXBPs&_nc_ht=scontent-kul3-1.xx&oh=00_AfCuVeOhqmWQAXJaWwOGB8Usw9ExCj9-UZacNN3agT3Vug&oe=65338BBD" />
-                    <h2>
-                        PRO-C UNITEN
-                    </h2>
+            <a href=" https://www.instagram.com/agentsoftech.tlc">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\aot_taylor.jpg' %}" />
+                        <h2>
+                            AOT Taylor's
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img src="{% static 'img\partners\gdcs_tayler.jpg' %}" />
-                    <h2>
-                        GDCS TAYLER
-                    </h2>
+            </a>
+
+            <a href="https://www.instagram.com/dnccsemarang/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\dncc.jpg' %}" />
+                        <h2>
+                            DNCC
+                        </h2>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-
-        </div>
-        <div class="partners-items-container">
-
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img
-                        src="https://scontent-kul3-1.xx.fbcdn.net/v/t39.30808-6/326496119_875249970378675_671812262120782368_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JKzBd5gzhHgAX97woK3&_nc_oc=AQk6qCE21HBygw1_s7Pb5AIryFU9Am5uSS9V6vbYAv64vrX2WD6Q1LsgRGg1NkdXBPs&_nc_ht=scontent-kul3-1.xx&oh=00_AfCuVeOhqmWQAXJaWwOGB8Usw9ExCj9-UZacNN3agT3Vug&oe=65338BBD" />
-                    <h2>
-                        PRO-C UNITEN
-                    </h2>
-                </div>
-            </div>
             <a href="https://www.instagram.com/gdsc.taylors/">
                 <div class="partners-container">
                     <div class="partners-item">
                         <img src="{% static 'img\partners\gdcs_tayler.jpg' %}" />
                         <h2>
-                            GDCS TAYLER
+                            GDSC Taylor's
                         </h2>
                     </div>
                 </div>
             </a>
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img
-                        src="https://scontent-kul3-1.xx.fbcdn.net/v/t39.30808-6/326496119_875249970378675_671812262120782368_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JKzBd5gzhHgAX97woK3&_nc_oc=AQk6qCE21HBygw1_s7Pb5AIryFU9Am5uSS9V6vbYAv64vrX2WD6Q1LsgRGg1NkdXBPs&_nc_ht=scontent-kul3-1.xx&oh=00_AfCuVeOhqmWQAXJaWwOGB8Usw9ExCj9-UZacNN3agT3Vug&oe=65338BBD" />
-                    <h2>
-                        PRO-C UNITEN
-                    </h2>
+            <a href="https://www.instagram.com/gdsc_unhas/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\gdsc_unhas.jpg' %}" />
+                        <h2>
+                            GDSC UNHAS
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="partners-container">
-                <div class="partners-item">
-                    <img src="{% static 'img\partners\gdcs_tayler.jpg' %}" />
-                    <h2>
-                        GDCS TAYLER
-                    </h2>
+            </a>
+
+
+        </div>
+        <div class="partners-items-container">
+
+            <a href="https://www.instagram.com/mumtec.monash/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\MUMTEC.jpg' %}" />
+
+                        <h2>
+                            MUMTEC
+                        </h2>
+                    </div>
                 </div>
-            </div>
+            </a>
+            <a href="https://www.instagram.com/pccpolines/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\PCCPOLINES.jpg' %}" />
+                        <h2>
+                            PCCPOLINES
+                        </h2>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/pekomum/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\PEKOM.jpg' %}" />
+                        <h2>
+                            PEKOM
+                        </h2>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/petakom_umpsa/">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\petakom_umpsa .jpg' %}" />
+                        <h2>
+                            PETAKOM
+                        </h2>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="partners-items-container">
+
+            <a href="https://www.instagram.com/amccamikom">
+                <div class="partners-container">
+                    <div class="partners-item">
+                        <img src="{% static 'img\partners\amcc.jpg' %}" />
+                        <h2>
+                            AMCC
+                        </h2>
+                    </div>
+                </div>
+            </a>
+
 
 
         </div>

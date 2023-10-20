@@ -717,12 +717,14 @@
 
                         </div>
                     </div>
-                    <div class="navbar-inner-item" id="hub-nav-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M13 9V3h8v6h-8ZM3 13V3h8v10H3Zm10 8V11h8v10h-8ZM3 21v-6h8v6H3Z" />
-                        </svg>
-                        <h3>Hub</h3>
-                    </div>
+                    <a href="/" style="text-decoration: none;">
+                        <div class="navbar-inner-item" id="hub-nav-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M13 9V3h8v6h-8ZM3 13V3h8v10H3Zm10 8V11h8v10h-8ZM3 21v-6h8v6H3Z" />
+                            </svg>
+                            <h3>Landing</h3>
+                        </div>
+                    </a>
 
                     <div class="navbar-inner-item" id="casestudies-nav-item">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -800,10 +802,10 @@
         // Add click event listeners to the navigation items
         const casestudiesNavItem = document.getElementById('casestudies-nav-item');
         const groupingNavItem = document.getElementById('grouping-nav-item');
-        const submissionNavItem = document.getElementById('submission-nav-item');
+        // const submissionNavItem = document.getElementById('submission-nav-item');
         const rulesNavItem = document.getElementById('rules-nav-item');
 
-        const hubNavItem = document.getElementById('hub-nav-item');
+        // const hubNavItem = document.getElementById('hub-nav-item');
 
 
         hideNavItemIfMatch(casestudiesNavItem, '/cases');
@@ -816,26 +818,26 @@
 
         hideNavItemIfMatch(groupingNavItem, '/groups');
 
-        hideNavItemIfMatch(submissionNavItem, '/submission');
+        // hideNavItemIfMatch(submissionNavItem, '/submission');
         hideNavItemIfMatch(rulesNavItem, '/rules');
         hideNavItemIfMatch(rulesNavItem, '/rules/');
         hideNavItemIfMatch(rulesNavItem, 'rules/');
 
-        hideNavItemIfMatch(hubNavItem, 'hub');
-        hideNavItemIfMatch(hubNavItem, 'hub/');
-        hideNavItemIfMatch(hubNavItem, '/hub/');
-        hideNavItemIfMatch(hubNavItem, '/hub');
+        // hideNavItemIfMatch(hubNavItem, 'hub');
+        // hideNavItemIfMatch(hubNavItem, 'hub/');
+        // hideNavItemIfMatch(hubNavItem, '/hub/');
+        // hideNavItemIfMatch(hubNavItem, '/hub');
 
 
 
-        hubNavItem.addEventListener('click', () => navigateToPage('/hub'));
+        // hubNavItem.addEventListener('click', () => navigateToPage('/hub'));
 
 
 
 
         casestudiesNavItem.addEventListener('click', () => navigateToPage('/cases'));
         groupingNavItem.addEventListener('click', () => navigateToPage('/groups'));
-        submissionNavItem.addEventListener('click', () => navigateToPage('submission'));
+        // submissionNavItem.addEventListener('click', () => navigateToPage('submission'));
         rulesNavItem.addEventListener('click', () => navigateToPage('/rules'));
     </script>
 

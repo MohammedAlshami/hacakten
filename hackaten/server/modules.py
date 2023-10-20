@@ -101,6 +101,7 @@ class Firebase:
         password,
         confirm_password,
         join_reason,
+        isLocal
     ):
         auth = self.firebase.auth()
 
@@ -156,6 +157,7 @@ class Firebase:
                     "email": email,
                     "join_reason": join_reason,
                     "resume_path": file_url,
+                    "local": isLocal 
                 }
                 db.child("hack10User").child(user_id).set(user_info)
                 print("User registered successfully with ID:", user_id)
@@ -285,6 +287,7 @@ class Firebase:
             else:
                 db.child(group_table_name).child(group_id).set(group_info)
             return True
+        return False
         
         # print(user_data)
         # user_data.pop('group_id')

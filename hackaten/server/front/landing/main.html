@@ -15,7 +15,6 @@
         margin: 0;
         /* Center the background image horizontally */
         background-position: center;
-        color: #fff;
         /* Make sure the container is positioned */
         position: relative;
         /* Create a black overlay using a pseudo-element */
@@ -32,7 +31,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
     }
 
 
@@ -42,7 +40,7 @@ background-color: white;
 } */
 
     .main-section-content {
-    
+
         padding: 280px 29vw 30vw 29vw;
         /* Adjust the values as needed */
         position: relative;
@@ -166,7 +164,7 @@ background-color: white;
     }
 
     .video-container video {
-        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+        /* -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0))); */
         /* mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0)); */
     }
 
@@ -351,6 +349,7 @@ background-color: white;
     }
 
     .glitch {
+        /* color: linear-gradient(90deg, rgb(244, 244, 244), rgb(255, 105, 180)); */
         color: white;
         font-size: 7.7vw;
         text-transform: upercase;
@@ -1280,7 +1279,7 @@ background-color: white;
         }
 
         .video-container video {
-            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .6)), to(rgba(0, 0, 0, 0)));
+            /* -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .6)), to(rgba(0, 0, 0, 0))); */
             /* mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0)); */
         }
 
@@ -1352,32 +1351,161 @@ background-color: white;
         }
 
     }
+
+    /* .main-section-bg {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        width: 100%;
+        z-index: -1;
+    } */
+</style>
+
+<style>
+    .wrapper {
+        text-align: center;
+        position: relative;
+        margin-top: -100px;
+        -webkit-animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .wrapper:hover {
+        
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+   begin Scroll Down Button
+ * ------------------------------------------------------------------------- */
+    button.scroll_down {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        height: 50px;
+        width: 30px;
+        bottom: 60px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 20px;
+        cursor: pointer;
+        outline: none;
+        z-index: 100000000000;
+    }
+
+    button.scroll_down:before {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        content: "";
+        width: 6px;
+        height: 6px;
+        margin-left: -3px;
+        background-color: #fff;
+        border-radius: 100%;
+        -webkit-animation: scroll_down_btn-animation 2s infinite;
+        animation: scroll_down_btn-animation 2s infinite;
+        box-sizing: border-box;
+    }
+
+    @keyframes scroll_down_btn-animation {
+        0% {
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 1;
+        }
+
+        80% {
+            transform: translate(0, 20px);
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes scroll_down_btn-animation {
+        0% {
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 1;
+        }
+
+        80% {
+            transform: translate(0, 20px);
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    /* -------------------------------------------------------------------------
+   end Scroll Down Button 
+ * ------------------------------------------------------------------------- */
+    /* ## Test ## */
+    .block {
+        height: 2000px;
+    }
 </style>
 
 <section class="mouse-hover " id="main-section">
 
 
- 
+
 
 
     <div class="video-container">
+        <!-- class="main-section-bg" -->
 
-        <!-- <div id="video">
-            <img src="https://i.imgur.com/8a4jrOU.jpeg" style="width: 100%;">
-    
-        </div> -->
+        <!-- <img src="{% static 'img\\cases_bg.webp' %}" class="main-section-bg "/> -->
+
         <video autoplay muted loop playsinline id="video" preload="none">
-         
+
         </video>
 
 
 
-        <div class="main-section-content text-overlay">
-            <div class="glitch-wrapper">
-                <div class="glitch" data-text="Hack@10">Hack@10</div>
+        <div>
+            <!-- <div class="wrapper">
+                <button type="button" class="scroll_down" id="scroll_down"></button>
+            </div> -->
+            <div class="main-section-content text-overlay">
+                <div class="glitch-wrapper">
+                    <div class="glitch" data-text="Hack@10">Hack@10</div>
+                </div>
+
+
             </div>
-    
+          
 
         </div>
     </div>
+
 </section>
+
+
+<script>  /* -------------------------------------------------------------------------
+begin Scroll Down Button
+* ------------------------------------------------------------------------- */
+
+    const scrollButton = document.getElementById('scroll_down');
+    const targetSection = document.getElementById('about-section');
+
+    // Add a click event listener to the button
+    scrollButton.addEventListener('click', function () {
+        // Scroll to the target section
+        targetSection.scrollIntoView({ behavior: 'smooth' }); // You can use 'auto' instead of 'smooth' for an instant scroll
+    });
+
+</script>

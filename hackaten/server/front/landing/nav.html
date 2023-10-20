@@ -12,9 +12,16 @@
         color: white;
         font-size: 18px;
 
-        padding: 45px 80px 0 80px;
+        padding: 35px 80px 0 80px;
         -webkit-animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+
+        background: rgba(0, 0, 0, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        /* border: 1px solid rgba(255, 255, 255, 0.18); */
     }
 
     /* #nav-animation */
@@ -210,7 +217,7 @@
             <li><a href="#timeline-section">Timeline</a></li>
             <li><a href="#faq-section" class="dropbtn">FAQ</a></li>
 
-            <li class="dropdown">
+            <!-- <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">More</a>
                 <div class="dropdown-content">
                     <a href="#faq-section">Team</a>
@@ -218,16 +225,16 @@
                     <a href="#faq-section-2">Speakers</a>
                     <a href="#faq-section-2">Judges</a>
                 </div>
-            </li>
+            </li> -->
         </ul>
 
         <div class="nav-right" id="register" style="display: hidden;">
             {% if user_exist %}
-            <a href="/hub">Profile</a>
+            <a href="/cases">Hub</a>
             {% else %}
             <a href="/login">Login</a>
             {% endif %}
-            
+
         </div>
     </nav>
 

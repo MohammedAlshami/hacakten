@@ -118,26 +118,34 @@
 
 
         .login-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
+            
             margin: 2.2vw auto;
-            width: clamp(350px, 25vw, 30vw);
+            /* width: clamp(500px, 25vw, 30vw); */
+
+            border: 3px solid #2A2A2A;
+            padding: 50px;
+            border-radius: 10px;
+            width: clamp(400px, 50vw, 60vw);
+            height: 600px;
 
         }
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 1000px) {
             .login-form {
 
-                width: auto;
-
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-                margin: 100px 40px;
+                /* margin: 2.2vw auto;
+                width: clamp(200px, 28vw, 30vw); */
 
             }
         }
 
         .login-top {
             text-align: center;
+
 
         }
 
@@ -242,8 +250,7 @@
 
 
 
-    <div class="login-form slide-top"
-        style="border: 3px solid #2A2A2A; padding: 50px; border-radius: 10px; width: 35vw;">
+    <div class="login-form slide-top">
 
 
         <div class="login-top">
@@ -262,6 +269,7 @@
                     flex-direction: row;
                     justify-content: space-between;
                     gap: 20px;
+
                     /* align-items: center; */
                 }
 
@@ -269,15 +277,17 @@
                     display: flex;
                     flex-direction: column;
                     gap: 40px;
-                    width: 14vw;
-                    height: 14vw;
+                    width: clamp(160px, 15vw, 15vw);
+                    height: 200px;
                     padding: 20px;
 
                     /* border: 1px solid #ffffff; */
                     border-radius: 10px;
-                    background-color: #ffffff;
+                    /* background-color: #ffffff; */
                     user-select: none;
                     transition: transform 0.3s, box-shadow 0.3s;
+
+                    border: 1px solid white;
 
 
                 }
@@ -285,31 +295,39 @@
                 .options-item:hover {
                     cursor: pointer;
                     transform: translateY(-10px);
+                    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
 
+
+                }
+                .options-item h2 {
+                    font-size: clamp(20px, 1.5vw, 1.6vw);
                 }
 
                 .options-item h2,
                 p {
-                    color: rgb(0, 0, 0);
+                    color: white;
                 }
 
                 .options-item p {
-                    color: black;
+                    color: white;
+                    font-size: clamp(12px, 1vw, 1.6vw);
+
                 }
             </style>
 
             <div class="register-options">
                 <div class="options-item" onclick="redirectTo('register/international')">
                     <h2>Internationl</h2>
-                    <p>Choose this if you live outside malaysia</p>
+                    <p>Choose this if you're not Malaysian, not a resident of Malaysia, or don't live in Malaysia.
+
+                    </p>
                 </div>
                 <div class="options-item" onclick="redirectTo('register/local')">
                     <h2>Local</h2>
                     <p>Choose this if you're malaysian, resident of malaysia or live in malaysia</p>
                 </div>
-                
+
             </div>
-            <p>Choose this if you're malaysian, resident of malaysia or live in malaysia</p>    
         </div>
 
 
