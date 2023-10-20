@@ -70,7 +70,10 @@ TEMPLATE_LOADERS = (
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [findMyWay("templates")],
+        "DIRS": ["/templates"],
+        "DIRS": [
+            findMyWay("/templates")
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
