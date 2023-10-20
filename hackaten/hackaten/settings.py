@@ -55,11 +55,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "hackaten.urls"
 
+
+def findMyWay(*relativeComponents):
+    return os.path.join(os.path.dirname(__file__), *relativeComponents).replace(
+        "\\", "/"
+    )
+
+
+TEMPLATE_LOADERS = (
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
+)
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "/templates"],
-        "DIRS": ["templates"],
+        "DIRS": [findMyWay("templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
