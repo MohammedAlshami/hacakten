@@ -9,6 +9,10 @@ import json
 
 SECRET_KEY = "2B1fGuGYqV445v9x4Dn9HX0vtBmDFRgP"
 
+import os
+current_directory = os.path.dirname(__file__)
+json_file_path = os.path.join(current_directory, 'firebase_access.json')
+
 
 class Firebase:
     def __init__(self):
@@ -17,7 +21,7 @@ class Firebase:
             "authDomain": "realtimedatabasetest-f226a.firebaseapp.com",
             "databaseURL": "https://realtimedatabasetest-f226a-default-rtdb.asia-southeast1.firebasedatabase.app",
             "storageBucket": "realtimedatabasetest-f226a.appspot.com",
-            "serviceAccount": r"D:\Desktop_1\Hack@10\Server\hackaten\server\credentials\firebase_access.json",
+            "serviceAccount": json_file_path,
         }
         self.firebase = pyrebase.initialize_app(config)
 

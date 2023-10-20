@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
+    <title>Lazy Loaded Images</title>
+    <style>
+        body {
+            background-color: black;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .landing-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>Lazy Loaded Images</h1>
+    <img data-src="{% static 'img\cases_bg.webp' %}" src="{% static 'img\cases_bg_compressed.webp' %}" class="lazyload" alt="Image 1" loading="lazy"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    {% include 'landing\nav.html' %}
+
+    {% include 'landing\page_bg.html' %}
+
+    {% include 'landing\main.html' %}
+
+
+    <div class="landing-sections" style="margin-top: 100px;">
+
+        <!-- {% include 'landing\scroll_icon.html' %} -->
+
+        {% include 'landing\about.html' %}
+        {% include 'landing\cases.html' %}
+        {% include 'landing\prizes.html' %}
+        {% include 'landing\timeline.html' %}
+        {% include 'landing\sponsors.html' %}
+
+        {% include 'landing\partners.html' %}
+        {% include 'landing\faq.html' %}
+        {% include 'landing\countdown.html' %}
+
+        {% include 'landing\footer.html' %}
+
+
+
+        <!-- {% include 'landing\sponsors.html' %} -->
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
