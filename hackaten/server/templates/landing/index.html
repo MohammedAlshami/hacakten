@@ -8,17 +8,33 @@
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
     <title>Lazy Loaded Images</title>
     <style>
+        #main-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'HackLogo';
+            height: clamp(70vh, 50vw, 100vh);
+            color: white;
+            font-size: clamp(30px, 4.5vw, 6vw);
+
+            max-width: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <style>
         html {
             scroll-behavior: smooth !important;
         }
+
 
         body {
             background-color: black;
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
+            /* overflow-x: hidden; */
         }
-    
+
 
         #footer-bg svg {
 
@@ -26,7 +42,7 @@
             /* width: 250vw; */
             height: 60vw;
             /* margin-bottom: ; */
-            
+
         }
 
         .page-bg {
@@ -36,13 +52,17 @@
 
             display: flex;
             flex-direction: column;
-            gap: clamp(400px, 30vw, 40vw);
+            gap: clamp(400px, 28vw, 28vw);
+
+            max-width: 100%;
+            overflow: hidden;
+
 
         }
 
         .page-bg svg {
             width: clamp(100px, 100vw, 200vw);
-            
+
         }
 
         /* .landing-sections {
@@ -59,30 +79,56 @@
             gap: clamp(200px, 20vw, 25vw);
 
             margin-top: -100px;
+
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        @media (min-height: 1000px) {
+            #main-section {
+                font-size: clamp(4vw, 7vw, 10vw) !important;
+            }
         }
 
         @media (max-width: 1000px) {
-      
+
+            /* html {
+                max-width: 1000px;
+            } */
             .page-bg svg {
                 /* width: clamp(200px, 100vw, 200vw); */
-                /* width: 150vw; */
-                max-width: 1000px;
+                width: 120vw;
+                /* max-width: 1000px; */
 
             }
+
+        }
+
+        @media (max-width: 400px) {
+            #all-sections {
+                margin-top: 0vw;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
 
             .page-bg {
+                width: 140vw;
 
-                gap: clamp(200px, 80vw, 120vw);
+                gap: clamp(200px, 80vw, 80vw);
 
             }
+
         }
 
         @media (max-width: 600px) {
-            .page-bg {
-
-                gap: 150vw;
-
+            #all-sections {
+                margin-top: -15vw;
             }
+
         }
     </style>
 
@@ -110,7 +156,7 @@
             color: white;
             font-size: clamp(14px, 1.1vw, 2vw);
 
-            padding: 35px 80px 0 80px;
+            padding: 35px 80px 20px 80px;
             -webkit-animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
@@ -172,13 +218,12 @@
             height: 0;
             background-color: white;
             overflow: hidden;
-            transition: height 0.5s ease;
+            /* transition: height 0.5s ease; */
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             z-index: 10000;
-            /* Adjust the z-index value */
             display: none;
         }
 
@@ -212,13 +257,14 @@
         }
 
 
+
         #showCover {
             position: fixed;
             z-index: 100000;
             background: none;
             border: none;
             cursor: pointer;
-            margin: 40px 0 0 30px;
+            margin: 30px 0 0 30px;
             display: none;
         }
 
@@ -251,7 +297,7 @@
             }
 
             nav {
-                padding: 40px 40px 0 80px;
+                padding: 40px 40px 40px 80px;
 
             }
 
@@ -327,13 +373,8 @@
             </li> -->
             </ul>
 
-            <div class="nav-right" id="register" style="display: hidden;">
-                {% if user_exist %}
-                <a href="/cases">Register</a>
-                {% else %}
-                <a href="/login">Register</a>
-                {% endif %}
-
+            <div class="nav-right" id="register">
+                <a href="/register">Register</a>
             </div>
         </nav>
 
@@ -374,27 +415,29 @@
         function updateMenuVisibility() {
             if (window.innerWidth > 768) {
                 coverDiv.classList.remove('active');
-                registerText.style.display = "block";
+                // registerText.style.display = "block";
                 iconImg.src = "{% static 'img\burger_icon1.png' %}";
-            } else {
-                if (coverDiv.classList.contains('active')) {
-                    registerText.style.display = "none";
-                    mainSec.style.opacity = "0";
-                }
             }
         }
 
         showCoverButton.addEventListener('click', () => {
             coverDiv.classList.toggle('active');
             iconImg.src = coverDiv.classList.contains('active') ? "{% static 'img\\x_icon.svg' %}" : "{% static 'img\burger_icon1.png' %}";
-            coverDiv.classList.contains('active') ? registerText.style.display = "none" : registerText.style.display = "block";
+
+            // if (window.getComputedStyle(registerText).display === "none") {
+            //     registerText.style.display = "block";
+            // } else {
+            //     registerText.style.display = "none";
+
+            // }
             // coverDiv.classList.contains('active') ? mainSec.style.opacity = "0" : mainSec.style.opacity = "1";
 
         });
+   
 
         menuItems.forEach(item => {
             item.addEventListener('click', (event) => {
-                registerText.style.display = "block";
+                // registerText.style.display = "block";
                 iconImg.src = "{% static 'img\\burger_icon1.png' %";
 
                 event.preventDefault();
@@ -416,35 +459,38 @@
     </script>
     <div id="background-style">
         <div class="page-bg">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800" opacity="0.71">
-                <defs>
-                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="vvvortex-grad">
-                        <stop stop-color="hsl(206, 75%, 49%)" stop-opacity="1" offset="0%"></stop>
-                        <stop stop-color="hsl(331, 90%, 56%)" stop-opacity="1" offset="100%"></stop>
-                    </linearGradient>
-                </defs>
-                <g stroke="url(#vvvortex-grad)" fill="none" stroke-linecap="round">
-                    <circle r="351" cx="400" cy="400" stroke-width="13" stroke-dasharray="26 44" stroke-dashoffset="25"
-                        transform="rotate(330, 400, 400)" opacity="0.83"></circle>
-                    <circle r="312" cx="400" cy="400" stroke-width="12" stroke-dasharray="51 18" stroke-dashoffset="25"
-                        transform="rotate(301, 400, 400)" opacity="0.63"></circle>
-                    <circle r="273" cx="400" cy="400" stroke-width="12" stroke-dasharray="51 21" stroke-dashoffset="25"
-                        transform="rotate(247, 400, 400)" opacity="0.53"></circle>
-                    <circle r="234" cx="400" cy="400" stroke-width="11" stroke-dasharray="46 19" stroke-dashoffset="25"
-                        transform="rotate(332, 400, 400)" opacity="0.36"></circle>
-                    <circle r="195" cx="400" cy="400" stroke-width="10" stroke-dasharray="32 48" stroke-dashoffset="25"
-                        transform="rotate(249, 400, 400)" opacity="0.31"></circle>
-                    <circle r="156" cx="400" cy="400" stroke-width="9" stroke-dasharray="22 13" stroke-dashoffset="25"
-                        transform="rotate(287, 400, 400)" opacity="0.14"></circle>
-                    <circle r="117" cx="400" cy="400" stroke-width="9" stroke-dasharray="35 18" stroke-dashoffset="25"
-                        transform="rotate(298, 400, 400)" opacity="0.63"></circle>
-                    <circle r="78" cx="400" cy="400" stroke-width="8" stroke-dasharray="26 42" stroke-dashoffset="25"
-                        transform="rotate(254, 400, 400)" opacity="0.86"></circle>
-                    <circle r="39" cx="400" cy="400" stroke-width="7" stroke-dasharray="34 52" stroke-dashoffset="25"
-                        transform="rotate(32, 400, 400)" opacity="0.95"></circle>
-                </g>
-            </svg>
+            <div class="svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800" opacity="0.71">
+                    <defs>
+                        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="vvvortex-grad">
+                            <stop stop-color="hsl(206, 75%, 49%)" stop-opacity="1" offset="0%"></stop>
+                            <stop stop-color="hsl(331, 90%, 56%)" stop-opacity="1" offset="100%"></stop>
+                        </linearGradient>
+                    </defs>
+                    <g stroke="url(#vvvortex-grad)" fill="none" stroke-linecap="round">
+                        <circle r="351" cx="400" cy="400" stroke-width="13" stroke-dasharray="26 44"
+                            stroke-dashoffset="25" transform="rotate(330, 400, 400)" opacity="0.83"></circle>
+                        <circle r="312" cx="400" cy="400" stroke-width="12" stroke-dasharray="51 18"
+                            stroke-dashoffset="25" transform="rotate(301, 400, 400)" opacity="0.63"></circle>
+                        <circle r="273" cx="400" cy="400" stroke-width="12" stroke-dasharray="51 21"
+                            stroke-dashoffset="25" transform="rotate(247, 400, 400)" opacity="0.53"></circle>
+                        <circle r="234" cx="400" cy="400" stroke-width="11" stroke-dasharray="46 19"
+                            stroke-dashoffset="25" transform="rotate(332, 400, 400)" opacity="0.36"></circle>
+                        <circle r="195" cx="400" cy="400" stroke-width="10" stroke-dasharray="32 48"
+                            stroke-dashoffset="25" transform="rotate(249, 400, 400)" opacity="0.31"></circle>
+                        <circle r="156" cx="400" cy="400" stroke-width="9" stroke-dasharray="22 13"
+                            stroke-dashoffset="25" transform="rotate(287, 400, 400)" opacity="0.14"></circle>
+                        <circle r="117" cx="400" cy="400" stroke-width="9" stroke-dasharray="35 18"
+                            stroke-dashoffset="25" transform="rotate(298, 400, 400)" opacity="0.63"></circle>
+                        <circle r="78" cx="400" cy="400" stroke-width="8" stroke-dasharray="26 42"
+                            stroke-dashoffset="25" transform="rotate(254, 400, 400)" opacity="0.86"></circle>
+                        <circle r="39" cx="400" cy="400" stroke-width="7" stroke-dasharray="34 52"
+                            stroke-dashoffset="25" transform="rotate(32, 400, 400)" opacity="0.95"></circle>
+                    </g>
+                </svg>
+            </div>
+
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800" opacity="0.43">
                 <defs>
@@ -628,10 +674,11 @@
                     </path>
                     <path d="M 0 66 Q 355.5 400 711 400 Q 1066.5 400 1422 66" stroke-dasharray="28 12" opacity="0.41">
                     </path>
-                    <path d="M 0 44 Q 355.5 400 711 400 Q 1066.5 400 1422 44" stroke-dasharray="16 1" opacity="0.57"></path>
+                    <path d="M 0 44 Q 355.5 400 711 400 Q 1066.5 400 1422 44" stroke-dasharray="16 1" opacity="0.57">
+                    </path>
                 </g>
             </svg>
-    
+
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800">
                 <defs>
@@ -766,28 +813,18 @@
                 </g>
             </svg>
             <div>
-    
-    
+
+
             </div>
-    
-    
+
+
         </div>
     </div>
 
 
 
 
-    <script>
-        const scrollButton = document.getElementById('scroll_down');
-        const targetSection = document.getElementById('about-section');
 
-        // Add a click event listener to the button
-        scrollButton.addEventListener('click', function () {
-            // Scroll to the target section
-            targetSection.scrollIntoView({ behavior: 'smooth' }); // You can use 'auto' instead of 'smooth' for an instant scroll
-        });
-
-    </script>
 
 
     <style>
@@ -887,7 +924,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 4vw;
+            gap: clamp(50px, 8vw, 10vw);
             /* margin-top: -150px; */
             -webkit-animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: slide-in-bottom 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -924,7 +961,7 @@
         @media (max-width: 500px) {
             .about-img img {
                 border-radius: 20px;
-                width: clamp(150px, 70vw, 100vw);
+                width: clamp(350px, 70vw, 100vw);
             }
 
             .about-right h1 {
@@ -941,9 +978,10 @@
 
             .about-right p {
 
-                font-size: clamp(12px, 3vw, 4vw);
+                font-size: clamp(16px, 3vw, 4vw);
 
-                width: 70vw;
+                /* text-align: left; */
+                width: 80vw;
 
             }
 
@@ -962,6 +1000,7 @@
         }
 
         .cases-section-title {
+            padding-top: 10px;
             font-family: "HackLogo";
             font-size: clamp(35px, 3vw, 8vw);
             font-style: normal;
@@ -1141,18 +1180,7 @@
     </style>
 
 
-    <style>
-        #main-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'HackLogo';
-            height: clamp(70vh, 50vw, 100vh);
-            color: white;
-            font-size: clamp(30px, 4.5vw, 6vw);
-        }
-    </style>
+
 
     <div id="main-section">
         <h1>
@@ -1180,7 +1208,8 @@
                         through
                         the
                         collaboration of two clubs: CLICQ Club and Pro-C Club, with the primary objective of providing
-                        participants with practical exposure to real-world challenges, enabling them to tackle authentic
+                        participants<br><br> with practical exposure to real-world challenges, enabling them to tackle
+                        authentic
                         problems and refine their problem-solving skills, with a focus on exploring problem-solving
                         through
                         the
@@ -1292,6 +1321,7 @@
             }
 
             .prizes-section-title {
+                padding-top: 20px;
                 font-family: "HackLogo";
                 font-size: clamp(35px, 3vw, 8vw);
                 font-style: normal;
@@ -1366,7 +1396,7 @@
 
             #prizes-container h3 {
                 color: #1ACFE2;
-                font-size: clamp(35px, 2vw, 5vw);
+                font-size: clamp(30px, 2vw, 5vw);
                 font-weight: 700;
                 margin: 0;
                 font-family: "HackLogo";
@@ -1477,6 +1507,9 @@
                 justify-content: center;
                 align-items: center;
                 gap: 60px;
+
+                max-width: 100%;
+                overflow: hidden;
             }
 
             .timeline-items-container {
@@ -1531,7 +1564,7 @@
             .timeline-item-content h5 {
                 color: #FFF;
                 font-family: Helvetica;
-                font-size: clamp(17.444px, 1vw, 5vw);
+                font-size: clamp(15px, 1vw, 5vw);
                 font-style: normal;
                 font-weight: 500;
                 line-height: normal;
@@ -1573,6 +1606,8 @@
             }
 
             .timeline-section-title {
+                padding-top: 20px;
+
                 font-family: "HackLogo";
                 font-size: clamp(35px, 3vw, 8vw);
                 font-style: normal;
@@ -1968,6 +2003,7 @@
             }
 
             .prizes-section-title {
+                padding-top: 20px;
 
                 font-family: "HackLogo";
                 font-size: clamp(35px, 3vw, 8vw);
@@ -2212,6 +2248,8 @@
             }
 
             .FAQ-section-title {
+                padding-top: 20px;
+
                 font-family: "HackLogo";
                 font-size: clamp(35px, 3vw, 8vw);
                 font-style: normal;
@@ -2453,7 +2491,7 @@
         <style>
             .countdown-num {
                 font-family: Helvetica;
-                font-size: clamp(1.2vw, 6vw, 12vw);
+                font-size: clamp(.6vw, 6vw, 12vw);
                 font-style: normal;
                 font-weight: 700;
                 padding-left: 15px;
@@ -2502,7 +2540,7 @@
 
             .date-title {
                 color: #FFF !important;
-                font-size: clamp(20px, 1.3vw, 2.5vw);
+                font-size: clamp(15px, 1.3vw, 2.5vw);
                 font-style: normal;
                 font-weight: 800;
                 line-height: normal;
@@ -2567,8 +2605,10 @@
             }
 
             .countdown-section-title {
+                padding-top: 20px;
+
                 font-family: "HackLogo";
-                font-size: clamp(30px, 3vw, 8vw);
+                font-size: clamp(25px, 3vw, 8vw);
                 font-style: normal;
                 font-weight: 700;
                 line-height: normal;
