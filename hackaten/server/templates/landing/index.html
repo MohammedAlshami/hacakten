@@ -81,7 +81,7 @@
             margin-top: -100px;
 
             max-width: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         @media (min-height: 1000px) {
@@ -360,7 +360,7 @@
                 <li><a href="#cases-section">Case Studies</a></li>
                 <li><a href="#prizes-section">Prizes</a></li>
                 <li><a href="#timeline-section">Timeline</a></li>
-                <li><a href="#faq-section" class="dropbtn">FAQ</a></li>
+                <li><a href="#FAQ-section" class="dropbtn">FAQ</a></li>
 
                 <!-- <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">More</a>
@@ -388,9 +388,9 @@
                     <li><a href="#cases-section" class="menu-item">Case Studies</a></li>
                     <li><a href="#prize-section" class="menu-item">Prizes</a></li>
                     <li><a href="#timeline-section" class="menu-item">Timeline</a></li>
-                    <li><a href="#faq-section" class="menu-item">FAQ</a></li>
+                    <li><a href="#FAQ-section" class="menu-item">FAQ</a></li>
 
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="javascript:void(0)" class="dropbtn" style="color: black;">More</a>
                         <div class="dropdown-content cover-sub">
                             <a href="#faq-section">Team</a>
@@ -398,7 +398,7 @@
                             <a href="#faq-section-2">Speakers</a>
                             <a href="#faq-section-2">Judges</a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -433,7 +433,7 @@
             // coverDiv.classList.contains('active') ? mainSec.style.opacity = "0" : mainSec.style.opacity = "1";
 
         });
-   
+
 
         menuItems.forEach(item => {
             item.addEventListener('click', (event) => {
@@ -1502,6 +1502,8 @@
 
         <style>
             .timeline-section-container {
+                padding: 50px;
+
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -1509,15 +1511,18 @@
                 gap: 60px;
 
                 max-width: 100%;
-                overflow: hidden;
+                overflow-x: hidden;
+
             }
 
             .timeline-items-container {
+
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
+
 
             }
 
@@ -1763,6 +1768,22 @@
             /********* Fonts Face CSS End **********/
 
             /******* Common Element CSS Start ******/
+
+            .item {
+                transition: transform 0.3s, box-shadow 0.3s;
+
+
+                /* Set the width to 20vw */
+            }
+
+            .item:hover {
+                transform: translateY(-10px);
+                /* Move the container up */
+                box-shadow: 0 0 20px rgba(6, 193, 235, 0.7);
+                border-radius: 20px;
+
+                /* Add a pink glowy shadow */
+            }
 
 
             .clear {
@@ -2179,12 +2200,25 @@
                 gap: 20px;
             }
 
+
+
             .FAQ-item-p {
                 background-color: #11141B;
                 display: flex;
                 flex-direction: column;
                 padding: 0px 20px 0px 40px;
                 border-radius: 15px;
+                transition: transform 0.3s, box-shadow 0.3s;
+
+            }
+
+            .FAQ-item-p:hover {
+                transform: translateY(-10px);
+                /* Move the container up */
+                box-shadow: 0 0 20px rgba(6, 193, 235, 0.7);
+                border-radius: 20px;
+
+                /* Add a pink glowy shadow */
             }
 
             .FAQ-item-answer {
@@ -2216,6 +2250,7 @@
                 align-items: center;
                 width: 40vw;
             }
+
 
             .FAQ-item-img img {
                 width: 45px;
@@ -2789,6 +2824,7 @@
                 }
             }
 
+       
             @media (max-width: 500px) {
                 .footer-socials {
                     display: flex;
@@ -2895,6 +2931,12 @@
 
                 }
             }
+
+            #call-action-btn a {
+                text-decoration: none;
+                color: white;
+
+            }
         </style>
 
         <section id="footer-socials">
@@ -2906,7 +2948,9 @@
                 </h1>
 
                 <div id="call-action-btn">
-                    <h2>Join Now</h2>
+                    <a href="/register">
+                        <h2>Join Now</h2>
+                    </a>
                 </div>
 
 
@@ -2925,9 +2969,9 @@
                     <a href="https://twitter.com/hackaten"><img src="{% static 'img\twitter.svg' %}" /></a>
                 </div>
 
-                <div class="footer-socials-container">
-                    <a href="https://www.linkedin.com/in/hackaten-uniten-1aa056287/"><img
-                            src="{% static 'img\linkedin.svg' %}" /></a>
+                <div class="footer-socials-container ">
+                    <a href="https://www.linkedin.com/in/hackaten-uniten-1aa056287/" ><img
+                            src="{% static 'img\linkedin.svg' %}"/></a>
                 </div>
             </div>
             <!-- <svg id="footer-bg" xmlns="http://www.w3.org/2000/svg" version="1.1"
