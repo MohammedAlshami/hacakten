@@ -25,7 +25,7 @@
 
         .main-form {
             margin: 150px auto 100px auto;
-            width: clamp(30vw, 50vw, 45vw);
+            width: clamp(600px, 50vw, 45vw);
 
             border: 3px solid rgba(255, 255, 255, 0.2);
             /* Transparent border for a glass effect */
@@ -125,7 +125,7 @@
             transform: scale(1.5);
         }
 
-        @media (max-width: 1500px) {
+        @media (max-width: 700px) {
             .main-form {
                 margin: clamp(110px, 10vw, 200px) auto 100px auto;
                 width: 90vw;
@@ -226,6 +226,14 @@
         .modal-body {
             height: 20vw;
             overflow-y: scroll;
+        }
+
+        @media (max-width: 1200px) {
+            .svg-bg {
+                margin-top: -34vw;
+
+            }
+
         }
 
         @media (max-width: 800px) {
