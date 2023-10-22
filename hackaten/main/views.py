@@ -4,5 +4,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'landing/index.html')
-def sub(request):
+
+def register_option(request):
     return render(request, 'signup/index.html')
