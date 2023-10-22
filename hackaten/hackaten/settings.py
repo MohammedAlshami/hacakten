@@ -130,6 +130,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+TEMPLATE_LOADERS = (
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
+)
 TEMPLATE_DIRS = [findMyWay("templates")]
 
 # Static files (CSS, JavaScript, Images)
