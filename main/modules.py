@@ -144,41 +144,26 @@ class Firebase:
 
         resume
         if user_id:
-            # Upload a PDF file to storage and get the file path
-            file_path = (
-                r"D:\download_1\screencapture-hackaten-2023-10-05-10_08_16 (1).pdf"
-            )
-            folder_path = rf"hack10/samples/{uuid.uuid4()}.pdf"
-            try:
-                storage.child(folder_path).put(file_path)
-                file_url = storage.child(folder_path).get_url(None)
-            except Exception as e:
-                print("File upload failed:", str(e))
-                file_url = None
-                return None
+            user_info = {
+                "user_id": user_id,
+                "email": email,
+                "first_name": first_name,
+                "last_name": last_name,
+                "university": university,
+                "major": major,
+                "age": age,
+                "discord_tag": discord_tag,
+                "email": email,
+                "join_reason": join_reason,
+                "resume_path": resume,
+                "local": isLocal 
+            }
+            db.child("hack10User").child(user_id).set(user_info)
+            print("User registered successfully with ID:", user_id)
 
-            if file_url:
-                # Create a record with user information
-                user_info = {
-                    "user_id": user_id,
-                    "email": email,
-                    "first_name": first_name,
-                    "last_name": last_name,
-                    "university": university,
-                    "major": major,
-                    "age": age,
-                    "discord_tag": discord_tag,
-                    "email": email,
-                    "join_reason": join_reason,
-                    "resume_path": resume,
-                    "local": isLocal 
-                }
-                db.child("hack10User").child(user_id).set(user_info)
-                print("User registered successfully with ID:", user_id)
-
-                # sending email verification
-                # auth.send_email_verification(user_token)
-                return generate_jwt_token(email, SECRET_KEY)
+            # sending email verification
+            # auth.send_email_verification(user_token)
+            return generate_jwt_token(email, SECRET_KEY)
         return None
 
     def create_group(self, user_id, group_name):
