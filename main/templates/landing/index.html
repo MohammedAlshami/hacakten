@@ -352,7 +352,8 @@
         <nav>
             <div class="nav-left">
                 <div class="nav-logo" id="logo">
-                    <img src="{% static 'img\hack_logo.png' %}" alt="Hack Logo" width="40" />
+                    <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/hack_logo.png" alt="Hack Logo"
+                        width="40" />
                 </div>
             </div>
             <ul class="nav-center">
@@ -380,7 +381,7 @@
 
         <div class="min-nav">
             <button id="showCover" class="menu-icon">
-                <img src="{% static 'img\burger_icon1.png' %}" alt="Menu">
+                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/nav/burger_icon1.png" alt="Menu">
             </button>
             <div id="cover">
                 <ul id="menu">
@@ -416,13 +417,13 @@
             if (window.innerWidth > 768) {
                 coverDiv.classList.remove('active');
                 // registerText.style.display = "block";
-                iconImg.src = "{% static 'img\burger_icon1.png' %}";
+                iconImg.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/nav/burger_icon1.png";
             }
         }
 
         showCoverButton.addEventListener('click', () => {
             coverDiv.classList.toggle('active');
-            iconImg.src = coverDiv.classList.contains('active') ? "{% static 'img\\x_icon.svg' %}" : "{% static 'img\burger_icon1.png' %}";
+            iconImg.src = coverDiv.classList.contains('active') ? "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/nav/x_icon.svg" : "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/nav/burger_icon1.png";
 
             // if (window.getComputedStyle(registerText).display === "none") {
             //     registerText.style.display = "block";
@@ -438,7 +439,7 @@
         menuItems.forEach(item => {
             item.addEventListener('click', (event) => {
                 // registerText.style.display = "block";
-                iconImg.src = "{% static 'img\\burger_icon1.png' %";
+                iconImg.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/nav/burger_icon1.png";
 
                 event.preventDefault();
                 const targetSectionId = item.getAttribute('href');
@@ -1193,8 +1194,8 @@
 
             <div class="about-container">
                 <div class="about-img">
-                    <img data-src="{% static 'img\cases_bg_compressed' %}" src="{% static 'img\about_bh.jpg' %}"
-                        class="lazyload" alt="Image 1" loading="lazy" />
+                    <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/about_bh.jpg" class="lazyload"
+                        alt="Image 1" loading="lazy" />
                 </div>
                 <div class="about-right">
                     <h1>
@@ -1234,7 +1235,7 @@
             <div class="case-studies-container">
 
                 <div class="image-container">
-                    <img src="{% static 'img\cases_bg.webp' %}">
+                    <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/cases_bg.webp">
                 </div>
 
                 <div class="case-studies-items-container-parent">
@@ -1263,7 +1264,8 @@
                                 Entertainment
                             </h3>
                             <p>
-                                Design an AI-powered entertainment experience that captivates and delights users, from virtual reality games to immersive storytelling.
+                                Design an AI-powered entertainment experience that captivates and delights users, from
+                                virtual reality games to immersive storytelling.
                             </p>
                         </div>
                     </div>
@@ -1667,11 +1669,12 @@
         <section id="timeline-section">
             <h2 class="timeline-section-title">Timeline</h2>
             <div class="timeline-section-container">
-                <img src="{% static 'img/timeline_sidebar.svg' %}" class="timeline-sidebar">
+                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/timeline_sidebar.svg"
+                    class="timeline-sidebar">
                 <div class="timeline-items-container">
                     <div class="timeline-item">
                         <div class="timeline-item-img">
-                            <img src="{% static 'img/calendar_icon.svg' %}" />
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/calendar_icon.svg" />
                         </div>
                         <div class="timeline-item-content">
                             <h5>Registration</h5>
@@ -1681,7 +1684,7 @@
                     <div class="timeline-items-container">
                         <div class="timeline-item">
                             <div class="timeline-item-img">
-                                <img src="{% static 'img/calendar_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/calendar_icon.svg" />
                             </div>
                             <div class="timeline-item-content">
                                 <h5>Preliminary Round</h5>
@@ -1691,7 +1694,7 @@
                         <div class="timeline-items-container">
                             <div class="timeline-item">
                                 <div class="timeline-item-img">
-                                    <img src="{% static 'img/calendar_icon.svg' %}" />
+                                    <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/calendar_icon.svg" />
                                 </div>
                                 <div class="timeline-item-content">
                                     <h5>Finalists Announcement</h5> <!-- Typo fixed here -->
@@ -1701,7 +1704,8 @@
                             <div class="timeline-items-container">
                                 <div class="timeline-item">
                                     <div class="timeline-item-img">
-                                        <img src="{% static 'img/calendar_icon.svg' %}" />
+                                        <img
+                                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/calendar_icon.svg" />
                                     </div>
                                     <div class="timeline-item-content">
                                         <h5>Finals</h5> <!-- Typo fixed here -->
@@ -1710,7 +1714,8 @@
                                 </div>
                                 <div class="timeline-item">
                                     <div class="timeline-item-img">
-                                        <img src="{% static 'img/calendar_icon.svg' %}" />
+                                        <img
+                                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/calendar_icon.svg" />
                                     </div>
                                     <div class="timeline-item-content">
                                         <h5>Closing Ceremony</h5> <!-- Typo fixed here -->
@@ -2176,6 +2181,250 @@
         {% load static %}
 
         <style>
+            #partners-section {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 80px;
+            }
+
+            .partners-section-title {
+                font-family: Helvetica;
+                font-size: clamp(35px, 3vw, 8vw);
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                background: linear-gradient(90deg, #EB06C7 0.04%, #02E5E5 95.27%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .partners-items-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 50px;
+            }
+
+            .partners-item {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .partners-item h2 {
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 600;
+                font-size: 19px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .partners-item img {
+                border-radius: 20px;
+                margin: 0;
+                width: 10vw;
+            }
+        </style>
+        <style>
+            .partners-container {
+                height: clamp(120px, 16vw, 30vw);
+                width: clamp(120px, 18vw, 35vw);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                transition: transform 0.3s, box-shadow 0.3s;
+
+            }
+
+
+
+            .partners-container div {
+                height: 100%;
+                width: 100%;
+                background: #11141B;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                position: relative;
+                border: 1px solid transparent;
+                border-radius: 20px;
+                background-clip: padding-box;
+
+            }
+
+            .partners-container:hover {
+                transform: translateY(-10px);
+                cursor: pointer;
+
+            }
+
+            .partners-container div:hover {
+                /* transform: translateY(-10px); */
+                /* Move the container up */
+                box-shadow: 0 0 20px rgba(0, 0, 255, 0.5), 0 0 10px rgba(235, 6, 199, 0.7);
+                /* Add a pink glowy shadow */
+            }
+
+            .partners-container div::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                bottom: -2px;
+                left: -2px;
+                right: -2px;
+                background: linear-gradient(170deg, #EB06C7 25%, #02E5E5 105.27%);
+                z-index: -1;
+                border-radius: 20px;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            @media (max-width: 700px) {
+                .partners-items-container {
+                    flex-direction: column;
+                }
+
+                .partners-container {
+                    width: 80vw;
+                    height: 60vw;
+                }
+
+                .partners-container img {
+                    width: 40vw;
+
+                }
+            }
+        </style>
+
+        <div id="partners-section">
+            <h2 class="partners-section-title">
+                Partners
+            </h2>
+
+            <div class="partners-items-container">
+
+
+                <a href=" https://www.instagram.com/agentsoftech.tlc">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/aot_taylor.jpg" />
+                            <h2>
+                                AOT Taylor's
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/dnccsemarang/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/dncc.jpg" />
+                            <h2>
+                                DNCC
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/gdsc.taylors/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/gdcs_tayler.jpg" />
+                            <h2>
+                                GDSC Taylor's
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/gdsc_unhas/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/gdsc_unhas.jpg" />
+                            <h2>
+                                GDSC UNHAS
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+            <div class="partners-items-container">
+
+                <a href="https://www.instagram.com/mumtec.monash/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/MUMTEC.jpg" />
+
+                            <h2>
+                                MUMTEC
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/pccpolines/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/pccpolines.jpg" />
+                            <h2>
+                                PCCPOLINES
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/pekomum/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/PEKOM.jpg" />
+                            <h2>
+                                PEKOM
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/petakom_umpsa/">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/petakom_umpsa.jpg" />
+                            <h2>
+                                PETAKOM
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="partners-items-container">
+
+                <a href="https://www.instagram.com/amccamikom">
+                    <div class="partners-container">
+                        <div class="partners-item">
+                            <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/partners/amcc.jpg" />
+                            <h2>
+                                AMCC
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+
+
+
+            </div>
+        </div>
+        {% load static %}
+
+        <style>
             .FAQ-section-container {
                 display: flex;
                 flex-direction: row;
@@ -2354,7 +2603,7 @@
                                 <h5>What is Hack@10?</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">Hack@10 is an annual hackathon that started in 2012 and is set to
@@ -2370,7 +2619,7 @@
                                 <h5>How can I participate? 🤝</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">You can participate by registering through the provided registration
@@ -2385,10 +2634,11 @@
                                 <h5>Is it only for Malaysians?</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
-                        <p class="FAQ-item-answer">Nope, this competition is open to participants of all nationalities.</p>
+                        <p class="FAQ-item-answer">Nope, this competition is open to participants of all nationalities.
+                        </p>
                     </div>
                     <div class="FAQ-item-p">
                         <div class="FAQ-item">
@@ -2396,7 +2646,7 @@
                                 <h5>Can my team have members from different universities?</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">Yes, your team can include members from different universities. </p>
@@ -2407,7 +2657,7 @@
                                 <h5>I'm not physically in Malaysia. Can I still participate? </h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">No, we made sure to provide full virtual support for the event so
@@ -2420,7 +2670,7 @@
                                 <h5>Is there a registration fee? 💰</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">No! participation is totally free!📈📈</p>
@@ -2434,7 +2684,7 @@
                                 </h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">You can participate individually or in a team. A team should have at
@@ -2447,7 +2697,7 @@
                                 <h5>When and where is the hackathon taking place?</h5>
                             </div>
                             <div class="FAQ-item-img" onclick="toggleAnswer(this)">
-                                <img src="{% static 'img/add_btn_icon.svg' %}" />
+                                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                             </div>
                         </div>
                         <p class="FAQ-item-answer">
@@ -2469,9 +2719,9 @@
                 parent.classList.toggle('show');
 
                 if (parent.classList.contains('show')) {
-                    image.src = "{% static 'img/remove_btn_icon.svg' %}"; // Change to minus icon
+                    image.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/remove_btn_icon.svg"; // Change to minus icon
                 } else {
-                    image.src = "{% static 'img/add_btn_icon.svg' %}"; // Change back to add icon
+                    image.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg"; // Change back to add icon
                 }
             }
         </script>
@@ -2912,41 +3162,23 @@
 
             <div class="footer-socials">
                 <div class="footer-socials-container">
-                    <a href="https://www.tiktok.com/@hackaten"><img src="{% static 'img\tiktok.svg' %}" /></a>
+                    <a href="https://www.tiktok.com/@hackaten"><img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/socials/tiktok.svg" /></a>
 
                     <a href="https://www.facebook.com/profile.php?id=100095414205084"><img
-                            src="{% static 'img\facebook.svg' %}" /></a>
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/socials/facebook.svg" /></a>
                 </div>
 
                 <div class="footer-socials-container">
-                    <a href="https://www.instagram.com/hackaten"> <img src="{% static 'img\instagram.svg' %}" /></a>
-                    <a href="https://twitter.com/hackaten"><img src="{% static 'img\twitter.svg' %}" /></a>
+                    <a href="https://www.instagram.com/hackaten"> <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/socials/instagram.svg" /></a>
+                    <a href="https://twitter.com/hackaten"><img src="twitter.svg" /></a>
                 </div>
 
                 <div class="footer-socials-container ">
                     <a href="https://www.linkedin.com/company/hack-10/"><img
-                            src="{% static 'img\linkedin.svg' %}" /></a>
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/socials/linkedin.svg" /></a>
                 </div>
             </div>
-            <!-- <svg id="footer-bg" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 450">
-                <defs>
-                    <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%"
-                        filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB">
-                        <feGaussianBlur stdDeviation="96" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic"
-                            edgeMode="none" result="blur"></feGaussianBlur>
-                    </filter>
-                </defs>
-                <g filter="url(#bbblurry-filter)">
-                    <ellipse rx="150" ry="150" cx="788.2318115234375" cy="434.7865295410156"
-                        fill="hsla(304, 100%, 50%, 1.00)"></ellipse>
-                    <ellipse rx="150" ry="150" cx="68.21124114389855" cy="460.59523181584615"
-                        fill="hsla(167, 72%, 60%, 1.00)"></ellipse>
-                    <ellipse rx="150" ry="150" cx="431.4640836997045" cy="729.306959003864"
-                        fill="hsla(290, 87%, 47%, 1.00)"></ellipse>
-                </g>
-            </svg> -->
+ 
         </section>
     </div>
 </body>
