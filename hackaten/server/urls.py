@@ -4,7 +4,7 @@ from django.conf.urls import handler404
 
 
 urlpatterns = [
-    path("", views.landing_page),
+    path("", views.register_options),
     path("register/local", views.signup_local),
     path("register/sent", views.signup_sent),
     path("register/international", views.signup_international),
