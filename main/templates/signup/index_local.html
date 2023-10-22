@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration</title>
+    <link rel="icon" type="image/x-icon" href="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/hack_logo.png">
     <link rel="stylesheet" href="{% static 'css/signup/register.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -222,7 +223,29 @@
 
         }
 
+        .modal-body {
+            height: 20vw;
+            overflow-y: scroll;
+        }
+
         @media (max-width: 800px) {
+            .modal-body {
+                height: 50vw;
+                overflow-y: scroll;
+            }
+
+            .svg-bg {
+                margin-top: -34vw;
+
+            }
+        }
+
+        @media (max-width: 500px) {
+            .modal-body {
+                height: 70vw;
+                overflow-y: scroll;
+            }
+
             .svg-bg {
                 margin-top: -34vw;
 
@@ -244,7 +267,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="height: 30vw; overflow-y: scroll;">
+                <div class="modal-body">
                     <ol>
                         <li><strong>Registration</strong>
                             <ol>
@@ -869,15 +892,21 @@
             <div class="FAQ-item-p" onclick="toggleAnswer(this)">
                 <div class="FAQ-item">
                     <div class="FAQ-item-content">
-                        <h5>Why is accessibility important for a website?</h5>
+                        <h5>How To Register?</h5>
                     </div>
                     <div class="FAQ-item-img">
                         <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                     </div>
                 </div>
-                <p class="FAQ-item-answer">Accessibility is important for a website because it ensures that people with
-                    disabilities can access and use the site, promoting inclusivity and equal access to information and
-                    services.</p>
+                <p class="FAQ-item-answer">
+
+                    1️⃣ Fill out the registration form on this page.<br><br>
+                    2️⃣ Join our Discord server, where you can find more information about the competition and
+                    connect with potential group members.<br><br>
+                    3️⃣ Once the competition begins, you'll gain access to the hackathon platform, where you can access
+                    case
+                    studies, create or join groups, and submit your project.
+                </p>
             </div>
 
             <script>
@@ -945,7 +974,7 @@
 
             <div style="display: flex; align-items: center; gap: 10px; margin-left: 3px;">
                 <input type="checkbox" id="myCheckbox">
-                <label for="myCheckbox" style="color:#A6A6A6; font-size: clamp(13px, 1.1vw, 2vw);">I agree to the
+                <label for="myCheckbox" style="color:#A6A6A6; font-size: clamp(17px, 1.1vw, 2vw);">I agree to the
                     <span style="color: #0198FF;"><a href="#" data-toggle="modal" data-target="#termsModal"> <span
                                 style="color: #0198FF;"><a href="#" data-toggle="modal" data-target="#rules-reg">Privacy
                                     Policy</a></span></label>
@@ -1124,7 +1153,7 @@
                     let error = null;
                     if (!firstName) {
                         firstNameInput.value = '';
-                        error_handling("First name Error");
+                        error_handling("First Name is required.");
                         return;
                     }
                     if (!lastName) {
