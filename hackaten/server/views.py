@@ -308,7 +308,7 @@ def register_options(request):
     # if session_auth:
     #     return HttpResponseRedirect("/hub")
 
-    return render(request, "signup\options.html")
+    return render(request, "landing\index.html")
 
 
 def grouping(request):
