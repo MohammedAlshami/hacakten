@@ -870,7 +870,7 @@
                         <h5>Why is accessibility important for a website?</h5>
                     </div>
                     <div class="FAQ-item-img">
-                        <img src="{% static 'img/add_btn_icon.svg' %}" />
+                        <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg" />
                     </div>
                 </div>
                 <p class="FAQ-item-answer">Accessibility is important for a website because it ensures that people with
@@ -887,9 +887,9 @@
                     parent.classList.toggle('show');
 
                     if (parent.classList.contains('show')) {
-                        image.src = "{% static 'img/remove_btn_icon.svg' %}"; // Change to minus icon
+                        image.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/remove_btn_icon.svg"; // Change to minus icon
                     } else {
-                        image.src = "{% static 'img/add_btn_icon.svg' %}"; // Change back to add icon
+                        image.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/add_btn_icon.svg"; // Change back to add icon
                     }
                 }
             </script>
@@ -928,7 +928,7 @@
                 <input type="text" placeholder="Why are you joining the event?" style="width: 100%;" id="join-reason">
             </div>
             <div class="upload" id="uploadDiv">
-                <img src="{% static 'img\signup_upload.svg' %}" id="upload_img1" />
+                <img src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/signup_upload.svg" id="upload_img1" />
 
                 <h3 id="resume-upload-text">Upload Your Resume (Optional)</h3>
                 <p style="color: white;">max: 2MB</p>
@@ -980,58 +980,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-        <script>
-            const showCoverButton = document.getElementById('showCover');
-            const registerText = document.getElementById("register");
-            const coverDiv = document.getElementById('cover');
-            const iconImg = showCoverButton.querySelector('img');
-            const menuItems = document.querySelectorAll('#menu li a');
-            const mainSec = document.getElementById("main-section");
-
-            function updateMenuVisibility() {
-                if (window.innerWidth > 768) {
-                    coverDiv.classList.remove('active');
-                    registerText.style.display = "block";
-                    iconImg.src = "{% static 'img/burger_icon1.png' %}";
-                } else {
-                    if (coverDiv.classList.contains('active')) {
-                        registerText.style.display = "none";
-                        mainSec.style.opacity = "0";
-                    }
-                }
-            }
-
-            showCoverButton.addEventListener('click', () => {
-                coverDiv.classList.toggle('active');
-                iconImg.src = coverDiv.classList.contains('active') ? "{% static 'images/x_icon.png' %}" : "{% static 'images/burger_icon1.png' %}";
-                coverDiv.classList.contains('active') ? registerText.style.display = "none" : registerText.style.display = "block";
-                // coverDiv.classList.contains('active') ? mainSec.style.opacity = "0" : mainSec.style.opacity = "1";
-
-            });
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', (event) => {
-                    registerText.style.display = "block";
-
-                    iconImg.src = "{% static 'img/burger_icon1.png' %}";
-
-                    event.preventDefault();
-                    const targetSectionId = item.getAttribute('href');
-                    coverDiv.classList.remove('active');
-                    setTimeout(() => {
-                        document.querySelector(targetSectionId).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }, 500); // Adjust delay based on your transition time
-                });
-            });
-
-            // Update menu visibility when the window is resized
-            window.addEventListener('resize', updateMenuVisibility);
-
-            // Initial call to update menu visibility on page load
-            updateMenuVisibility();
-        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <script>
@@ -1178,6 +1126,7 @@
                     formData.append('lastName', lastName);
                     formData.append('university', university);
                     formData.append('major', major);
+                    formData.append('type', "local");
                     formData.append('discordTag', discordTag);
                     formData.append('email', email);
                     formData.append('joinReason', joinReason);
@@ -1231,7 +1180,7 @@
                 resume_upload_text.innerHTML = "Your Resume is being Uploaded";
 
                 const resume_upload_img1 = document.getElementById("upload_img1");
-                resume_upload_img1.src = "{% static 'img/signup_upload.svg' %}";
+                resume_upload_img1.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/signup_upload.svg";
 
                 const ref = firebase.storage().ref();
                 const file = document.querySelector("#resume").files[0];
@@ -1265,7 +1214,8 @@
                             const resume_upload_div = document.getElementById("uploadDiv");
                             const resume_upload_img1 = document.getElementById("upload_img1");
 
-                            resume_upload_img1.src = "{% static 'img/pdf_blue_icon.svg' %}";
+                            resume_upload_img1.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/pdf_icon_white.svg";
+
 
                             resume_upload_text.style.color = "#ffffff";
                             resume_upload_text.innerHTML = "Your file has been uploaded";
