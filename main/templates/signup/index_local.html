@@ -963,7 +963,7 @@
 
                 <h3 id="resume-upload-text">Upload Your Resume (Optional)</h3>
                 <p style="color: white;">max: 2MB</p>
-                <input type="file" id="resume" style="display:none" />
+                <input type="file" id="resume" style="display:none" accept="application/pdf" />
                 <div id="progress">
                     <progress value="0" max="100"></progress>
                     <!-- <span id="progressText">0%</span> -->
@@ -993,9 +993,6 @@
 
 
 
-        <script>
-
-        </script>
 
         <script src="https://unpkg.com/filepond@4/dist/filepond.js"></script>
 
@@ -1016,6 +1013,17 @@
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
         <script>
+            function error_handling(error) {
+                const error_container = document.getElementById("signup-error"); // Find the target section
+                error_container.innerText = error;
+                error_container.style.display = "block";
+                if (error_container) {
+                    // Scroll to the target section smoothly
+                    error_container.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
             let file_url = "";
             const firebaseConfig = {
                 apiKey: "AIzaSyBLv1DiRB6egmpaoIKfjODXZF5fYheQKIM",
@@ -1030,14 +1038,26 @@
             firebase.initializeApp(firebaseConfig);
 
             function uploadImage() {
+
+                const ref = firebase.storage().ref().child("pdfs");
+                let file = document.querySelector("#resume").files[0];
+                const fi = document.getElementById('resume');
+                file = event.target.files[0];
+                if (fi) {
+                    const fsize = fi.files.item(0).size;
+                    const filesize = Math.round((fsize / 1024));
+
+                    if (filesize > 2500) {
+                        error_handling("Max File Size is 2MB.")
+                        return;
+                    }
+                }
                 const resume_upload_text = document.getElementById("resume-upload-text");
                 resume_upload_text.innerHTML = "Your Resume is being Uploaded";
 
                 const resume_upload_img1 = document.getElementById("upload_img1");
                 resume_upload_img1.src = "https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/signup_upload.svg";
 
-                const ref = firebase.storage().ref();
-                const file = document.querySelector("#resume").files[0];
                 const name = +new Date() + "-" + file.name;
                 const metadata = {
                     contentType: file.type
@@ -1109,17 +1129,7 @@
                 // Set the cookie
                 document.cookie = cookieString;
             }
-            function error_handling(error) {
-                const error_container = document.getElementById("signup-error"); // Find the target section
-                error_container.innerText = error;
-                error_container.style.display = "block";
-                if (error_container) {
-                    // Scroll to the target section smoothly
-                    error_container.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            }
+
             document.addEventListener('DOMContentLoaded', function () {
                 const formButton = document.querySelector('.form-btn');
                 formButton.addEventListener('click', function () {
