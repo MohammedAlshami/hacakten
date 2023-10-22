@@ -7,33 +7,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/signup/register.css' %}">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <!-- <link rel="stylesheet" href="css/nav.css"> -->
+    <!-- <link rel="stylesheet" href="css/register.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <link href="https://unpkg.com/filepond@4/dist/filepond.css" rel="stylesheet">
+
+    <script>
+        function deleteCookie(cookieName) {
+            // Set the expiration date to a past time (e.g., one second before the current time)
+            var expirationDate = new Date();
+            expirationDate.setSeconds(expirationDate.getSeconds() - 1);
+
+            // Set the cookie's expiration date to delete it
+            document.cookie = cookieName + "=; expires=" + expirationDate.toUTCString() + "; path=/";
+
+            // Note: You should also specify the same path and domain that were used when the cookie was originally set to ensure the correct cookie is deleted.
+        }
+        deleteCookie("session_auth");
+
+    </script>
     <style>
         body {
             background-color: black;
-            /* height: 150vh; */
-            scroll-behavior: smooth;
-            /* padding-left: 100vw;
-            padding-right: 100vw;
-            width: ; */
-        }
+            /* scroll-behavior: smooth; */
+            /* overflow-y: hidden; */
 
-        .main-form {
-            margin: 150px auto 100px auto;
-            width: clamp(30vw, 50vw, 45vw);
-
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            /* Transparent border for a glass effect */
-            border-radius: 10px;
-            padding: 50px;
-            background-color: rgba(17, 20, 27, 0);
-            /* Transparent background for glass effect */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(4px);
         }
 
         input {
@@ -47,10 +49,9 @@
             outline: none;
         }
 
-        input:focus {
-            /* border-color: #0198FF; */
+        /* input:focus {
             border: 2px solid #0198FF;
-        }
+        } */
 
         input[type=number]::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -71,48 +72,11 @@
             font-size: 17px;
             border-radius: 10px;
             margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .form-btn:hover {
             cursor: pointer;
-        }
-
-        .upload {
-            background-color: #333333;
-            border-radius: 10px;
-            width: 100%;
-            min-height: 100px;
-            /* border: 2px dotted #0198FF; */
-            margin: 20px auto;
-            text-align: center;
-            border: 2px dashed #0198FF;
-            padding: 30px 0;
-            transform: all 2s;
-        }
-
-        .upload img {
-            width: 70px;
-            filter: invert(47%) sepia(57%) saturate(5011%) hue-rotate(185deg) brightness(105%) contrast(103%);
-        }
-
-        .upload h3 {
-            margin-top: 30px;
-            color: #0198FF;
-            font-size: 20px;
-        }
-
-        .upload:hover {
-            cursor: pointer;
-            border: 2px dashed #ffffff;
-            background-color: #0198FF;
-        }
-
-        .upload:hover h3 {
-            color: white;
-        }
-
-        .upload:hover img {
-            filter: none;
         }
 
         .form-input {
@@ -120,58 +84,13 @@
             margin-bottom: 10px;
         }
 
-        input[type=checkbox] {
-            transform: scale(1.5);
+        .form-input input {
+            width: 100%;
         }
 
-        @media (max-width: 1500px) {
-            .main-form {
-                margin: clamp(110px, 10vw, 200px) auto 100px auto;
-                width: 90vw;
-            }
 
-            .upload:hover {
-                background-color: #333333;
-                border-radius: 10px;
-                width: 100%;
-                min-height: 100px;
-                /* border: 2px dotted #0198FF; */
-                margin: 20px auto;
-                text-align: center;
-                border: 2px dashed #0198FF;
-                padding: 30px 0;
-            }
-
-            .upload:hover h3 {
-                margin-top: 30px;
-                color: #0198FF;
-                font-size: 20px;
-            }
-
-            .upload:hover img {
-                width: 70px;
-                filter: invert(47%) sepia(57%) saturate(5011%) hue-rotate(185deg) brightness(105%) contrast(103%);
-            }
-        }
-
-        .modal-close-button {
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            /* padding: 5px 2px; */
-            padding-bottom: 2px;
-        }
-
-        progress {
-            margin-top: 20px;
-            width: 80%;
-            height: 10px;
-        }
-
-        #signup-error {
-            display: none;
-            color: red;
+        input[type="checkbox"] {
+            filter: invert(15%) sepia(8%) saturate(80%) hue-rotate(333deg) brightness(96%) contrast(85%);
         }
 
         @keyframes shake {
@@ -206,6 +125,97 @@
             }
         }
 
+        /* Apply the shake animation to the shake class */
+        .shake-effect {
+            animation: shake 0.5s, colorChange 0.5s;
+        }
+
+
+        .login-form {
+            margin: 11vw auto;
+            width: clamp(350px, 25vw, 30vw);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            /* Transparent border for a glass effect */
+            border-radius: 10px;
+            padding: 50px;
+            background-color: rgba(17, 20, 27, 0.8);
+            /* Transparent background for glass effect */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(4px);
+
+        }
+
+        @media screen and (max-width: 700px) {
+            .login-form {
+
+                width: auto;
+
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin: 100px 40px;
+
+            }
+        }
+
+        .login-top {
+            text-align: center;
+
+        }
+
+        .login-top h3 {
+            font-size: clamp(20px, 1.5vw, 2vw);
+            white-space: nowrap;
+
+        }
+
+        .login-top img {
+            width: 80px;
+            margin-bottom: 70px;
+        }
+
+        .login-top p {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .login-top p span {
+            color: white;
+            margin-bottom: 30px;
+            color: #0198FF;
+        }
+
+        .login-top-divider {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-top-divider1 {
+            flex: 1;
+            height: 3px;
+            background-color: #2A2A2A;
+            margin-bottom: 4px;
+        }
+
+        .login-top-divider2 {
+            margin-left: 20px;
+            margin-right: 20px;
+            color: white;
+        }
+
+        .login-top-divider3 {
+            flex: 1;
+            height: 3px;
+            background-color: #2A2A2A;
+            margin-bottom: 4px;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+        }
+
         .svg-bg {
 
 
@@ -231,146 +241,6 @@
 
 <body>
 
-
-    <div style="margin-top: 60px;" class="modal fade" id="rules-reg" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Terms and Conditions</h5>
-                    <button type="button" class="close modal-close-button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="height: 30vw; overflow-y: scroll;">
-                    <ol>
-                        <li><strong>Registration</strong>
-                            <ol>
-                                <li>Eligibility: You must be [age or eligibility requirement] to register for
-                                    the
-                                    Service.</li>
-                                <li>Accurate Information: You agree to provide accurate, current, and complete
-                                    information during the registration process.</li>
-                                <li>Account Security: You are responsible for maintaining the confidentiality of
-                                    your account information, including your username and password.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Use of the Service</strong>
-                            <ol>
-                                <li>License: You are granted a limited, non-exclusive, non-transferable, and
-                                    revocable license to use the Service for its intended purpose.</li>
-                                <li>Prohibited Activities: You may not use the Service for any unlawful or
-                                    prohibited purpose. Prohibited activities include, but are not limited to:
-                                    <ul>
-                                        <li>Transmitting any content that is harmful, abusive, obscene, or
-                                            violates
-                                            any applicable laws.</li>
-                                        <li>Attempting to gain unauthorized access to the Service or its users'
-                                            information.</li>
-                                        <li>Engaging in any form of harassment or discrimination.</li>
-                                        <li>Impersonating any person or entity.</li>
-                                        <li>Violating any copyright, trademark, or intellectual property rights.
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>Compliance with Laws: You agree to comply with all applicable local, state,
-                                    national, and international laws and regulations.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>User Content</strong>
-                            <ol>
-                                <li>Ownership: You may be able to submit, post, or share content on the Service.
-                                    You
-                                    retain all rights to your content, but by sharing it on the Service, you
-                                    grant
-                                    us a non-exclusive, royalty-free, and worldwide license to use, reproduce,
-                                    modify, adapt, publish, and distribute your content.</li>
-                                <li>Responsibility: You are solely responsible for the content you submit and
-                                    any
-                                    consequences arising from it. We do not endorse or assume any liability for
-                                    user-generated content.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Privacy</strong>
-                            <ol>
-                                <li>Privacy Policy: Your use of the Service is also governed by our Privacy
-                                    Policy,
-                                    which can be found on our website. It outlines how your personal data is
-                                    collected, stored, and used.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Termination</strong>
-                            <ol>
-                                <li>Termination Rights: We reserve the right to terminate or suspend your access
-                                    to
-                                    the Service at our sole discretion, without notice, for any violation of
-                                    these
-                                    Terms.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Disclaimers</strong>
-                            <ol>
-                                <li>No Warranties: The Service is provided "as is" without any warranties or
-                                    guarantees, including but not limited to the implied warranties of
-                                    merchantability and fitness for a particular purpose.</li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Limitation of Liability</strong>
-                            <ol>
-                                <li>Exclusion of Liability: We shall not be liable for any direct, indirect,
-                                    incidental, special, or consequential damages resulting from your use of the
-                                    Service, including, but not limited to, loss of data, profits, or
-                                    reputation.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Changes to Terms</strong>
-                            <ol>
-                                <li>Updates: We may update these Terms from time to time. Any changes will be
-                                    posted
-                                    on our website, and it is your responsibility to review the Terms
-                                    periodically.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Governing Law and Jurisdiction</strong>
-                            <ol>
-                                <li>Governing Law: These Terms are governed by and construed in accordance with
-                                    the
-                                    laws of Malaysia.</li>
-                                <li>Jurisdiction: Any dispute or claim arising from or in connection with these
-                                    Terms shall be subject to the exclusive jurisdiction of the courts in
-                                    Malaysia.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li><strong>Contact Information</strong>
-                            <ol>
-                                <li>If you have any questions or concerns about these Terms, please contact us
-                                    at
-                                    [contact information].</li>
-                            </ol>
-                        </li>
-                    </ol>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
     <svg class="svg-bg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
         xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 1422 800">
         <g stroke-width="3.5" stroke="hsl(335, 77%, 50%)" fill="none" stroke-linecap="butt">
@@ -781,518 +651,182 @@
             <line x1="1404" y1="756" x2="1458" y2="810" opacity="0.10"></line>
         </g>
     </svg>
-    <div class="main-form">
-        <!-- Part A -->
-        <div style="text-align: center;">
-            <!-- <img src="../images/hack_logo.png" style="width: 80px; margin-bottom: 70px;" /> -->
-            <h3 style="font-weight: bold; color: white; margin-bottom: 20px; font-family: 'HackLogo';">Join Hack@10</h3>
 
-            <div style="margin-bottom: 20px; display: flex; align-items: center;">
-                <div style="flex: 1; height: 2px; background-color: #2A2A2A; margin-bottom: 4px;"></div>
-                <div style="flex: 1; height: 2px; background-color: #2A2A2A; margin-bottom: 4px;"></div>
-            </div>
+    <div class="login-form"
+        style="border: 3px solid #2A2A2A; padding: 50px; border-radius: 10px; width: clamp(400px, 35vw, 40vw); margin: 100px auto;">
 
-            {% load static %}
+        <div class="login-top">
+            <img src="{% static 'img/hack_logo.png' %}" />
 
-            <style>
-                .FAQ-item-p {
-                    background-color: #2A2A2A;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 20px 20px 12px 40px;
-                    border-radius: 10px;
-                    transition: transform 0.3s, box-shadow 0.3s;
-
-
-                    /* width: 40vw; */
-                }
-
-                .FAQ-item-p:hover {
-                    cursor: pointer;
-                    transform: translateY(-10px);
-                    /* Move the container up */
-                    box-shadow: 0 0 20px rgba(6, 193, 235, 0.3);
-                }
-
-
-
-                .FAQ-item-answer {
-                    max-width: 40vw;
-                    color: white;
-                    padding-bottom: 10px;
-                    display: none;
-                    /* Hide the paragraph by default */
-                    opacity: 0;
-                    transition: all 0.1s;
-                    line-height: 1.6;
-                    font-family: 'Times New Roman', Times, serif !important;
-                    font-size: clamp(18px, 1.2vw, 5vw);
-                    text-align: left;
-                    /* Add expansion animation */
-                }
-
-                .FAQ-item-p.show .FAQ-item-answer {
-                    display: block;
-                    /* Show the paragraph when the parent has the "show" class */
-                    opacity: 1;
-                }
-
-                .FAQ-item {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    gap: 2vw;
-                    align-items: center;
-                }
-
-                .FAQ-item-img img {
-                    width: 35px;
-                    padding-bottom: 5px;
-                }
-
-                .FAQ-item-content {
-                    color: white;
-                }
-
-                .FAQ-item-content h5 {
-                    color: #C8C8C8;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: clamp(18.444px, 1.3vw, 5vw);
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
-                }
-            </style>
-
-            <div class="FAQ-item-p" onclick="toggleAnswer(this)">
-                <div class="FAQ-item">
-                    <div class="FAQ-item-content">
-                        <h5>Why is accessibility important for a website?</h5>
-                    </div>
-                    <div class="FAQ-item-img">
-                        <img src="{% static 'img/add_btn_icon.svg' %}" />
-                    </div>
-                </div>
-                <p class="FAQ-item-answer">Accessibility is important for a website because it ensures that people with
-                    disabilities can access and use the site, promoting inclusivity and equal access to information and
-                    services.</p>
-            </div>
-
-            <script>
-                function toggleAnswer(element) {
-                    const parent = element.closest('.FAQ-item-p');
-                    const answer = parent.querySelector('.FAQ-item-answer');
-                    const image = parent.querySelector('.FAQ-item-img img');
-
-                    parent.classList.toggle('show');
-
-                    if (parent.classList.contains('show')) {
-                        image.src = "{% static 'img/remove_btn_icon.svg' %}"; // Change to minus icon
-                    } else {
-                        image.src = "{% static 'img/add_btn_icon.svg' %}"; // Change back to add icon
-                    }
-                }
-            </script>
-
-
+            <!--  -->
+            {% if email %}
+            <h3 style="font-weight: 600; color: white; margin-bottom: 20px;">Verification Link has been sent to <br>
+                {{ email }}</h3>
+            {% else %}
+            <h3 style="font-weight: 600; color: white; margin-bottom: 20px;">Sorry, something went wrong.<br>Please
+                register again.</h3>
+            {% endif %}
         </div>
-        <div style="text-align: center; ">
-            <div style="display: flex; gap: 20px;" class="form-input">
-                <div style="flex: 1;">
-                    <input type="text" placeholder="First Name" style="width: 100%;" id="first-name">
-                </div>
-                <div style="flex: 1;">
-                    <input type="text" placeholder="Last Name" style="width: 100%;" id="last-name">
-                </div>
-            </div>
-            <div class="form-input">
-                <input type="text" placeholder="What's your university?" style="width: 100%;" id="uni">
-            </div>
-            <div class="form-input">
-                <input type="text" placeholder="What's your Major?" style="width: 100%;" id="major">
-            </div>
-            <div style="display: flex; gap: 20px;" class="form-input">
-
-                <div style="flex: 1;">
-                    <input type="text" placeholder="Nationality" style="width: 100%;" id="tag">
-                </div>
-            </div>
-            <div class="form-input">
-                <input type="email" placeholder="Email" style="width: 100%;" id="email">
-            </div>
-            <div class="form-input">
-                <input type="text" placeholder="Discord Tag" style="width: 100%;" id="tag">
-            </div>
-
-            <div class="form-input">
-                <input type="text" placeholder="Why are you joining the event?" style="width: 100%;" id="join-reason">
-            </div>
-            <div class="upload" id="uploadDiv">
-                <img src="{% static 'img\signup_upload.svg' %}" id="upload_img1" />
-
-                <h3 id="resume-upload-text">Upload Your Resume (Optional)</h3>
-                <p style="color: white;">max: 2MB</p>
-                <input type="file" id="resume" style="display:none" />
-                <div id="progress">
-                    <progress value="0" max="100"></progress>
-                    <!-- <span id="progressText">0%</span> -->
-                </div>
-            </div>
+        <div style="text-align: center; margin-top: 30px;">
 
 
 
-            <div style="display: flex; align-items: center; gap: 10px; margin-left: 3px;">
-                <input type="checkbox" id="myCheckbox">
-                <label for="myCheckbox" style="color:#A6A6A6; font-size: clamp(13px, 1.1vw, 2vw);">I agree to the
-                    <span style="color: #0198FF;"><a href="#" data-toggle="modal" data-target="#termsModal"> <span
-                                style="color: #0198FF;"><a href="#" data-toggle="modal" data-target="#rules-reg">Privacy
-                                    Policy</a></span></label>
-            </div>
-
-            <div class="form-btn" style="margin-top: 20px;">
-                Sign up
-            </div>
-            <div style="width: 100%;">
-                <p style="text-align: left;" id="signup-error">Incorrect password. Please try again.</p>
-
-            </div>
+            <p id="error"></p>
         </div>
 
-        <!-- Modal -->
-
-
-
-        <script>
-
-        </script>
-
-        <script src="https://unpkg.com/filepond@4/dist/filepond.js"></script>
-
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-
-            </script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-        <script>
-            const showCoverButton = document.getElementById('showCover');
-            const registerText = document.getElementById("register");
-            const coverDiv = document.getElementById('cover');
-            const iconImg = showCoverButton.querySelector('img');
-            const menuItems = document.querySelectorAll('#menu li a');
-            const mainSec = document.getElementById("main-section");
-
-            function updateMenuVisibility() {
-                if (window.innerWidth > 768) {
-                    coverDiv.classList.remove('active');
-                    registerText.style.display = "block";
-                    iconImg.src = "{% static 'img/burger_icon1.png' %}";
-                } else {
-                    if (coverDiv.classList.contains('active')) {
-                        registerText.style.display = "none";
-                        mainSec.style.opacity = "0";
-                    }
-                }
-            }
-
-            showCoverButton.addEventListener('click', () => {
-                coverDiv.classList.toggle('active');
-                iconImg.src = coverDiv.classList.contains('active') ? "{% static 'images/x_icon.png' %}" : "{% static 'images/burger_icon1.png' %}";
-                coverDiv.classList.contains('active') ? registerText.style.display = "none" : registerText.style.display = "block";
-                // coverDiv.classList.contains('active') ? mainSec.style.opacity = "0" : mainSec.style.opacity = "1";
-
-            });
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', (event) => {
-                    registerText.style.display = "block";
-
-                    iconImg.src = "{% static 'img/burger_icon1.png' %}";
-
-                    event.preventDefault();
-                    const targetSectionId = item.getAttribute('href');
-                    coverDiv.classList.remove('active');
-                    setTimeout(() => {
-                        document.querySelector(targetSectionId).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }, 500); // Adjust delay based on your transition time
-                });
-            });
-
-            // Update menu visibility when the window is resized
-            window.addEventListener('resize', updateMenuVisibility);
-
-            // Initial call to update menu visibility on page load
-            updateMenuVisibility();
-        </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <script>
             function setCookie(name, value, daysToExpire) {
                 // Calculate the expiration date
                 const expirationDate = new Date();
                 expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
                 // Format the cookie string
                 const cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
+
                 // Set the cookie
                 document.cookie = cookieString;
             }
-            function error_handling(error) {
-                const error_container = document.getElementById("signup-error"); // Find the target section
-                error_container.innerText = error;
-                error_container.style.display = "block";
-                if (error_container) {
-                    // Scroll to the target section smoothly
-                    error_container.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+
+
+
+            // Function to validate email using a regular expression
+            function isEmailValid() {
+                const emailInput = document.getElementById('emailInput');
+                const emailValue = emailInput.value;
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(emailValue);
             }
-            document.addEventListener('DOMContentLoaded', function () {
-                const formButton = document.querySelector('.form-btn');
-                formButton.addEventListener('click', function () {
-                    // Get input values
-                    const firstNameInput = document.getElementById('first-name');
-                    const lastNameInput = document.getElementById('last-name');
-                    const universityInput = document.getElementById('uni');
-                    const majorInput = document.getElementById('major');
-                    const discordTagInput = document.getElementById('tag');
-                    const emailInput = document.getElementById('email');
-                    const joinReasonInput = document.getElementById('join-reason');
-                    const resumeInput = document.getElementById('resume');
-                    const checkbox = document.getElementById('myCheckbox');
-                    // Validation
-                    const firstName = firstNameInput.value.trim();
-                    const lastName = lastNameInput.value.trim();
-                    const university = universityInput.value.trim();
-                    const major = majorInput.value.trim();
-                    const discordTag = discordTagInput.value.trim();
-                    const email = emailInput.value.trim();
 
-                    const joinReason = joinReasonInput.value.trim();
-                    const resume = resumeInput.value.trim();
-                    // Clear any previous error messages
-                    const errorMessages = document.querySelectorAll('.error-message');
-                    errorMessages.forEach((errorMessage) => {
-                        errorMessage.textContent = '';
-                    });
-                    const resumeFile = document.getElementById('resume');
-                    const file = resumeFile.files[0];
-                    let error = null;
-                    if (!firstName) {
-                        firstNameInput.value = '';
-                        error_handling("First name Error");
-                        return;
-                    }
-                    if (!lastName) {
-                        lastNameInput.value = '';
-                        error_handling("Last Name is required.");
-                        return;
-                    }
-                    if (!university) {
-                        universityInput.value = '';
-                        error_handling("University is required.");
-                        return;
-                    }
-                    if (!major) {
-                        majorInput.value = '';
-                        error_handling("Major is required.");
-                        return;
-                    }
 
-                    if (!discordTag) {
-                        discordTagInput.value = '';
-                        error_handling("Country is required.");
-                        return;
-                    }
-                    if (!email) {
-                        emailInput.value = '';
-                        error_handling("Email is required.");
-                        return;
-                    }
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        emailInput.value = '';
-                        error_handling('Invalid email format.');
-                        return;
-                    }
 
-                    // Add similar error handling for other input fields here...
+            // Function to handle login
+            function handleLogin() {
 
-                    if (!joinReason) {
-                        joinReasonInput.value = '';
-                        error_handling('Please state your reason for joining');
-                        return;
-                    }
-                    if (!file) {
-                        error_handling("Please upload your resume");
-                        return;
-                    }
-                    // Email validation regex
-                    if (!checkbox.checked) {
-                        error_handling("Please agree to the terms and privacy policy.");
-                        return;
-                    }
-                    // All conditions met, log input values
-                    console.log('First Name:', firstName);
-                    console.log('Last Name:', lastName);
-                    console.log('University:', university);
-                    console.log('Major:', major);
-                    console.log('Discord Tag:', discordTag);
-                    console.log('Email:', email);
 
-                    console.log('Join Reason:', joinReason);
-                    console.log('Resume:', resume);
-                    document.getElementById("signup-error").innerHTML = "";
-                    function getCookie(name) {
-                        var dc = document.cookie;
-                        var prefix = name + "=";
-                        var begin = dc.indexOf("; " + prefix);
-                        if (begin == -1) {
-                            begin = dc.indexOf(prefix);
-                            if (begin != 0) return null;
+                function checkBoth() {
+
+                    const emailInput = document.getElementById('emailInput');
+                    const error = document.getElementById('error');
+                    const emailValue = emailInput.value;
+
+                    if (!isEmailValid()) {
+                        emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                        emailInput.style.border = "2px solid red";
+                        setTimeout(function () {
+                            emailInput.style.animation = "none";
+                            // passwordInput.style.border = "2px solid blue";
+                        }, 800);
+                        error.innerText = "Sorry, your email/password was incorrect. Please double-check your email/password.";
+                        return;
+                    } else {
+
+                        if (!isEmailValid()) {
+                            emailInput.style.animation = "shake 0.8s, colorChange 0.8s";
+                            emailInput.style.border = "2px solid red";
+                            setTimeout(function () {
+                                emailInput.style.animation = "none";
+                                // emailInput.style.border = "none";
+                                document.body.innerHTML += '<style> input:focus {border: 2px solid #0198FF;}</style>'
+
+                            }, 800);
+                            error.innerText = "email needs to follow this format: email@example.com";
+                            return;
                         }
-                        else {
-                            begin += 2;
-                            var end = document.cookie.indexOf(";", begin);
-                            if (end == -1) {
-                                end = dc.length;
-                            }
-                        }
-                        // because unescape has been deprecated, replaced with decodeURI
-                        //return unescape(dc.substring(begin + prefix.length, end));
-                        return decodeURI(dc.substring(begin + prefix.length, end));
+
+
                     }
-                    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                    var headers = new Headers();
-                    headers.append('X-CSRFToken', csrftoken);
-                    const formData = new FormData();
-                    formData.append('firstName', firstName);
-                    formData.append('lastName', lastName);
-                    formData.append('university', university);
-                    formData.append('major', major);
-                    formData.append('discordTag', discordTag);
-                    formData.append('email', email);
-                    formData.append('joinReason', joinReason);
-                    formData.append('checkbox', checkbox);
-                    // formData.append('resume', file); 
-                    fetch('/register/local', {
-                        method: 'POST',
-                        body: formData,
-                        headers: headers,
-                        credentials: 'include'
-                    }).then(response => {
-                        if (response.status === 200) {
-                            response.json().then(data => {
-                                if (data.status === 'success') {
-                                    session_auth = data.session_auth;
-                                    setCookie("session_auth", session_auth, 7);
-                                    window.location.href = '/register/sent'; // Redirect to the desired page
-                                } else {
-                                    const fail_reason = data.reason;
-                                    error_handling(fail_reason)
-                                }
-                            });
-                        } else {
-                            console.log("error")
+
+
+                }
+
+                checkBoth();
+
+
+
+
+                const emailInput = document.getElementById('emailInput');
+                const error = document.getElementById('error');
+                const emailValue = emailInput.value;
+
+                // Add a focus event listener to each input element
+
+                function getCookie(name) {
+                    var dc = document.cookie;
+                    var prefix = name + "=";
+                    var begin = dc.indexOf("; " + prefix);
+                    if (begin == -1) {
+                        begin = dc.indexOf(prefix);
+                        if (begin != 0) return null;
+                    }
+                    else {
+                        begin += 2;
+                        var end = document.cookie.indexOf(";", begin);
+                        if (end == -1) {
+                            end = dc.length;
                         }
-                    })
-                        .catch(error => {
-                            console.log("error")
-                        });
-                });
-            });
-        </script>
+                    }
+                    // because unescape has been deprecated, replaced with decodeURI
+                    //return unescape(dc.substring(begin + prefix.length, end));
+                    return decodeURI(dc.substring(begin + prefix.length, end));
+                }
+                // var csrftoken = getCookie('csrftoken');
+                var headers = new Headers();
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                headers.append('X-CSRFToken', csrftoken);
 
-        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
-        <script>
-            const firebaseConfig = {
-                apiKey: "AIzaSyBLv1DiRB6egmpaoIKfjODXZF5fYheQKIM",
-                authDomain: "realtimedatabasetest-f226a.firebaseapp.com",
-                databaseURL: "https://realtimedatabasetest-f226a-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "realtimedatabasetest-f226a",
-                storageBucket: "realtimedatabasetest-f226a.appspot.com",
-                messagingSenderId: "348704796176",
-                appId: "1:348704796176:web:b19a37e276fd097a2ce495"
-            };
 
-            firebase.initializeApp(firebaseConfig);
-
-            function uploadImage() {
-                const resume_upload_text = document.getElementById("resume-upload-text");
-                resume_upload_text.innerHTML = "Your Resume is being Uploaded";
-
-                const resume_upload_img1 = document.getElementById("upload_img1");
-                resume_upload_img1.src = "{% static 'img/signup_upload.svg' %}";
-
-                const ref = firebase.storage().ref();
-                const file = document.querySelector("#resume").files[0];
-                const name = +new Date() + "-" + file.name;
-                const metadata = {
-                    contentType: file.type
+                const data = {
+                    email: emailValue,
                 };
-
-                const task = ref.child(name).put(file, metadata);
-
-                task.on('state_changed',
-                    (snapshot) => {
-                        // Calculate the upload progress
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        const progressText = progress.toFixed(2) + "%";
-
-                        // Update the progress bar and text
-                        document.querySelector("#progress").style.display = "block";
-                        document.querySelector("progress").value = progress;
-                    },
-                    (error) => {
-                        // Handle errors here
-                        console.error(error);
-                    },
-                    () => {
-
-                        // Upload completed successfully
-                        task.snapshot.ref.getDownloadURL().then((url) => {
-
-                            const resume_upload_text = document.getElementById("resume-upload-text");
-                            const resume_upload_div = document.getElementById("uploadDiv");
-                            const resume_upload_img1 = document.getElementById("upload_img1");
-
-                            resume_upload_img1.src = "{% static 'img/pdf_blue_icon.svg' %}";
-
-                            resume_upload_text.style.color = "#ffffff";
-                            resume_upload_text.innerHTML = "Your file has been uploaded";
-                            console.log(url);
-                            // alert('Image uploaded successfully');
-                            // document.querySelector("#progress").style.display = "none"; // Hide the progress bar when done
+                console.log(data)
+                const payload = JSON.stringify(data)
+                fetch('/reset/', {
+                    method: 'POST',
+                    body: payload,
+                    headers: headers,
+                    credentials: 'include'
+                }).then(response => {
+                    if (response.status === 200) {
+                        response.json().then(data => {
+                            if (data.status === 'success') {
+                                const temp_auth = data.temp_auth;
+                                setCookie("temp_auth", temp_auth, 7);
+                            } else {
+                                checkBoth()
+                            }
                         });
+                    } else {
+                        checkBoth()
                     }
-                );
+                })
+                    .catch(error => {
+                        checkBoth()
+                    });
             }
+
+            // Function to get CSRF token from cookies
+
+
+            // Get references to the input fields and the login button
+            const loginButton = document.getElementById('loginButton');
+
+            // Add a click event listener to the login button
+            loginButton.addEventListener('click', handleLogin);
+
+
         </script>
 
-        <script>
-            const uploadDiv = document.getElementById('uploadDiv');
-            const resume = document.getElementById('resume');
 
-            uploadDiv.addEventListener('click', function () {
-                resume.click();
-            });
-            resume.addEventListener('change', function () {
-                // Check if a file is selected
-                if (resume.files.length > 0) {
-                    // Call the uploadImage() function here
-                    uploadImage();
-                }
-            });
-        </script>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+
 
 </body>
 

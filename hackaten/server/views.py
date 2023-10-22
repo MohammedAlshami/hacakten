@@ -21,6 +21,20 @@ from django.http import JsonResponse
 import json
 
 
+def first_time_verify(request):
+    oob_code = request.GET.get("oobCode", None)
+    email = request.GET.get("email", None)
+
+    if oob_code and email:
+        is_reset_success = firebase.verify_register(oob_code)
+        return render(request, "signup/verify_response.html", {"success": True})
+        # if is_reset_success:
+        #     return render(request, "signup/verify_response.html", {"success": True})
+        # else:
+        #     return render(request, "signup/verify_response.html", {"success": False})
+    
+    return HttpResponseRedirect("/register")
+
 def landing_page(request):
     session_auth = request.COOKIES.get("session_auth")
     is_session_valid = False
@@ -136,71 +150,65 @@ def sign_in(request):
         return HttpResponseRedirect("/hub")
 
 
-def signup_local(request):
+def signup_sent(request):
     session_auth = request.COOKIES.get("session_auth")
-    if session_auth is None:
-        if request.method == "POST":
-            print(len(request.POST))
-
-            isLocal = True
-
-            first_name = request.POST.get("firstName", "")
-            last_name = request.POST.get("lastName", "")
-            university = request.POST.get("university", "")
-            major = request.POST.get("major", "")
-            age = request.POST.get("age", "")
-            discord_tag = request.POST.get("discordTag", "")
-            email = request.POST.get("email", "")
-            password = request.POST.get("password", "")
-            confirm_password = request.POST.get("confirmPassword", "")
-            join_reason = request.POST.get("joinReason", "")
-
-            isAuthValid = firebase.upload_user_info(
-                first_name,
-                last_name,
-                university,
-                major,
-                age,
-                discord_tag,
-                email,
-                password,
-                confirm_password,
-                join_reason,
-                isLocal
-            )
-
-            if isAuthValid:
-                # Return a JSON response with status and user name
-                response_data = {
-                    "status": "success",
-                    "session_auth": isAuthValid,  # Replace with the actual username
-                }
-                return JsonResponse(response_data)
-            else:
-                response_data = {
-                    "status": "fail",
-                    "reason": "User Email Already Exists",
-                }
-                return JsonResponse(response_data)
-            # resume_file = request.FILES.get("resume", None)
-
-            # # Handle the file, e.g., save it to the server
-            # if resume_file:
-            #     file_path = os.path.join("D:\Desktop_1", resume_file.name)
-            #     with open(file_path, 'wb+') as destination:
-            #         file_size = resume_file.size
-            #         progress_bar = tqdm(total=file_size, unit='B', unit_scale=True)
-            #         for chunk in resume_file.chunks():
-            #             destination.write(chunk)
-            #             progress_bar.update(len(chunk))
-            #         progress_bar.close()
-
-            return HttpResponse("File uploaded")
-
+    if session_auth:
+        is_auth = decode_jwt_token(session_auth, SECRET_KEY)
+        if is_auth:
+            return render(request, "signup/email_sent.html", {"email": is_auth["user_id"]})
         else:
-            return render(request, "signup/index_local.html")
+            return render(request, "signup/email_sent.html", {"email": None})
     else:
-        return HttpResponseRedirect("/hub")
+        return HttpResponseRedirect("/register")
+def signup_local(request):
+    if request.method == "POST":
+        print(len(request.POST))
+
+        isLocal = True
+
+        first_name = request.POST.get("firstName", "")
+        last_name = request.POST.get("lastName", "")
+        university = request.POST.get("university", "")
+        major = request.POST.get("major", "")
+        age = request.POST.get("age", "")
+        discord_tag = request.POST.get("discordTag", "")
+        email = request.POST.get("email", "")
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get("confirmPassword", "")
+        join_reason = request.POST.get("joinReason", "")
+
+        isAuthValid = firebase.upload_user_info(
+            first_name,
+            last_name,
+            university,
+            major,
+            age,
+            discord_tag,
+            email,
+            password,
+            confirm_password,
+            join_reason,
+            isLocal
+        )
+
+        if isAuthValid:
+            # Return a JSON response with status and user name
+
+            response_data = {
+                "status": "success",
+                "session_auth": isAuthValid,  # Replace with the actual username
+            }
+            return JsonResponse(response_data)
+        else:
+            response_data = {
+                "status": "fail",
+                "reason": "You have already registered",
+            }
+            return JsonResponse(response_data)
+      
+
+    return render(request, "signup/index_local.html")
+            
 
 
 def signup_international(request):
@@ -296,9 +304,9 @@ def group_create(request):
 
 
 def register_options(request):
-    session_auth = request.COOKIES.get("session_auth")
-    if session_auth:
-        return HttpResponseRedirect("/hub")
+    # session_auth = request.COOKIES.get("session_auth")
+    # if session_auth:
+    #     return HttpResponseRedirect("/hub")
 
     return render(request, "signup\options.html")
 

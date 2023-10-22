@@ -37,13 +37,12 @@ class Firebase:
     def verify_register(self, verification_code):
         auth = self.firebase.auth()
         try:
-            auth.verify_password_reset_code(verification_code, "")
-            return False
+             return False
         except Exception as ex:
             json_str = str(ex).split("] ")[1]
 
             error_dict = dict(json.loads(json_str))["error"]["message"]
-
+            print(error_dict)
             if error_dict == "WEAK_PASSWORD":
                 return True
 
@@ -107,6 +106,7 @@ class Firebase:
         join_reason,
         isLocal
     ):
+        password = "Test@12345"
         auth = self.firebase.auth()
 
         db = self.firebase.database()
@@ -120,19 +120,27 @@ class Firebase:
             # Create the "hack10User" table if it doesn't exist
             db.child("hack10Users").set({})
 
-        try:
-            auth.get_user_by_email(email)
-            print("User with this email already exists.")
-            return None  # You can handle this case as needed
-        except:
-            pass
+        # try:
+        #     auth.get_user_by_email(email)
+        #     print("User with this email already exists.")
+        #     return None  # You can handle this case as needed
+        # except:
+        #     pass
 
         try:
             user = auth.create_user_with_email_and_password(email, password)
             user_id = user["localId"]
+            user_token = user["idToken"]
         except Exception as e:
-            print("User registration failed:", str(e))
-            user_id = None
+                # User already exists, attempt to fetch their information
+            try:
+                user = auth.sign_in_with_email_and_password(email, password)
+                user_id = user["localId"]
+                user_token = user["idToken"]
+                print(f"User already exists. User ID: {user_id}")
+            except Exception as e:
+                print(f"User creation or retrieval failed: {str(e)}")
+
 
         if user_id:
             # Upload a PDF file to storage and get the file path
@@ -146,6 +154,7 @@ class Firebase:
             except Exception as e:
                 print("File upload failed:", str(e))
                 file_url = None
+                return None
 
             if file_url:
                 # Create a record with user information
@@ -168,8 +177,8 @@ class Firebase:
                 print("Resume file uploaded to:", file_url)
 
                 # sending email verification
-                auth.send_email_verification(user_id)
-                return generate_jwt_token(user_id, SECRET_KEY)
+                auth.send_email_verification(user_token)
+                return generate_jwt_token(email, SECRET_KEY)
         return None
 
     def create_group(self, user_id, group_name):
