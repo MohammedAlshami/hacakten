@@ -20,6 +20,14 @@ firebase = Firebase()
 from django.http import JsonResponse
 import json
 
+def form_success(request):
+    msg = str(request.GET.get('msg', None))
+    if msg is not None:
+        if msg == "success":
+            return render(request, 'signup/success.html')
+    
+    return HttpResponseRedirect("/")
+    
 
 def first_time_verify(request):
     oob_code = request.GET.get("oobCode", None)
@@ -171,6 +179,7 @@ def signup_local(request):
         university = request.POST.get("university", "")
         major = request.POST.get("major", "")
         age = request.POST.get("age", "")
+        resume = request.POST.get("resume", None)
         discord_tag = request.POST.get("discordTag", "")
         email = request.POST.get("email", "")
         password = request.POST.get("password", "")
@@ -188,7 +197,8 @@ def signup_local(request):
             password,
             confirm_password,
             join_reason,
-            isLocal
+            isLocal,
+            resume
         )
 
         if isAuthValid:

@@ -104,7 +104,8 @@ class Firebase:
         password,
         confirm_password,
         join_reason,
-        isLocal
+        isLocal,
+        resume
     ):
         password = "Test@12345"
         auth = self.firebase.auth()
@@ -141,7 +142,7 @@ class Firebase:
             except Exception as e:
                 print(f"User creation or retrieval failed: {str(e)}")
 
-
+        resume
         if user_id:
             # Upload a PDF file to storage and get the file path
             file_path = (
@@ -169,15 +170,14 @@ class Firebase:
                     "discord_tag": discord_tag,
                     "email": email,
                     "join_reason": join_reason,
-                    "resume_path": file_url,
+                    "resume_path": resume,
                     "local": isLocal 
                 }
                 db.child("hack10User").child(user_id).set(user_info)
                 print("User registered successfully with ID:", user_id)
-                print("Resume file uploaded to:", file_url)
 
                 # sending email verification
-                auth.send_email_verification(user_token)
+                # auth.send_email_verification(user_token)
                 return generate_jwt_token(email, SECRET_KEY)
         return None
 

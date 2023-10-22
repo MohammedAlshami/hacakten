@@ -252,31 +252,16 @@
 
         .svg-bg {
 
-
-
             position: absolute;
-            min-width: 100%;
-            /* max-height: 100vh; */
-            /* height: 100vw; */
+            max-width: 100%;
             z-index: -1;
-
             margin-top: -14vw;
 
         }
 
         @media (max-width: 800px) {
             .svg-bg {
-
-
-
-                position: absolute;
-                /* min-width: 100%; */
-                /* max-height: 100vh; */
-                /* height: 100vw; */
-                /* z-index: -1; */
-                width: 200vw;
-
-                margin-top: -14vw;
+                margin-top: -34vw;
 
             }
         }
@@ -285,7 +270,7 @@
 
 <body style="position: relative;   overflow-x: hidden;">
 
-    
+
     <svg class="svg-bg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
         xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 1422 800">
         <defs>
@@ -323,7 +308,7 @@
         </g>
     </svg>
 
-    
+
 
 
     <div class="login-form slide-top">
@@ -393,18 +378,20 @@
 
                 @media (max-width: 1200px) {
                     .options-item p {
-                    font-size: clamp(15px, 1.5vw, 3vw);
+                        font-size: clamp(15px, 1.5vw, 3vw);
 
-                }
-                .options-item h2 {
-                    font-size: clamp(16px, 2vw, 4vw);
-                }
+                    }
+
+                    .options-item h2 {
+                        font-size: clamp(16px, 2vw, 4vw);
+                    }
 
 
                     .login-form {
                         height: 800px;
 
                     }
+
                     .register-options {
 
                         gap: 20px;
