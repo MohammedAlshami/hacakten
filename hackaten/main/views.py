@@ -6,4 +6,4 @@ def index(request):
     return render(request, 'landing/index.html')
 
 def register_option(request):
-    return render(request, 'signup/index.html')
+    return render(request, 'signup/options.html')
