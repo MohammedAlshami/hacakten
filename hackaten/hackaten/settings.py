@@ -57,12 +57,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = "hackaten.urls"
 
 
-def findMyWay(*relativeComponents):
-    return os.path.join(os.path.dirname(__file__), *relativeComponents).replace(
-        "\\", "/"
-    )
-
-
 TEMPLATE_LOADERS = (
     "django.template.loaders.filesystem.Loader",
     "django.template.loaders.app_directories.Loader",
@@ -70,7 +64,7 @@ TEMPLATE_LOADERS = (
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,12 +121,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+def findMyWay(*relativeComponents):
+    return os.path.join(os.path.dirname(__file__), *relativeComponents).replace("\\","/")
+
 TEMPLATE_LOADERS = (
     "django.template.loaders.filesystem.Loader",
     "django.template.loaders.app_directories.Loader",
 )
-TEMPLATE_DIRS = [findMyWay("templates")]
 
+TEMPLATE_DIRS = (
+    findMyWay("templates"),
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
