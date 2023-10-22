@@ -1,25 +1,25 @@
 @font-face {
     font-family: "HackLogo";
-    src: url("fonts/TYPOGRAPH PRO Extra Bold.ttf");
+    src: url("https://hackaten.sgp1.cdn.digitaloceanspaces.com/fonts/TYPOGRAPH%20PRO%20Extra%20Bold.ttf");
 }
 
 @font-face {
     font-family: "HackLogoSemi";
-    src: url("fonts/TYPOGRAPH PRO Semi Bold.ttf");
+    src: url("https://hackaten.sgp1.cdn.digitaloceanspaces.com/fonts/TYPOGRAPH%20PRO%20Semi%20Bold.ttf");
 }
-
+    
 @font-face {
     font-family: "ethno";
-    src: url("fonts/ethnocentric rg.ttf");
+    src: url("https://hackaten.sgp1.cdn.digitaloceanspaces.com/fonts/ethnocentric%20rg.ttf");
 }
 
 @font-face {
     font-family: "HelveticaBold";
-    src: url("fonts/Helvetica CE Bold.otf");
+    src: url("https://hackaten.sgp1.cdn.digitaloceanspaces.com/fonts/Helvetica%20CE%20Bold.otf");
 }
 
 @font-face {
     font-family: "HelveticaMedium";
-    src: url("fonts/Helvetica CE Medium.otf");
+    src: url("https://hackaten.sgp1.cdn.digitaloceanspaces.com/fonts/Helvetica%20CE%20Medium.otf");
 }
 
