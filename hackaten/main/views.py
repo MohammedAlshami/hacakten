@@ -4,3 +4,5 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'landing/index.html')
+def sub(request):
+    return render(request, 'signup/index.html')
