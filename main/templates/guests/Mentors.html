@@ -1,6 +1,5 @@
 {% load static %}
 {% csrf_token %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="https://hackaten.sgp1.cdn.digitaloceanspaces.com/cs/fonts.css" />
+    <link rel="icon" type="image/x-icon" href="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/hack_logo.png">
+
 
     <style>
-        body {
-            padding-top: 80px;
-        }
+  
     </style>
 
 </head>
@@ -279,11 +279,14 @@
                 </div>
             </div>
             <ul class="nav-center">
-                <li><a href="#about-section">About</a></li>
-                <li><a href="#cases-section">Case Studies</a></li>
-                <li><a href="#prizes-section">Prizes</a></li>
-                <li><a href="#timeline-section">Timeline</a></li>
-                <li><a href="#FAQ-section" class="dropbtn">FAQ</a></li>
+                <li><a href="/#about-section">About</a></li>
+                <li><a href="/#cases-section">Case Studies</a></li>
+                <li><a href="/#prizes-section">Prizes</a></li>
+                <li><a href="/#timeline-section">Timeline</a></li>
+                <li><a href="/#FAQ-section" class="dropbtn">FAQ</a></li>
+                <li><a href="/speakers">Speakers</a></li>
+                <li><a href="/mentors">Mentors</a></li>
+                <!-- <li><a href="/guests">Judges</a></li> -->
 
                 <!-- <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">More</a>
@@ -296,10 +299,7 @@
             </li> -->
             </ul>
 
-            <div class="nav-right" id="register">
-                <a href="/participant/login">Login</a>
-            </div>
-
+        
         </nav>
 
         <div class="min-nav">
@@ -308,32 +308,35 @@
             </button>
             <div id="cover">
                 <ul id="menu">
-                    <li><a href="#about-section" class="menu-item">About</a></li>
-                    <li><a href="#cases-section" class="menu-item">Case Studies</a></li>
-                    <li><a href="#prize-section" class="menu-item">Prizes</a></li>
-                    <li><a href="#timeline-section" class="menu-item">Timeline</a></li>
-                    <li><a href="#FAQ-section" class="menu-item">FAQ</a></li>
+                    <li><a href="/#about-section" class="menu-item">About</a></li>
+                    <li><a href="/#cases-section" class="menu-item">Case Studies</a></li>
+                    <li><a href="/#prize-section" class="menu-item">Prizes</a></li>
+                    <li><a href="/#timeline-section" class="menu-item">Timeline</a></li>
+                    <li><a href="/#FAQ-section" class="menu-item">FAQ</a></li>
+                    <li><a href="/speakers">Speakers</a></li>
+                    <li><a href="/mentors">Mentors</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="font-sans flex h-fit items-center justify-center text-black">
+    <div class="font-sans flex h-fit items-center justify-center text-black pt-28 lg:pt-32 xl:pt-48">
         <div class="p-8">
             <div class="max-w-md mx-auto">
-                <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
-                    <a href="/Mentors.html"
-                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300  bg-blue-600 text-white">Mentors</a>
-                    <a href="/Speakers.html"
-                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Speakers</a>
-                    <a href="/Judges.html"
-                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Judges</a>
+                <div class="mb-0 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
+                    <a href="/mentors"
+                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 bg-blue-600 text-white">Mentors</a>
+                    <a href="/speakers"
+                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 ">Speakers</a>
+                    <!-- <a href="/Judges.html"
+                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Judges</a> -->
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
 
     <section class="bg-repeat bg-cover">
         <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -623,7 +626,7 @@
         updateMenuVisibility();
     </script>
 
-    <footer class="px-4 py-8 dark:bg-gray-800 dark:text-gray-400">
+    <!-- <footer class="px-4 py-8 dark:bg-gray-800 dark:text-gray-400">
         <div
             class="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
             <div class="flex flex-row pr-3 space-x-4 sm:space-x-8">
@@ -656,7 +659,7 @@
                 </li>
             </ul>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
 
