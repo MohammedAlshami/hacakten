@@ -296,6 +296,29 @@
             color: black;
         }
 
+        #menu1 {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            padding-top: 150px;
+        }
+
+        #menu1 li {
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+
+        .menu1-item {
+            text-decoration: none;
+            color: black;
+        }
 
 
         #showCover {
@@ -429,8 +452,10 @@
                     <li><a href="#prize-section" class="menu-item">Prizes</a></li>
                     <li><a href="#timeline-section" class="menu-item">Timeline</a></li>
                     <li><a href="#FAQ-section" class="menu-item">FAQ</a></li>
-                    <li><a href="/speakers">Speakers</a></li>
-                    <li><a href="/mentors">Mentors</a></li>
+                </ul>
+                <ul id="menu1" style="margin-top: -150px;">
+                    <li><a href="/speakers" class="menu-item">Speakers</a></li>
+                    <li><a href="/mentors" class="menu-item">Mentors</a></li>
                 </ul>
             </div>
         </div>
@@ -2881,10 +2906,26 @@
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
+
+            @media (max-width: 600px) {
+                .countdown-section-title {
+                    width: 300px;
+                    font-size: clamp(30px, 2vw, 8vw);
+                    text-align: center;
+                }
+
+                .break-show {
+                    display: block;
+                }
+            }
+
+            .break-show {
+                display: none;
+            }
         </style>
 
         <section id="countdown-section">
-            <h2 class="countdown-section-title">Preliminary Round</h2>
+            <h2 class="countdown-section-title">Preliminary Round Deadline</h2>
             <div class="all-dates">
                 <div class="half-dates-container">
                     <div class="date-container">
@@ -2960,7 +3001,7 @@
                 second: 'numeric'
             };
 
-            let targetDate = new Date("2023-11-27T00:00:00");
+            let targetDate = new Date("2023-12-04T00:00:00");
             const formatter = new Intl.DateTimeFormat("en-US", options);
             const targetDateString = formatter.format(targetDate);
 
