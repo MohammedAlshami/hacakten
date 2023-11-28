@@ -481,3 +481,14 @@ def project_edit(request):
 
     print(project)
     return render(request, "participant_hub\\submission\project_edit.html", project)
+
+
+def speakers(request, **kwargs):
+    # email = request.GET.get('email', None)
+    # if email:
+    return render(request, "guests/Speakers.html")
+
+def mentors(request, **kwargs):
+    # email = request.GET.get('email', None)
+    # if email:
+    return render(request, "guests/Mentors.html")

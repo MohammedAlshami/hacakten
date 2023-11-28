@@ -9,7 +9,10 @@ urlpatterns = [
     # path("register/sent", views.signup_sent),
     path("register/success", views.form_success),
     # path("register/international", views.signup_international),
-    path("register", views.signup_local),
+    # path("register", views.signup_local),
+    path("speakers", views.speakers),
+    path("mentors", views.mentors),
+
     # path("register/verify", views.first_time_verify),
 
     # path("reset/verify", views.register_verify),
