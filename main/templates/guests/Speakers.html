@@ -13,7 +13,7 @@
 
 
     <style>
-  
+
     </style>
 
 </head>
@@ -267,6 +267,29 @@
             color: rgb(255, 255, 255);
             text-decoration: none;
         }
+        #menu1 {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            padding-top: 150px;
+        }
+
+        #menu1 li {
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+
+        .menu1-item {
+            text-decoration: none;
+            color: black;
+        }
     </style>
     <div id="nav-animation">
         <nav>
@@ -282,6 +305,7 @@
                 <li><a href="/#prizes-section">Prizes</a></li>
                 <li><a href="/#timeline-section">Timeline</a></li>
                 <li><a href="/#FAQ-section" class="dropbtn">FAQ</a></li>
+                <li><a href="/judges">Judges</a></li>
                 <li><a href="/speakers">Speakers</a></li>
                 <li><a href="/mentors">Mentors</a></li>
                 <!-- <li><a href="/guests">Judges</a></li> -->
@@ -297,7 +321,7 @@
             </li> -->
             </ul>
 
-        
+
         </nav>
 
         <div class="min-nav">
@@ -311,8 +335,11 @@
                     <li><a href="/#prize-section" class="menu-item">Prizes</a></li>
                     <li><a href="/#timeline-section" class="menu-item">Timeline</a></li>
                     <li><a href="/#FAQ-section" class="menu-item">FAQ</a></li>
-                    <li><a href="/speakers">Speakers</a></li>
-                    <li><a href="/mentors">Mentors</a></li>
+                </ul>
+                <ul id="menu1" style="margin-top: -150px;">
+                    <li><a href="/judges" class="menu-item">Judges</a></li>
+                    <li><a href="/speakers" class="menu-item">Speakers</a></li>
+                    <li><a href="/mentors" class="menu-item">Mentors</a></li>
                 </ul>
             </div>
         </div>
@@ -326,8 +353,8 @@
                         class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Mentors</a>
                     <a href="/speakers"
                         class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 bg-[#024756] text-white">Speakers</a>
-                    <!-- <a href="/Judges.html"
-                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Judges</a> -->
+                    <a href="/judges"
+                        class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Judges</a>
                 </div>
             </div>
         </div>
@@ -372,7 +399,8 @@
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
                         <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
-                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/mentors/photo_6278510256061528088_x.jpg" alt="Person" />
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/mentors/photo_6278510256061528088_x.jpg"
+                            alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
                             <p class="mb-1 text-lg font-bold text-gray-100">Khairi Azim</p>
@@ -397,7 +425,8 @@
                 <div>
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80" src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 36.png"
+                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 36.png"
                             alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
@@ -423,7 +452,8 @@
                 <div>
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80" src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 39.png"
+                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 39.png"
                             alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
@@ -449,7 +479,8 @@
                 <div>
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80" src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 38.png"
+                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 38.png"
                             alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
@@ -476,7 +507,8 @@
                 <div>
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80" src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/img400.jpeg"
+                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/img400.jpeg"
                             alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
@@ -501,7 +533,8 @@
                 <div>
                     <div
                         class="relative overflow-hidden transition duration-300 transform rounded shadow-lg lg:hover:-translate-y-2 hover:shadow-2xl">
-                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80" src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 40.jpeg"
+                        <img class="object-cover w-full h-[500px] md:h-64 xl:h-80"
+                            src="https://hackaten.sgp1.cdn.digitaloceanspaces.com/img/guests/speakers/image 40.jpeg"
                             alt="Person" />
                         <div
                             class="absolute inset-0 flex flex-col justify-center px-5 py-4 text-center transition-opacity duration-300 bg-black bg-opacity-75 opacity-0 hover:opacity-100">

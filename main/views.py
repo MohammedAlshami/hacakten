@@ -488,6 +488,11 @@ def speakers(request, **kwargs):
     # if email:
     return render(request, "guests/Speakers.html")
 
+def judges(request, **kwargs):
+    # email = request.GET.get('email', None)
+    # if email:
+    return render(request, "guests/Judges.html")
+
 def mentors(request, **kwargs):
     # email = request.GET.get('email', None)
     # if email:

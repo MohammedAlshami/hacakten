@@ -12,6 +12,7 @@ urlpatterns = [
     # path("register", views.signup_local),
     path("speakers", views.speakers),
     path("mentors", views.mentors),
+    path("judges", views.judges),
 
     # path("register/verify", views.first_time_verify),
 
