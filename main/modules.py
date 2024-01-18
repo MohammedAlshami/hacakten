@@ -7,7 +7,7 @@ from fuzzywuzzy import fuzz
 from cryptography.fernet import Fernet
 import json
 
-SECRET_KEY = "2B1fGuGYqV445v9x4Dn9HX0vtBmDFRgP"
+SECRET_KEY = ""
 
 import os
 current_directory = os.path.dirname(__file__)
@@ -17,10 +17,10 @@ json_file_path = os.path.join(current_directory, 'firebase_access.json')
 class Firebase:
     def __init__(self):
         config = {
-            "apiKey": "AIzaSyBLv1DiRB6egmpaoIKfjODXZF5fYheQKIM",
-            "authDomain": "realtimedatabasetest-f226a.firebaseapp.com",
-            "databaseURL": "https://realtimedatabasetest-f226a-default-rtdb.asia-southeast1.firebasedatabase.app",
-            "storageBucket": "realtimedatabasetest-f226a.appspot.com",
+            "apiKey": "",
+            "authDomain": "",
+            "databaseURL": "",
+            "storageBucket": "",
             "serviceAccount": json_file_path,
         }
         self.firebase = pyrebase.initialize_app(config)
